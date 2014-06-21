@@ -11,9 +11,9 @@
     
     <meta name="description" content="首先参见最简单的搭建教程：Github+Hexo搭建静态Blog小结
 然后修改成Jacman主题：在根目录下右键选择Git Bash输入1
-$ git clone https://github.com/wuchong/jacman.git themes/jacman
+git clone https://github.com/wuchong/jacman.git themes/jacman
 
-修改./_config.yml">
+修改./_config.yml配置">
     
     
     
@@ -97,7 +97,7 @@ $ git clone https://github.com/wuchong/jacman.git themes/jacman
 		<ol>
 <li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
 <li>然后修改成Jacman主题：在根目录下右键选择Git Bash输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
+</pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
 </pre></td></tr></table></figure></li>
 <li>修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code><strong>前面</strong>加入<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
@@ -123,6 +123,12 @@ $ git clone https://github.com/wuchong/jacman.git themes/jacman
 ---</span>
 &lt;自我介绍&gt;
 </pre></td></tr></table></figure></li>
+<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>git <span class="built_in">add</span> .
+</pre></td></tr></table></figure><br>以及<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
+</pre></td></tr></table></figure><br>即可。<br>&lt;!—</li>
+<li>添加RSS：<br>—&gt;</li>
 </ol>
   
 	</div>
