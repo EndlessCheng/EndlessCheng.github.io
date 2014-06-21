@@ -1,6 +1,15 @@
 
  <!DOCTYPE HTML>
 <html lang="ch-ZN">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ba770fbbb6aef589858f8106b23b2ae5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 <head>
   <meta charset="UTF-8">
   
@@ -131,6 +140,34 @@ git <span class="operator"><span class="keyword">commit</span> -m <span class="s
   <span class="attribute">enable</span>: <span class="string">true</span>
   <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
 </pre></td></tr></table></figure></li>
+<li>写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></li>
+<li>添加<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的body标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+<span class="keyword">var</span> _bdhmProtocol = ((<span class="string">"https:"</span> == document.location.protocol) ? <span class="string">" https://"</span> : <span class="string">" http://"</span>);
+document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cscript src='"</span> + _bdhmProtocol + <span class="string">"hm.baidu.com/h.js%3Fcfedc723a9dc30bd7db67ad8e53a97fa' type='text/javascript'%3E%3C/script%3E"</span>));
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</pre></td></tr></table></figure><br>百度统计异步代码是以异步加载形式加载了网站分析代码，使用该代码能够大幅提升您网站的打开速度(目前使用百度统计异步代码会导致百度统计图标和代码检查功能的失效).使用这种方式需要将代码添加至网站全部页面的标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/head.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
+<span class="keyword">var</span> _hmt = _hmt || [];
+(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+  <span class="keyword">var</span> hm = document.createElement(<span class="string">"script"</span>);
+  hm.src = <span class="string">"//hm.baidu.com/hm.js?cfedc723a9dc30bd7db67ad8e53a97fa"</span>;
+  <span class="keyword">var</span> s = document.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+</pre></td></tr></table></figure></li>
 </ol>
   
 	</div>
@@ -194,17 +231,17 @@ git <span class="operator"><span class="keyword">commit</span> -m <span class="s
 	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/「Hello-World」/" title="「Hello World」">「Hello World」<sup>1</sup></a></li>
-		
-			<li><a href="/tags/JNI/" title="JNI">JNI<sup>1</sup></a></li>
-		
-			<li><a href="/tags/混合编程/" title="混合编程">混合编程<sup>1</sup></a></li>
-		
 			<li><a href="/tags/Jacman/" title="Jacman">Jacman<sup>1</sup></a></li>
 		
 			<li><a href="/tags/GitHub/" title="GitHub">GitHub<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/「Hello-World」/" title="「Hello World」">「Hello World」<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JNI/" title="JNI">JNI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/混合编程/" title="混合编程">混合编程<sup>1</sup></a></li>
 		
 		</ul>
 </div>
