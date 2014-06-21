@@ -1,10 +1,10 @@
 
-  <!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html lang="ch-ZN">
 <head>
   <meta charset="UTF-8">
   
-    <title>Archives | 简言</title>
+    <title>Tag: undefined | 简言</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="EndlessCheng">
@@ -64,77 +64,19 @@
 </div>
       </header>
       <div id="container">
-        
-
+          
 <div class="archive-title" >
-  <h2 class="archive-icon">Archives</h2>
-  
-  <div class="archiveslist archive-float clearfix">
-   <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06">2014 年 06 月</a><span class="archive-list-count">2</span></li></ul>
- </div>
-  
+<h2 class="tag-icon">Tags</h2>
+
 </div>
-<div id="main" class="archive-part clearfix">
-  <div id="archive-page">
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/06/21/JNI/" title="JNI" itemprop="url">
-  
-
-    <time datetime="2014-06-21T11:42:13.000Z" itemprop="datePublished">Jun 21 2014</time>
-
-
-    <h1 itemprop="name">JNI</h1>
-
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/06/21/hello-world/" title="Hello World" itemprop="url">
-  
-
-    <time datetime="2014-06-21T11:29:01.000Z" itemprop="datePublished">Jun 21 2014</time>
-
-
-    <h1 itemprop="name">Hello World</h1>
-
-  </a>
-</section>
-
-
-  </div>
+<div id="main" class="archive-part">
+<div class="all-list-box"></div>
 </div>
+
+
+
 
       </div>
-      <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		
-		<div class="author"></div>
-		
-	</div>
-	
-	
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Pacman">Jacman</a> © 2014 
-		
-		<a href="http://endlesscheng.github.io/about" target="_blank" title="EndlessCheng">EndlessCheng</a>
-		
-		</p>
-</div>
-</footer>
       <script src="/js/jquery-2.0.3.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
@@ -185,6 +127,24 @@ $(document).ready(function(){
 
 
 
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var list    = $('.archive-title a'),
+      box     = $('.all-list-box'),
+      first   = $('.archive-title a:first-of-type');
+      box.load(first.attr('data-src').toString()+' #archive-page');
+      first.addClass('current');
+  list.each(function(){
+    $(this).click(function(){
+      var listSrc=$(this).attr('data-src').toString()+' #archive-page';
+      box.load(listSrc);
+      list.removeClass('current');
+      $(this).addClass('current');
+     });  
+    });
+  }); 
+</script>
 
 
 
