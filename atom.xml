@@ -3,9 +3,9 @@
   <title><![CDATA[简言]]></title>
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
-  <link href="http://endlesscheng.github.io/"/>
-  <updated>2014-06-22T04:36:58.802Z</updated>
-  <id>http://endlesscheng.github.io/</id>
+  <link href="http://jianyan.me/"/>
+  <updated>2014-06-22T06:02:09.450Z</updated>
+  <id>http://jianyan.me/</id>
   
   <author>
     <name><![CDATA[EndlessCheng]]></name>
@@ -16,8 +16,8 @@
   
   <entry>
     <title><![CDATA[Java与C++混合编程——JNI学习小记]]></title>
-    <link href="http://endlesscheng.github.io/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/"/>
-    <id>http://endlesscheng.github.io/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</id>
+    <link href="http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/"/>
+    <id>http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</id>
     <published>2014-06-21T13:42:13.000Z</published>
     <updated>2014-06-21T16:35:48.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
@@ -143,18 +143,18 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 <p>闲话少说，先看代码：</p>
 ]]></summary>
     
-      <category term="混合编程" scheme="http://endlesscheng.github.io/tags/%E6%B7%B7%E5%90%88%E7%BC%96%E7%A8%8B/"/>
+      <category term="混合编程" scheme="http://jianyan.me/tags/%E6%B7%B7%E5%90%88%E7%BC%96%E7%A8%8B/"/>
     
-      <category term="JNI" scheme="http://endlesscheng.github.io/tags/JNI/"/>
+      <category term="JNI" scheme="http://jianyan.me/tags/JNI/"/>
     
-      <category term="「Hello World」" scheme="http://endlesscheng.github.io/tags/%E3%80%8CHello-World%E3%80%8D/"/>
+      <category term="「Hello World」" scheme="http://jianyan.me/tags/%E3%80%8CHello-World%E3%80%8D/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[如何搭建免费静态博客——Hexo与GitHub使用小记]]></title>
-    <link href="http://endlesscheng.github.io/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
-    <id>http://endlesscheng.github.io/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
+    <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
+    <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
     <updated>2014-06-22T03:50:13.000Z</updated>
     <content type="html"><![CDATA[<ol>
@@ -244,11 +244,11 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 ]]></content>
     
     
-      <category term="Hexo" scheme="http://endlesscheng.github.io/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://jianyan.me/tags/Hexo/"/>
     
-      <category term="GitHub" scheme="http://endlesscheng.github.io/tags/GitHub/"/>
+      <category term="GitHub" scheme="http://jianyan.me/tags/GitHub/"/>
     
-      <category term="Jacman" scheme="http://endlesscheng.github.io/tags/Jacman/"/>
+      <category term="Jacman" scheme="http://jianyan.me/tags/Jacman/"/>
     
   </entry>
   
