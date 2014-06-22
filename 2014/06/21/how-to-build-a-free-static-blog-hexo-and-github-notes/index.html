@@ -141,6 +141,13 @@ git <span class="operator"><span class="keyword">commit</span> -m <span class="s
   <span class="attribute">enable</span>: <span class="string">true</span>
   <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
 </pre></td></tr></table></figure></li>
+<li>添加RSS：在根目录下运行Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
+</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>plugins:
+<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
+</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman主题自带）</li>
 <li>写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></li>
 <li>添加<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的body标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -169,6 +176,13 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 })();
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 </pre></td></tr></table></figure></li>
+<li>添加sitemap：在根目录下运行Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
+</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>plugins:
+<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
+</pre></td></tr></table></figure><br>随后提交给Google网站站长工具即可。</li>
 </ol>
   
 	</div>
@@ -232,17 +246,17 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
-			<li><a href="/tags/「Hello-World」/" title="「Hello World」">「Hello World」<sup>1</sup></a></li>
-		
-			<li><a href="/tags/JNI/" title="JNI">JNI<sup>1</sup></a></li>
-		
-			<li><a href="/tags/混合编程/" title="混合编程">混合编程<sup>1</sup></a></li>
-		
 			<li><a href="/tags/Jacman/" title="Jacman">Jacman<sup>1</sup></a></li>
 		
 			<li><a href="/tags/GitHub/" title="GitHub">GitHub<sup>1</sup></a></li>
 		
 			<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/「Hello-World」/" title="「Hello World」">「Hello World」<sup>1</sup></a></li>
+		
+			<li><a href="/tags/JNI/" title="JNI">JNI<sup>1</sup></a></li>
+		
+			<li><a href="/tags/混合编程/" title="混合编程">混合编程<sup>1</sup></a></li>
 		
 		</ul>
 </div>
