@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://endlesscheng.github.io/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</loc>
+    <lastmod>2014-06-21T16:56:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://endlesscheng.github.io/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</loc>
+    <lastmod>2014-06-21T16:35:48.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://endlesscheng.github.io/about/index.html</loc>
+    <lastmod>2014-06-21T13:51:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://endlesscheng.github.io/categories/index.html</loc>
+    <lastmod>2014-06-21T12:07:28.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://endlesscheng.github.io/tags/index.html</loc>
+    <lastmod>2014-06-21T12:06:56.000Z</lastmod>
+  </url>
+  
+</urlset>
