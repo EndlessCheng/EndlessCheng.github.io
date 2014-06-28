@@ -1,4 +1,4 @@
 EndlessCheng.github.io
 ======================
 
-使用Hexo搭建的个人博客——[简言](http://jianyan.me/)
+使用 Hexo 搭建的个人博客——[简言](http://jianyan.me/)
