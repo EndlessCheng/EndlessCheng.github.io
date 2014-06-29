@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-06-24T06:11:46.392Z</updated>
+  <updated>2014-06-29T08:17:49.069Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -210,7 +210,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-06-22T03:50:13.000Z</updated>
+    <updated>2014-06-29T08:17:11.000Z</updated>
     <content type="html"><![CDATA[<ol>
 <li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
 <li>然后修改成Jacman主题：在根目录下右键选择Git Bash输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -240,7 +240,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 ---</span>
 &lt;自我介绍&gt;
 </pre></td></tr></table></figure></li>
-<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开Git Bash，输入一下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>git add .
 git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
