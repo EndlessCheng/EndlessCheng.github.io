@@ -13,12 +13,12 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="UTF-8">
   
-    <title>如何搭建免费静态博客——Hexo与GitHub使用小记 | 简言</title>
+    <title>如何搭建免费静态博客——Hexo 与 GitHub 使用小记 | 简言</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="EndlessCheng">
     
-    <meta name="description" itemprop="description" content="参考了下别人的经验，无需配置SSH等麻烦操作。">
+    <meta name="description" itemprop="description" content="参考了下别人的经验，无需配置 SSH 等麻烦操作。">
     
     
     
@@ -79,7 +79,7 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/" title="如何搭建免费静态博客——Hexo与GitHub使用小记" itemprop="url">如何搭建免费静态博客——Hexo与GitHub使用小记</a>
+      <a href="/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/" title="如何搭建免费静态博客——Hexo 与 GitHub 使用小记" itemprop="url">如何搭建免费静态博客——Hexo 与 GitHub 使用小记</a>
   </h1>
   <p class="article-author">By
        
@@ -96,13 +96,16 @@ var _hmt = _hmt || [];
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速搭建"><span class="toc-number">2.</span> <span class="toc-text">快速搭建</span></a></li></ol>
 		
 		</div>
 		
-		<ol>
+		<h2 id="缘起">缘起</h2>
+<p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
+<h2 id="快速搭建">快速搭建</h2>
+<ol>
 <li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
-<li>然后修改成Jacman主题：在根目录下右键选择Git Bash输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>然后修改成 Jacman 主题：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
 </pre></td></tr></table></figure></li>
 <li>修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code><strong>前面</strong>加入<figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -129,7 +132,7 @@ var _hmt = _hmt || [];
 ---</span>
 &lt;自我介绍&gt;
 </pre></td></tr></table></figure></li>
-<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>git add .
 git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
@@ -141,13 +144,13 @@ git <span class="operator"><span class="keyword">commit</span> -m <span class="s
   <span class="attribute">enable</span>: <span class="string">true</span>
   <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
 </pre></td></tr></table></figure></li>
-<li>添加RSS：在根目录下运行Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 RSS：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
 </pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>plugins:
 <span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman主题自带）</li>
+</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman 主题自带）</li>
 <li>写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></li>
 <li>添加<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的body标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -176,13 +179,13 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 })();
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 </pre></td></tr></table></figure></li>
-<li>添加sitemap：在根目录下运行Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 sitemap：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
 </pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>plugins:
 <span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>随后提交给Google网站站长工具即可。</li>
+</pre></td></tr></table></figure><br>随后提交给 Google 网站站长工具即可。</li>
 </ol>
   
 	</div>
@@ -199,7 +202,7 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 
 <div class="article-share" id="share">
 
-  <div data-url="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/" data-title="如何搭建免费静态博客——Hexo与GitHub使用小记 | 简言" data-tsina="null" class="share clearfix">
+  <div data-url="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/" data-title="如何搭建免费静态博客——Hexo 与 GitHub 使用小记 | 简言" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -209,10 +212,10 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/" title="Java与C++混合编程——JNI学习小记">
+ <a href="/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/" title="Java 与 C++ 混合编程——JNI 学习小记">
   <strong>上一篇：</strong><br/>
   <span>
-  Java与C++混合编程——JNI学习小记</span>
+  Java 与 C++ 混合编程——JNI 学习小记</span>
 </a>
 </div>
 
@@ -231,7 +234,7 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速搭建"><span class="toc-number">2.</span> <span class="toc-text">快速搭建</span></a></li></ol>
  
   </div>
 
@@ -248,19 +251,19 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 		
 			<li><a href="/tags/GitHub/" title="GitHub">GitHub<sup>2</sup></a></li>
 		
-			<li><a href="/tags/Jacman/" title="Jacman">Jacman<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
-		
-			<li><a href="/tags/爬虫/" title="爬虫">爬虫<sup>1</sup></a></li>
-		
-			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
-		
 			<li><a href="/tags/「Hello-World」/" title="「Hello World」">「Hello World」<sup>1</sup></a></li>
 		
 			<li><a href="/tags/JNI/" title="JNI">JNI<sup>1</sup></a></li>
 		
 			<li><a href="/tags/混合编程/" title="混合编程">混合编程<sup>1</sup></a></li>
+		
+			<li><a href="/tags/爬虫/" title="爬虫">爬虫<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Jacman/" title="Jacman">Jacman<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 		
 		</ul>
 </div>

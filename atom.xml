@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-06-29T08:17:49.069Z</updated>
+  <updated>2014-06-29T15:16:14.090Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -15,13 +15,13 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Python爬虫学习——收集「有趣」信息]]></title>
+    <title><![CDATA[Python 爬虫学习——收集「有趣」信息]]></title>
     <link href="http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/"/>
     <id>http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/</id>
     <published>2014-06-24T05:36:39.000Z</published>
-    <updated>2014-06-24T06:11:32.000Z</updated>
-    <content type="html"><![CDATA[<p>我们使用urllib2这个组件来抓取网页，这是Python的一个获取URLs(Uniform Resource Locators)的组件，它以urlopen函数的形式提供了一个非常简单的接口。</p>
-<p>以获取某<del>id为EndlessCheng</del>用户的repository列表为例：<br>（阅读下面代码之前建议先看看<a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a>的源码）</p>
+    <updated>2014-06-29T15:11:41.000Z</updated>
+    <content type="html"><![CDATA[<p>我们使用 urllib2 这个组件来抓取网页，这是 Python 的一个获取 URLs (Uniform Resource Locators)的组件，它以 urlopen 函数的形式提供了一个非常简单的接口。</p>
+<p>以获取某~~ id 为 EndlessCheng ~~用户的 repository 列表为例：<br>（阅读下面代码之前建议先看看<a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a>的源码）</p>
 <p><figure class="highlight python"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -69,20 +69,20 @@ cnt = next = <span class="number">1</span>
   </entry>
   
   <entry>
-    <title><![CDATA[Java与C++混合编程——JNI学习小记]]></title>
+    <title><![CDATA[Java 与 C++ 混合编程——JNI 学习小记]]></title>
     <link href="http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/"/>
     <id>http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</id>
     <published>2014-06-21T13:42:13.000Z</published>
-    <updated>2014-06-21T16:35:48.000Z</updated>
+    <updated>2014-06-29T15:14:35.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
-<p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的native方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的arraycopy方法（第482行）、setOut0方法（第247行）等。Google一下后发现这是Java Native Interface(JNI)，便花点时间学习了一下。</p>
+<p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的 native 方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的 arraycopy 方法（第 482 行）、setOut0 方法（第 247 行）等。Google 一下后发现这是 Java Native Interface (JNI)，便花点时间学习了一下。</p>
 <h2 id="何谓JNI？">何谓JNI？</h2>
-<p>JNI是Java平台中的一个强大特性。<br>应用程序可以通过JNI把C/C++代码集成进Java程序中，这样开发者在利用Java平台强大功能的同时，又不必放弃对原有代码的投资。</p>
+<p>JNI 是 Java 平台中的一个强大特性。<br>应用程序可以通过 JNI 把 C/C++ （或者其他语言）代码集成进 Java 程序中，这样开发者在利用 Java 平台强大功能的同时，又不必放弃对原有代码的投资。</p>
 <h2 id="HelloWorld">HelloWorld</h2>
 <p>闲话少说，先看代码：</p>
 <a id="more"></a>
 
-<p>新建一个class，名称为Algorithm</p>
+<p>新建一个 class，名称为 Algorithm</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -107,7 +107,7 @@ cnt = next = <span class="number">1</span>
 		write(<span class="string">"Hello, 混合编程！"</span>);
 	}
 }
-</pre></td></tr></table></figure><br>保存。<br><br>打开cmd，cd到\src，执行<code>javah Algorithm</code>（如果你的.java文件在某一package下的话，比如在\mjava\lang\里面，就执行<code>javah mjava.lang.Algorithm</code>），生成<code>Algorithm.h</code>文件，如下：<br><br><figure class="highlight c++"><table><tr><td class="gutter"><pre>1
+</pre></td></tr></table></figure><br>保存。<br><br>打开 cmd，cd 到 \src，执行<code>javah Algorithm</code>（如果你的 .java 文件在某一 package 下的话，比如在 \mjava\lang\ 里面，就执行<code>javah mjava.lang.Algorithm</code>），生成<code>Algorithm.h</code>文件，如下：<br><br><figure class="highlight c++"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -151,14 +151,14 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 <span class="preprocessor">#endif</span>
 </pre></td></tr></table></figure>
 
-<p>对于Windows下的JDK来说，可以在JDK目录<code>\include\win32\jni_md.h</code>中找到如下定义</p>
+<p>对于 Windows 下的 JDK 来说，可以在 JDK 目录<code>\include\win32\jni_md.h</code>中找到如下定义</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span> JNIEXPORT __declspec(dllexport)</span>
 <span class="preprocessor">#<span class="keyword">define</span> JNIIMPORT __declspec(dllimport)</span>
 <span class="preprocessor">#<span class="keyword">define</span> JNICALL __stdcall</span>
-</pre></td></tr></table></figure><br>其中<code>__declspec</code>用于指定所给定类型的实例的与Microsoft相关的存储方式。<br><code>dllexport</code>用来从dll中导出函数，数据或对象，<code>dllimport</code>用来从dll导入函数，数据，或对象。<br>这相当于定义了dll的接口，提供可被Java使用的C/C++函数，数据，或对象。<br><code>__stdcall</code>见<a href="http://baike.baidu.com/view/1276580.htm" target="_blank" rel="external">百度百科</a>。<br><code>JNIEnv</code>，<code>jclass</code>和<code>jstring</code>的定义见<code>\include\jni.h</code>，也可以参考<a href="http://wenku.baidu.com/link?url=khOHgORmPEnOlIwZ_Zi7VBnueTNQcSp60EV-Grmiw12bgrLt0YT9rxTQq8PeOiBVecVewsW54EIBdKIt_DogruJUeqHaoYO9rFy8vDWs9Ce" target="_blank" rel="external">jni详解</a>。<br><br><br>随后打开VS2012，新建 Win32项目，名称随便：<br><img src="http://endless.qiniudn.com/blogjni01.png" alt=""><br>应用程序类型选择DLL：<br><img src="http://endless.qiniudn.com/blogjni02.png" alt=""><br>按<code>alt</code>+<code>F7</code>，点击<code>配置属性</code>-<code>VC++目录</code>，如果你的JDK是64位的话，你的VS2012也应该是64位，此时做如下修改：（32位可以无视）<br><img src="http://endless.qiniudn.com/blogjni05.png" alt=""><br>然后点击<code>包含目录</code>-<code>编辑</code>：<br><img src="http://endless.qiniudn.com/blogjni04.png" alt=""><br>点击文件夹图标，把<code>\include\</code>，<code>\include\win32\</code>和<code>Algorithm.h</code>所在目录加进去。<br>随后点击<code>常规</code>，把<code>配置类型</code>改为<code>动态库(.dll)</code>。<br><br>打开<code>&lt;项目名&gt;.cpp</code>，这里<code>&lt;项目名&gt;</code>是你自己输入的名字，输入如下代码：（函数名必须与Algorithm.h中声明的一致）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre>1
+</pre></td></tr></table></figure><br>其中<code>__declspec</code>用于指定所给定类型的实例的与 Microsoft 相关的存储方式。<br><code>dllexport</code>用来从 dll 中导出函数，数据或对象，<code>dllimport</code>用来从 dll 导入函数，数据，或对象。<br>这相当于定义了 dll 的接口，提供可被 Java 使用的 C/C++ 函数，数据，或对象。<br><code>__stdcall</code>见<a href="http://baike.baidu.com/view/1276580.htm" target="_blank" rel="external">百度百科</a>。<br><code>JNIEnv</code>，<code>jclass</code>和<code>jstring</code>的定义见<code>\include\jni.h</code>，也可以参考<a href="http://wenku.baidu.com/link?url=khOHgORmPEnOlIwZ_Zi7VBnueTNQcSp60EV-Grmiw12bgrLt0YT9rxTQq8PeOiBVecVewsW54EIBdKIt_DogruJUeqHaoYO9rFy8vDWs9Ce" target="_blank" rel="external">jni详解</a>。<br><br><br>随后打开 VS2012，新建 Win32 项目，名称随便：<br><img src="http://endless.qiniudn.com/blogjni01.png" alt=""><br>应用程序类型选择 DLL：<br><img src="http://endless.qiniudn.com/blogjni02.png" alt=""><br>按<code>alt</code>+<code>F7</code>，点击<code>配置属性</code>-<code>VC++目录</code>，如果你的 JDK 是 64 位的话，你的 VS2012 也应该是 64 位，此时做如下修改：（32 位可以无视）<br><img src="http://endless.qiniudn.com/blogjni05.png" alt=""><br>然后点击<code>包含目录</code>-<code>编辑</code>：<br><img src="http://endless.qiniudn.com/blogjni04.png" alt=""><br>点击文件夹图标，把<code>\include\</code>，<code>\include\win32\</code>和<code>Algorithm.h</code>所在目录加进去。<br>随后点击<code>常规</code>，把<code>配置类型</code>改为<code>动态库(.dll)</code>。<br><br>打开<code>&lt;项目名&gt;.cpp</code>，这里<code>&lt;项目名&gt;</code>是你自己输入的名字，输入如下代码：（函数名必须与 Algorithm.h 中声明的一致）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -182,17 +182,17 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 }
 </pre></td></tr></table></figure>
 
-<p>这里<code>setlocale</code>函数用来配置地域化信息，<code>GetStringChars</code>函数将jstring转化成jchar数组并返回jchar*，这里jchar被定义为unsigned short，所以可以转化成wchar_t类型。</p>
+<p>这里<code>setlocale</code>函数用来配置地域化信息，<code>GetStringChars</code>函数将 jstring 转化成 jchar 数组并返回 jchar*，这里 jchar 被定义为unsigned short，所以可以转化成 wchar_t 类型。</p>
 <p>按<code>F7</code>。</p>
-<p>在你的项目文件夹中找到<code>&lt;项目名&gt;.dll</code>文件，复制，粘贴到你的工程下（直接在Eclipse中单击工程名然后<code>ctrl</code>+<code>V</code>），并重命名为<code>Hello.dll</code>。</p>
-<p>回到Eclipse，按下<code>Ctrl</code>+<code>F11</code>，Well done！<br><img src="http://endless.qiniudn.com/blogjni06.png" alt=""></p>
+<p>在你的项目文件夹中找到<code>&lt;项目名&gt;.dll</code>文件，复制，粘贴到你的工程下（直接在 Eclipse 中单击工程名然后<code>ctrl</code>+<code>V</code>），并重命名为<code>Hello.dll</code>。</p>
+<p>回到 Eclipse，按下<code>Ctrl</code>+<code>F11</code>，Well done！<br><img src="http://endless.qiniudn.com/blogjni06.png" alt=""></p>
 <h2 id="More">More</h2>
-<p>自定义readLine()方法的实现，见<a href="https://github.com/EndlessCheng/OpenJDK-7u4-analysis" target="_blank" rel="external">GitHub</a></p>
+<p>自定义 readLine() 方法的实现，见<a href="https://github.com/EndlessCheng/OpenJDK-7u4-analysis" target="_blank" rel="external">GitHub</a></p>
 ]]></content>
     <summary type="html"><![CDATA[<h2 id="缘起">缘起</h2>
-<p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的native方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的arraycopy方法（第482行）、setOut0方法（第247行）等。Google一下后发现这是Java Native Interface(JNI)，便花点时间学习了一下。</p>
+<p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的 native 方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的 arraycopy 方法（第 482 行）、setOut0 方法（第 247 行）等。Google 一下后发现这是 Java Native Interface (JNI)，便花点时间学习了一下。</p>
 <h2 id="何谓JNI？">何谓JNI？</h2>
-<p>JNI是Java平台中的一个强大特性。<br>应用程序可以通过JNI把C/C++代码集成进Java程序中，这样开发者在利用Java平台强大功能的同时，又不必放弃对原有代码的投资。</p>
+<p>JNI 是 Java 平台中的一个强大特性。<br>应用程序可以通过 JNI 把 C/C++ （或者其他语言）代码集成进 Java 程序中，这样开发者在利用 Java 平台强大功能的同时，又不必放弃对原有代码的投资。</p>
 <h2 id="HelloWorld">HelloWorld</h2>
 <p>闲话少说，先看代码：</p>
 ]]></summary>
@@ -206,14 +206,17 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
   </entry>
   
   <entry>
-    <title><![CDATA[如何搭建免费静态博客——Hexo与GitHub使用小记]]></title>
+    <title><![CDATA[如何搭建免费静态博客——Hexo 与 GitHub 使用小记]]></title>
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-06-29T08:17:11.000Z</updated>
-    <content type="html"><![CDATA[<ol>
+    <updated>2014-06-29T15:15:53.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
+<p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
+<h2 id="快速搭建">快速搭建</h2>
+<ol>
 <li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
-<li>然后修改成Jacman主题：在根目录下右键选择Git Bash输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>然后修改成 Jacman 主题：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
 </pre></td></tr></table></figure></li>
 <li>修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code><strong>前面</strong>加入<figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -240,7 +243,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 ---</span>
 &lt;自我介绍&gt;
 </pre></td></tr></table></figure></li>
-<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>git add .
 git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
@@ -252,13 +255,13 @@ git <span class="operator"><span class="keyword">commit</span> -m <span class="s
   <span class="attribute">enable</span>: <span class="string">true</span>
   <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
 </pre></td></tr></table></figure></li>
-<li>添加RSS：在根目录下运行Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 RSS：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
 </pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>plugins:
 <span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman主题自带）</li>
+</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman 主题自带）</li>
 <li>写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></li>
 <li>添加<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的body标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<figure class="highlight html"><table><tr><td class="gutter"><pre>1
 2
@@ -287,13 +290,13 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 })();
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 </pre></td></tr></table></figure></li>
-<li>添加sitemap：在根目录下运行Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 sitemap：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
 </pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>plugins:
 <span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>随后提交给Google网站站长工具即可。</li>
+</pre></td></tr></table></figure><br>随后提交给 Google 网站站长工具即可。</li>
 </ol>
 ]]></content>
     
