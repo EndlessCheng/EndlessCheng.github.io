@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-06-30T01:12:44.964Z</updated>
+  <updated>2014-06-30T01:30:19.948Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -210,7 +210,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-06-30T00:59:30.000Z</updated>
+    <updated>2014-06-30T01:30:01.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
 <h2 id="快速搭建">快速搭建</h2>
@@ -248,7 +248,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 </pre></td><td class="code"><pre>git add .
 git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
 </pre></td></tr></table></figure></li>
-<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击<a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a>，填完，记住<code>shortname</code>中填的名字，然后打开<code>./themes/jacman/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/jacman/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="attribute">disqus</span>: <span class="string"></span>
