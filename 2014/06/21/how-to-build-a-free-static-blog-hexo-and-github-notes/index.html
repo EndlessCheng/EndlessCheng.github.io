@@ -137,10 +137,10 @@ var _hmt = _hmt || [];
 </pre></td><td class="code"><pre>git add .
 git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
 </pre></td></tr></table></figure></li>
-<li>添加多说：点击<a href="http://duoshuo.com/create-site/" target="_blank" rel="external">http://duoshuo.com/create-site/</a>，填完，记住<code>多说域名</code>中填的名字，然后打开<code>./themes/jacman/_config.yml</code>，找到<code>duoshuo</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击<a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a>，填完，记住<code>shortname</code>中填的名字，然后打开<code>./themes/jacman/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
-</pre></td><td class="code"><pre><span class="attribute">duoshuo</span>: <span class="string"></span>
+</pre></td><td class="code"><pre><span class="attribute">disqus</span>: <span class="string"></span>
   <span class="attribute">enable</span>: <span class="string">true</span>
   <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
 </pre></td></tr></table></figure></li>
@@ -223,10 +223,12 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 </nav>
 
 	
-<section class="comment">
-	<div class="ds-thread"></div>
-</section>
 
+<section class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
@@ -251,9 +253,9 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 		
 			<li><a href="/tags/GitHub/" title="GitHub">GitHub<sup>2</sup></a></li>
 		
-			<li><a href="/tags/爬虫/" title="爬虫">爬虫<sup>1</sup></a></li>
+			<li><a href="/tags/Jacman/" title="Jacman">Jacman<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
+			<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
 		
 			<li><a href="/tags/「Hello-World」/" title="「Hello World」">「Hello World」<sup>1</sup></a></li>
 		
@@ -261,9 +263,9 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 		
 			<li><a href="/tags/混合编程/" title="混合编程">混合编程<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Jacman/" title="Jacman">Jacman<sup>1</sup></a></li>
+			<li><a href="/tags/爬虫/" title="爬虫">爬虫<sup>1</sup></a></li>
 		
-			<li><a href="/tags/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			<li><a href="/tags/Python/" title="Python">Python<sup>1</sup></a></li>
 		
 		</ul>
 </div>
@@ -422,18 +424,19 @@ $(document).ready(function(){
 
 
 
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"jianyan"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
 
+<script type="text/javascript">
+
+var disqus_shortname = 'endlesscheng';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

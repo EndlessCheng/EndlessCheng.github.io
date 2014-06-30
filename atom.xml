@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-06-29T15:39:19.581Z</updated>
+  <updated>2014-06-30T01:00:12.060Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -210,7 +210,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-06-29T15:15:53.000Z</updated>
+    <updated>2014-06-30T00:59:30.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
 <h2 id="快速搭建">快速搭建</h2>
@@ -248,10 +248,10 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 </pre></td><td class="code"><pre>git add .
 git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
 </pre></td></tr></table></figure></li>
-<li>添加多说：点击<a href="http://duoshuo.com/create-site/" target="_blank" rel="external">http://duoshuo.com/create-site/</a>，填完，记住<code>多说域名</code>中填的名字，然后打开<code>./themes/jacman/_config.yml</code>，找到<code>duoshuo</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击<a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a>，填完，记住<code>shortname</code>中填的名字，然后打开<code>./themes/jacman/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
-</pre></td><td class="code"><pre><span class="attribute">duoshuo</span>: <span class="string"></span>
+</pre></td><td class="code"><pre><span class="attribute">disqus</span>: <span class="string"></span>
   <span class="attribute">enable</span>: <span class="string">true</span>
   <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
 </pre></td></tr></table></figure></li>
