@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jianyan.me/about/index.html</loc>
+    <lastmod>2014-07-04T12:48:17.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://jianyan.me/2014/07/04/earlier-for-git-youll-live-longer/</loc>
     <lastmod>2014-07-04T05:14:45.000Z</lastmod>
   </url>
@@ -19,11 +24,6 @@
   <url>
     <loc>http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</loc>
     <lastmod>2014-06-29T15:14:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://jianyan.me/about/index.html</loc>
-    <lastmod>2014-06-21T13:51:28.000Z</lastmod>
   </url>
   
   <url>
