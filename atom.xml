@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-07-01T00:04:09.008Z</updated>
+  <updated>2014-07-04T05:15:15.937Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -13,6 +13,26 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Git 用的越早，你就活得越久]]></title>
+    <link href="http://jianyan.me/2014/07/04/earlier-for-git-youll-live-longer/"/>
+    <id>http://jianyan.me/2014/07/04/earlier-for-git-youll-live-longer/</id>
+    <published>2014-07-04T04:40:14.000Z</published>
+    <updated>2014-07-04T05:14:45.000Z</updated>
+    <content type="html"><![CDATA[<p>这是我最近这段时间使用 Git 的感受。<br>Git 的核心功能是版本控制，基于此，我们可以：</p>
+<ol>
+<li>利用其强大的「历史」功能，我们可以把一些频繁修改的东西（不仅限于代码），都使用 Git 来管理。这样，我们可以轻松找回 n 天前删掉的代码或文字。</li>
+<li>利用其强大的「分支管理」功能，我们可以将某一项目的编码过程拆分成「受精卵-卵裂-原肠胚-器官形成-出生-发育」，同时再推广 Java 类库的设计思想，从而简化软件开发流程。</li>
+</ol>
+]]></content>
+    
+    
+      <category term="Git" scheme="http://jianyan.me/tags/Git/"/>
+    
+      <category term="杂谈" scheme="http://jianyan.me/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Python 爬虫学习——收集「有趣」信息]]></title>
