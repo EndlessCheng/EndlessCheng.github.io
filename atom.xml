@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-07-04T12:49:11.846Z</updated>
+  <updated>2014-07-24T04:56:01.254Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -93,15 +93,13 @@ cnt = next = <span class="number">1</span>
     <link href="http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/"/>
     <id>http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</id>
     <published>2014-06-21T13:42:13.000Z</published>
-    <updated>2014-06-29T15:14:35.000Z</updated>
+    <updated>2014-07-09T04:22:59.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的 native 方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的 arraycopy 方法（第 482 行）、setOut0 方法（第 247 行）等。Google 一下后发现这是 Java Native Interface (JNI)，便花点时间学习了一下。</p>
 <h2 id="何谓JNI？">何谓JNI？</h2>
 <p>JNI 是 Java 平台中的一个强大特性。<br>应用程序可以通过 JNI 把 C/C++ （或者其他语言）代码集成进 Java 程序中，这样开发者在利用 Java 平台强大功能的同时，又不必放弃对原有代码的投资。</p>
 <h2 id="HelloWorld">HelloWorld</h2>
 <p>闲话少说，先看代码：</p>
-<a id="more"></a>
-
 <p>新建一个 class，名称为 Algorithm</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre>1
 2
@@ -209,13 +207,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 <h2 id="More">More</h2>
 <p>自定义 readLine() 方法的实现，见<a href="https://github.com/EndlessCheng/OpenJDK-7u4-analysis" target="_blank" rel="external">GitHub</a></p>
 ]]></content>
-    <summary type="html"><![CDATA[<h2 id="缘起">缘起</h2>
-<p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的 native 方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的 arraycopy 方法（第 482 行）、setOut0 方法（第 247 行）等。Google 一下后发现这是 Java Native Interface (JNI)，便花点时间学习了一下。</p>
-<h2 id="何谓JNI？">何谓JNI？</h2>
-<p>JNI 是 Java 平台中的一个强大特性。<br>应用程序可以通过 JNI 把 C/C++ （或者其他语言）代码集成进 Java 程序中，这样开发者在利用 Java 平台强大功能的同时，又不必放弃对原有代码的投资。</p>
-<h2 id="HelloWorld">HelloWorld</h2>
-<p>闲话少说，先看代码：</p>
-]]></summary>
+    
     
       <category term="混合编程" scheme="http://jianyan.me/tags/%E6%B7%B7%E5%90%88%E7%BC%96%E7%A8%8B/"/>
     
