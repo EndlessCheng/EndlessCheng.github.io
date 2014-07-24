@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-07-24T05:06:08.003Z</updated>
+  <updated>2014-07-24T05:09:21.979Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -222,7 +222,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-07-24T05:05:52.000Z</updated>
+    <updated>2014-07-24T05:09:05.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
 <h2 id="快速搭建">快速搭建</h2>
@@ -254,7 +254,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 </pre></td><td class="code"><pre><span class="header">title: 关于我
 ---</span>
 &lt;自我介绍&gt;
-</pre></td></tr></table></figure><br>如果你想让你的 tags 有标签云的效果，在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中<code>widgets</code>中的<code>tags</code>修改成<code>tagcloud</code></li>
+</pre></td></tr></table></figure><br>如果你想让你的 tags 有标签云的效果，把<code>./themes/&lt;你的主题&gt;/_config.yml</code>中<code>widgets</code>下的<code>tags</code>修改成<code>tagcloud</code></li>
 <li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>git add .
