@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-07-24T04:56:01.254Z</updated>
+  <updated>2014-07-24T05:06:08.003Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -222,13 +222,13 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-06-30T01:30:01.000Z</updated>
+    <updated>2014-07-24T05:05:52.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
 <h2 id="快速搭建">快速搭建</h2>
 <ol>
 <li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
-<li>然后修改成 Jacman 主题：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>然后修改成 Jacman 主题（或者你喜欢的其他主题）：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
 </pre></td></tr></table></figure></li>
 <li>修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code><strong>前面</strong>加入<figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -236,7 +236,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 </pre></td><td class="code"><pre>stylus:
    <span class="built_in">compress</span>: <span class="constant">true</span>
 </pre></td></tr></table></figure></li>
-<li>在<code>./source</code>文件夹中建立<code>tags</code>、<code>categories</code>和<code>about</code>文件夹，各文件夹内部新建一个<code>index.md</code>文件。内容分别为：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>在<code>./source</code>文件夹中建立<code>tags</code>、<code>categories</code>和<code>about</code>文件夹，各文件夹内部新建一个<code>index.md</code>文件。内容分别为：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre>layout: tags
@@ -254,13 +254,13 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 </pre></td><td class="code"><pre><span class="header">title: 关于我
 ---</span>
 &lt;自我介绍&gt;
-</pre></td></tr></table></figure></li>
+</pre></td></tr></table></figure><br>如果你想让你的 tags 有标签云的效果，在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中<code>widgets</code>中的<code>tags</code>修改成<code>tagcloud</code></li>
 <li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 </pre></td><td class="code"><pre>git add .
 git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
 </pre></td></tr></table></figure></li>
-<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/jacman/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
+<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/&lt;你的主题&gt;/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 </pre></td><td class="code"><pre><span class="attribute">disqus</span>: <span class="string"></span>
