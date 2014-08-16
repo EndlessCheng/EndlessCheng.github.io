@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-07-24T05:09:21.979Z</updated>
+  <updated>2014-08-16T12:14:04.402Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -35,14 +35,14 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Python 爬虫学习——收集「有趣」信息]]></title>
+    <title><![CDATA[Python 爬虫学习——收集「有趣」信息（8月16日更新）]]></title>
     <link href="http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/"/>
     <id>http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/</id>
     <published>2014-06-24T05:36:39.000Z</published>
-    <updated>2014-06-29T15:39:05.000Z</updated>
+    <updated>2014-08-16T12:13:13.000Z</updated>
     <content type="html"><![CDATA[<p>我们使用 urllib2 这个组件来抓取网页，这是 Python 的一个获取 URLs (Uniform Resource Locators)的组件，它以 urlopen 函数的形式提供了一个非常简单的接口。</p>
 <p>以获取某 <del>id 为 EndlessCheng</del> 用户的 repository 列表为例：<br>（阅读下面代码之前建议先看看<a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a>的源码）</p>
-<p><figure class="highlight python"><table><tr><td class="gutter"><pre>1
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -76,7 +76,102 @@ cnt = next = <span class="number">1</span>
     begin = html.rfind(<span class="string">'&gt;'</span>, <span class="number">0</span>, end) + <span class="number">1</span>
     <span class="keyword">print</span> <span class="string">"%3d  %s"</span> % (cnt, html[begin:end])
     cnt += <span class="number">1</span>
-</pre></td></tr></table></figure><br>源网页：<br><img src="http://endless.qiniudn.com/blogrepo.png" alt=""><br>输出结果：<br><img src="http://endless.qiniudn.com/blogoutput.png" alt=""></p>
+</pre></td></tr></table></figure><br>源网页：<br><img src="http://endless.qiniudn.com/blogrepo.png" alt=""><br>输出结果：<br><img src="http://endless.qiniudn.com/blogoutput.png" alt=""><br><br>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br><figure class="highlight python"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td><td class="code"><pre><span class="comment"># -*- coding: UTF-8 -*-</span>
+
+<span class="keyword">import</span> urllib2  
+
+EscapeCharacterDict = {<span class="string">'&amp;'</span>:<span class="string">'&'</span>, <span class="string">'&lt;'</span>:<span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>:<span class="string">'&gt;'</span>, <span class="string">'&quot;'</span>:<span class="string">'"'</span>, <span class="string">'&#39;'</span>:<span class="string">'\''</span>}
+
+<span class="function"><span class="keyword">def</span> <span class="title">deal</span><span class="params">(response)</span>:</span>
+	html = response.read() 
+
+	<span class="keyword">global</span> cnt
+	<span class="keyword">global</span> fp
+	STEP = <span class="number">24</span>
+	end = <span class="number">1000</span>
+	
+	<span class="keyword">while</span> <span class="keyword">True</span>:
+		begin = html.find(<span class="string">'data-pjax="true" title='</span>, end, len(html)) <span class="comment">#获取commit首位置</span>
+		<span class="keyword">if</span>(begin == -<span class="number">1</span>):
+			<span class="keyword">break</span>
+		begin += STEP
+		keywords = <span class="string">'"&gt;'</span> <span class="keyword">if</span> html[begin - <span class="number">1</span>] == <span class="string">'"'</span> <span class="keyword">else</span> <span class="string">'\'&gt;'</span>
+		end = html.find(keywords, begin, len(html))
+		s = html[begin:end]
+		<span class="keyword">for</span> k, v <span class="keyword">in</span> EscapeCharacterDict.iteritems():
+			s = s.replace(k, v)
+		fp.write(<span class="string">"%3d  %s\n"</span> % (cnt, s))
+		cnt += <span class="number">1</span>
+
+USERNAME = <span class="string">'rogerwang'</span> <span class="comment"># 修改这里</span>
+REPONAME = <span class="string">'node-webkit'</span> <span class="comment"># 修改这里</span>
+
+fp = open(USERNAME + <span class="string">'#'</span> + REPONAME + <span class="string">'#commits.txt'</span>, <span class="string">'w'</span>)
+
+cnt = <span class="number">1</span>
+i = <span class="number">1</span>
+<span class="keyword">while</span>(<span class="keyword">True</span>):
+	<span class="keyword">try</span>:
+		response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'/'</span> + REPONAME + <span class="string">'/commits?page='</span> + str(i))  
+		deal(response)
+		<span class="keyword">print</span> <span class="string">'Cheaked'</span>, i, <span class="string">'page(s).'</span>
+		i += <span class="number">1</span>
+	<span class="keyword">except</span> urllib2.HTTPError, err:
+		<span class="keyword">if</span> err.code == <span class="number">404</span>:
+			<span class="keyword">print</span> <span class="string">''</span>
+			<span class="keyword">print</span> <span class="string">'Cheaked'</span>, i - <span class="number">1</span>, <span class="string">'page(s),'</span>, cnt - <span class="number">1</span>, <span class="string">'commit(s) found.'</span>			
+			<span class="keyword">break</span>
+		<span class="keyword">else</span>:
+			<span class="keyword">raise</span>
+</pre></td></tr></table></figure>
+
 ]]></content>
     
     
