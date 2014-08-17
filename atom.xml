@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-08-16T12:14:04.402Z</updated>
+  <updated>2014-08-17T15:18:08.255Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -39,7 +39,7 @@
     <link href="http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/"/>
     <id>http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/</id>
     <published>2014-06-24T05:36:39.000Z</published>
-    <updated>2014-08-16T12:13:13.000Z</updated>
+    <updated>2014-08-17T15:16:56.000Z</updated>
     <content type="html"><![CDATA[<p>我们使用 urllib2 这个组件来抓取网页，这是 Python 的一个获取 URLs (Uniform Resource Locators)的组件，它以 urlopen 函数的形式提供了一个非常简单的接口。</p>
 <p>以获取某 <del>id 为 EndlessCheng</del> 用户的 repository 列表为例：<br>（阅读下面代码之前建议先看看<a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a>的源码）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre>1
@@ -76,7 +76,7 @@ cnt = next = <span class="number">1</span>
     begin = html.rfind(<span class="string">'&gt;'</span>, <span class="number">0</span>, end) + <span class="number">1</span>
     <span class="keyword">print</span> <span class="string">"%3d  %s"</span> % (cnt, html[begin:end])
     cnt += <span class="number">1</span>
-</pre></td></tr></table></figure><br>源网页：<br><img src="http://endless.qiniudn.com/blogrepo.png" alt=""><br>输出结果：<br><img src="http://endless.qiniudn.com/blogoutput.png" alt=""><br><br>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br><figure class="highlight python"><table><tr><td class="gutter"><pre>1
+</pre></td></tr></table></figure><br>源网页：<br><img src="http://endless.qiniudn.com/blogrepo.png" alt=""><br>输出结果：<br><img src="http://endless.qiniudn.com/blogoutput.png" alt=""><br><br>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br>（晕，代码中的<code>EscapeCharacterDict</code>中的转义字符被直接转换了，可以去 <a href="https://github.com/EndlessCheng/Commits-Crawler/blob/master/Core.py" target="_blank" rel="external">原项目</a> 查看）<br><figure class="highlight python"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -125,7 +125,7 @@ cnt = next = <span class="number">1</span>
 47
 </pre></td><td class="code"><pre><span class="comment"># -*- coding: UTF-8 -*-</span>
 
-<span class="keyword">import</span> urllib2  
+<span class="keyword">import</span> urllib2
 
 EscapeCharacterDict = {<span class="string">'&amp;'</span>:<span class="string">'&'</span>, <span class="string">'&lt;'</span>:<span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>:<span class="string">'&gt;'</span>, <span class="string">'&quot;'</span>:<span class="string">'"'</span>, <span class="string">'&#39;'</span>:<span class="string">'\''</span>}
 
