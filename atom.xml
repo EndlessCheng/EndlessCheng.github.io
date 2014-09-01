@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-08-25T05:13:43.285Z</updated>
+  <updated>2014-09-01T04:21:16.536Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -317,12 +317,12 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
     <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-07-24T05:09:05.000Z</updated>
+    <updated>2014-09-01T04:20:29.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
 <h2 id="快速搭建">快速搭建</h2>
 <ol>
-<li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
+<li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
 <li>然后修改成 Jacman 主题（或者你喜欢的其他主题）：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
 </pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
 </pre></td></tr></table></figure></li>
