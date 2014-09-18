@@ -13,12 +13,20 @@ var _hmt = _hmt || [];
 <head>
   <meta charset="UTF-8">
   
-    <title>如何搭建免费静态博客——Hexo 与 GitHub 使用小记 | 简言</title>
+    <title>Django 中设置 css/js/images 路径的方法 | 简言</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="EndlessCheng">
     
-    <meta name="description" itemprop="description" content="参考了下别人的经验，无需配置 SSH 等麻烦操作。">
+    <meta name="description" content="在 settings.py 的最后一行你可以看到 STATIC_URL = &amp;#39;/static/&amp;#39; 这句话，在其后面加上：
+1
+2
+3
+4
+5
+6
+STATIC_ROOT = os.path.join(os.path.dirname(__file__),&#39;static&#39;)
+STATIC">
     
     
     
@@ -79,14 +87,14 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/" title="如何搭建免费静态博客——Hexo 与 GitHub 使用小记" itemprop="url">如何搭建免费静态博客——Hexo 与 GitHub 使用小记</a>
+      <a href="/2014/09/18/django-sets-the-css-js-images-path/" title="Django 中设置 css/js/images 路径的方法" itemprop="url">Django 中设置 css/js/images 路径的方法</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://jianyan.me/about" title="EndlessCheng" target="_blank" itemprop="author">EndlessCheng</a>
 		
   <p class="article-time">
-    <time datetime="2014-06-21T11:42:13.000Z" itemprop="datePublished">Published Jun 21 2014</time>
+    <time datetime="2014-09-18T10:42:13.000Z" itemprop="datePublished">Published Sep 18 2014</time>
     
   </p>
 </header>
@@ -96,105 +104,42 @@ var _hmt = _hmt || [];
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速搭建"><span class="toc-number">2.</span> <span class="toc-text">快速搭建</span></a></li></ol>
+			
 		
 		</div>
 		
-		<h2 id="缘起">缘起</h2>
-<p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）</p>
-<h2 id="快速搭建">快速搭建</h2>
-<ol>
-<li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
-<li>然后修改成 Jacman 主题（或者你喜欢的其他主题）：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
-</pre></td></tr></table></figure></li>
-<li>修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code><strong>前面</strong>加入<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>stylus:
-   <span class="built_in">compress</span>: <span class="constant">true</span>
-</pre></td></tr></table></figure></li>
-<li>在<code>./source</code>文件夹中建立<code>tags</code>、<code>categories</code>和<code>about</code>文件夹，各文件夹内部新建一个<code>index.md</code>文件。内容分别为：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>layout: tags
-<span class="header">title: tags
----</span>
-</pre></td></tr></table></figure><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>layout: categories
-<span class="header">title: categories
----</span>
-</pre></td></tr></table></figure><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="header">title: 关于我
----</span>
-&lt;自我介绍&gt;
-</pre></td></tr></table></figure><br>如果你想让你的 tags 有标签云的效果，把<code>./themes/&lt;你的主题&gt;/_config.yml</code>中<code>widgets</code>下的<code>tags</code>修改成<code>tagcloud</code></li>
-<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>git add .
-git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
-</pre></td></tr></table></figure></li>
-<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/&lt;你的主题&gt;/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="attribute">disqus</span>: <span class="string"></span>
-  <span class="attribute">enable</span>: <span class="string">true</span>
-  <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
-</pre></td></tr></table></figure></li>
-<li>添加 RSS：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>plugins:
-<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman 主题自带）</li>
-<li>写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></li>
-<li>添加<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的body标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
-<span class="keyword">var</span> _bdhmProtocol = ((<span class="string">"https:"</span> == document.location.protocol) ? <span class="string">" https://"</span> : <span class="string">" http://"</span>);
-document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cscript src='"</span> + _bdhmProtocol + <span class="string">"hm.baidu.com/h.js%3Fcfedc723a9dc30bd7db67ad8e53a97fa' type='text/javascript'%3E%3C/script%3E"</span>));
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure><br>百度统计异步代码是以异步加载形式加载了网站分析代码，使用该代码能够大幅提升您网站的打开速度(目前使用百度统计异步代码会导致百度统计图标和代码检查功能的失效).使用这种方式需要将代码添加至网站全部页面的标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/head.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
+		<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
-<span class="keyword">var</span> _hmt = _hmt || [];
-(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-  <span class="keyword">var</span> hm = document.createElement(<span class="string">"script"</span>);
-  hm.src = <span class="string">"//hm.baidu.com/hm.js?cfedc723a9dc30bd7db67ad8e53a97fa"</span>;
-  <span class="keyword">var</span> s = document.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure></li>
-<li>添加 sitemap：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)
+STATICFILES_DIRS = (
+    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
+    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
+    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
+)
+</pre></td></tr></table></figure><br>然后把你的 css/js/images 那些文件夹都丢进 static 文件夹中（此文件夹应建立在你的 view.py 所在目录下）<br>模板里面这么写：<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">link</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/static/css/login.css"</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>如果设置之后出现了与 Unicode 有关的错误，打开 <code>/Python27/Lib/mimetypes.py</code>，在 import 语句之后加入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
 2
-</pre></td><td class="code"><pre>plugins:
-<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>随后提交给 Google 网站站长工具即可。</li>
-</ol>
-  
+3
+</pre></td><td class="code"><pre><span class="keyword">if</span> sys.getdefaultencoding() != <span class="string">'gbk'</span>:
+    reload(sys)
+    sys.setdefaultencoding(<span class="string">'gbk'</span>)
+</pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/GitHub/">GitHub</a><a href="/tags/Jacman/">Jacman</a>
+  <span></span> <a href="/tags/Django/">Django</a>
   </div>
 
 
@@ -202,7 +147,7 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 
 <div class="article-share" id="share">
 
-  <div data-url="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/" data-title="如何搭建免费静态博客——Hexo 与 GitHub 使用小记 | 简言" data-tsina="null" class="share clearfix">
+  <div data-url="http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/" data-title="Django 中设置 css/js/images 路径的方法 | 简言" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -211,14 +156,14 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/" title="Java 与 C++ 混合编程——JNI 学习小记">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Java 与 C++ 混合编程——JNI 学习小记</span>
+
+<div class="next">
+<a href="/2014/07/04/earlier-for-git-youll-live-longer/"  title="Git 用的越早，你就活得越久">
+ <strong>下一篇：</strong><br/> 
+ <span>Git 用的越早，你就活得越久
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -236,7 +181,7 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速搭建"><span class="toc-number">2.</span> <span class="toc-text">快速搭建</span></a></li></ol>
+ 
  
   </div>
 

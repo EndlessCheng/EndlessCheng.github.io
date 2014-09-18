@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-09-01T04:21:16.536Z</updated>
+  <updated>2014-09-18T10:48:26.100Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -13,6 +13,43 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Django 中设置 css/js/images 路径的方法]]></title>
+    <link href="http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/"/>
+    <id>http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/</id>
+    <published>2014-09-18T10:42:13.000Z</published>
+    <updated>2014-09-18T10:47:41.000Z</updated>
+    <content type="html"><![CDATA[<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)
+STATICFILES_DIRS = (
+    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
+    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
+    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
+)
+</pre></td></tr></table></figure><br>然后把你的 css/js/images 那些文件夹都丢进 static 文件夹中（此文件夹应建立在你的 view.py 所在目录下）<br>模板里面这么写：<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">link</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/static/css/login.css"</span>&gt;</span>
+</pre></td></tr></table></figure>
+
+<p>如果设置之后出现了与 Unicode 有关的错误，打开 <code>/Python27/Lib/mimetypes.py</code>，在 import 语句之后加入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="keyword">if</span> sys.getdefaultencoding() != <span class="string">'gbk'</span>:
+    reload(sys)
+    sys.setdefaultencoding(<span class="string">'gbk'</span>)
+</pre></td></tr></table></figure>]]></content>
+    
+    
+      <category term="Django" scheme="http://jianyan.me/tags/Django/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Git 用的越早，你就活得越久]]></title>
