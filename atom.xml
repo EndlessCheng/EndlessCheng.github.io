@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-09-23T15:40:32.932Z</updated>
+  <updated>2014-09-29T02:37:35.642Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -898,7 +898,7 @@ STATICFILES_DIRS = (
     <link href="http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/"/>
     <id>http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/</id>
     <published>2014-06-24T05:36:39.000Z</published>
-    <updated>2014-08-17T15:28:10.000Z</updated>
+    <updated>2014-09-29T02:36:17.000Z</updated>
     <content type="html"><![CDATA[<p>我们使用 urllib2 这个组件来抓取网页，这是 Python 的一个获取 URLs (Uniform Resource Locators)的组件，它以 urlopen 函数的形式提供了一个非常简单的接口。</p>
 <p>以获取某 <del>id 为 EndlessCheng</del> 用户的 repository 列表为例：<br>（阅读下面代码之前建议先看看<a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a>的源码）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre>1
@@ -918,7 +918,11 @@ STATICFILES_DIRS = (
 15
 16
 17
-</pre></td><td class="code"><pre><span class="keyword">import</span> urllib2  
+18
+19
+</pre></td><td class="code"><pre><span class="comment"># -*- coding: UTF-8 -*-</span>
+
+<span class="keyword">import</span> urllib2
 
 USERNAME = <span class="string">'EndlessCheng'</span>
 response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'?tab=repositories'</span>)  
@@ -927,15 +931,15 @@ html = response.read()
 STEP = <span class="number">20</span>
 cnt = next = <span class="number">1</span>
 <span class="keyword">while</span> <span class="keyword">True</span>:
-    end = html.find(<span class="string">'&lt;/h3&gt;'</span>, next, len(html)) <span class="comment">#获取repolist-name尾位置</span>
-    <span class="keyword">if</span>(end == -<span class="number">1</span>):
+    end = html.find(<span class="string">'&lt;/h3&gt;'</span>, next, len(html))  <span class="comment"># 获取 repolist-name 尾位置</span>
+    <span class="keyword">if</span> end == -<span class="number">1</span>:
         <span class="keyword">break</span>
     next = end + STEP
     end = html.rfind(<span class="string">'&lt;/a&gt;'</span>, <span class="number">0</span>, end) 
     begin = html.rfind(<span class="string">'&gt;'</span>, <span class="number">0</span>, end) + <span class="number">1</span>
     <span class="keyword">print</span> <span class="string">"%3d  %s"</span> % (cnt, html[begin:end])
     cnt += <span class="number">1</span>
-</pre></td></tr></table></figure><br>源网页：<br><img src="http://endless.qiniudn.com/blogrepo.png" alt=""><br>输出结果：<br><img src="http://endless.qiniudn.com/blogoutput.png" alt=""><br><br>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br>（晕，代码中的 EscapeCharacterDict 的转义字符被直接转换了，可以去 <a href="https://github.com/EndlessCheng/Commits-Crawler/blob/master/Core.py" target="_blank" rel="external">原项目</a> 查看）<br><figure class="highlight python"><table><tr><td class="gutter"><pre>1
+</pre></td></tr></table></figure><br>源网页：<br><img src="http://endless.qiniudn.com/blogrepo.png" alt=""><br>输出结果：<br><img src="http://endless.qiniudn.com/blogoutput.png" alt=""><br><br>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br><figure class="highlight python"><table><tr><td class="gutter"><pre>1
 2
 3
 4
@@ -986,7 +990,7 @@ cnt = next = <span class="number">1</span>
 
 <span class="keyword">import</span> urllib2
 
-EscapeCharacterDict = {<span class="string">'&amp;'</span>:<span class="string">'&'</span>, <span class="string">'&lt;'</span>:<span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>:<span class="string">'&gt;'</span>, <span class="string">'&quot;'</span>:<span class="string">'"'</span>, <span class="string">'&#39;'</span>:<span class="string">'\''</span>}
+EscapeCharacterDict = {<span class="string">'`&amp;`'</span>:<span class="string">'&'</span>, <span class="string">'`&lt;`'</span>:<span class="string">'&lt;'</span>, <span class="string">'`&gt;`'</span>:<span class="string">'&gt;'</span>, <span class="string">'`&quot;`'</span>:<span class="string">'"'</span>, <span class="string">'`&#39;`'</span>:<span class="string">'\''</span>}
 
 <span class="function"><span class="keyword">def</span> <span class="title">deal</span><span class="params">(response)</span>:</span>
 	html = response.read() 
