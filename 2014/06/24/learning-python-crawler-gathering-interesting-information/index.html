@@ -192,29 +192,29 @@ cnt = next = <span class="number">1</span>
 
 <span class="keyword">import</span> urllib2
 
-EscapeCharacterDict = {<span class="string">'&amp;'</span>:<span class="string">'&'</span>, <span class="string">'&lt;'</span>:<span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>:<span class="string">'&gt;'</span>, <span class="string">'&quot;'</span>:<span class="string">'"'</span>, <span class="string">'&#39;'</span>:<span class="string">'\''</span>}
+EscapeCharacterDict = {<span class="string">'&amp;'</span>: <span class="string">'&'</span>, <span class="string">'&lt;'</span>: <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>: <span class="string">'&gt;'</span>, <span class="string">'&quot;'</span>: <span class="string">'"'</span>, <span class="string">'&#39;'</span>: <span class="string">'\''</span>}
 
 
 <span class="function"><span class="keyword">def</span> <span class="title">deal</span><span class="params">(response)</span>:</span>
-	html = response.read() 
+    html = response.read()
 
-	<span class="keyword">global</span> cnt
-	<span class="keyword">global</span> fp
-	STEP = <span class="number">24</span>
-	end = <span class="number">1000</span>
-	
-	<span class="keyword">while</span> <span class="keyword">True</span>:
-		begin = html.find(<span class="string">'data-pjax="true" title='</span>, end, len(html)) <span class="comment">#获取commit首位置</span>
-		<span class="keyword">if</span>(begin == -<span class="number">1</span>):
-			<span class="keyword">break</span>
-		begin += STEP
-		keywords = <span class="string">'"&gt;'</span> <span class="keyword">if</span> html[begin - <span class="number">1</span>] == <span class="string">'"'</span> <span class="keyword">else</span> <span class="string">'\'&gt;'</span>
-		end = html.find(keywords, begin, len(html))
-		s = html[begin:end]
-		<span class="keyword">for</span> k, v <span class="keyword">in</span> EscapeCharacterDict.iteritems():
-			s = s.replace(k, v)
-		fp.write(<span class="string">"%3d  %s\n"</span> % (cnt, s))
-		cnt += <span class="number">1</span>
+    <span class="keyword">global</span> cnt
+    <span class="keyword">global</span> fp
+    step = <span class="number">24</span>
+    end = <span class="number">1000</span>
+
+    <span class="keyword">while</span> <span class="keyword">True</span>:
+        begin = html.find(<span class="string">'data-pjax="true" title='</span>, end, len(html))  <span class="comment"># 获取 commit 首位置</span>
+        <span class="keyword">if</span> begin == -<span class="number">1</span>:
+            <span class="keyword">break</span>
+        begin += step
+        keywords = <span class="string">'"&gt;'</span> <span class="keyword">if</span> html[begin - <span class="number">1</span>] == <span class="string">'"'</span> <span class="keyword">else</span> <span class="string">'\'&gt;'</span>
+        end = html.find(keywords, begin, len(html))
+        s = html[begin:end]
+        <span class="keyword">for</span> k, v <span class="keyword">in</span> EscapeCharacterDict.iteritems():
+            s = s.replace(k, v)
+        fp.write(<span class="string">"%3d  %s\n"</span> % (cnt, s))
+        cnt += <span class="number">1</span>
 
 USERNAME = <span class="string">'rogerwang'</span> <span class="comment"># 修改这里</span>
 REPONAME = <span class="string">'node-webkit'</span> <span class="comment"># 修改这里</span>
@@ -223,19 +223,19 @@ fp = open(USERNAME + <span class="string">'#'</span> + REPONAME + <span class="s
 
 cnt = <span class="number">1</span>
 i = <span class="number">1</span>
-<span class="keyword">while</span>(<span class="keyword">True</span>):
-	<span class="keyword">try</span>:
-		response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'/'</span> + REPONAME + <span class="string">'/commits?page='</span> + str(i))  
-		deal(response)
-		<span class="keyword">print</span> <span class="string">'Cheaked'</span>, i, <span class="string">'page(s).'</span>
-		i += <span class="number">1</span>
-	<span class="keyword">except</span> urllib2.HTTPError, err:
-		<span class="keyword">if</span> err.code == <span class="number">404</span>:
-			<span class="keyword">print</span> <span class="string">''</span>
-			<span class="keyword">print</span> <span class="string">'Cheaked'</span>, i - <span class="number">1</span>, <span class="string">'page(s),'</span>, cnt - <span class="number">1</span>, <span class="string">'commit(s) found.'</span>			
-			<span class="keyword">break</span>
-		<span class="keyword">else</span>:
-			<span class="keyword">raise</span>
+<span class="keyword">while</span> <span class="keyword">True</span>:
+    <span class="keyword">try</span>:
+        response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'/'</span> + REPONAME + <span class="string">'/commits?page='</span> + str(i))
+        deal(response)
+        <span class="keyword">print</span> <span class="string">'Cheaked'</span>, i, <span class="string">'page(s).'</span>
+        i += <span class="number">1</span>
+    <span class="keyword">except</span> urllib2.HTTPError, err:
+        <span class="keyword">if</span> err.code == <span class="number">404</span>:
+            <span class="keyword">print</span> <span class="string">''</span>
+            <span class="keyword">print</span> <span class="string">'Cheaked'</span>, i - <span class="number">1</span>, <span class="string">'page(s),'</span>, cnt - <span class="number">1</span>, <span class="string">'commit(s) found.'</span>
+            <span class="keyword">break</span>
+        <span class="keyword">else</span>:
+            <span class="keyword">raise</span>
 </pre></td></tr></table></figure>
 
   
