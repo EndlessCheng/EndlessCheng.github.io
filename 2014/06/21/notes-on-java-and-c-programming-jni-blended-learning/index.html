@@ -202,7 +202,7 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
 JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </span>Java_Algorithm_write(JNIEnv * env, jclass obj, jstring jMsg)
 {
 	setlocale(LC_ALL, <span class="string">"Chinese-simplified"</span>); <span class="comment">// clocale</span>
-	   wprintf(L<span class="string">"%ls"</span>, (wchar_t*)env-&gt;GetStringChars(jMsg, NULL));
+	wprintf(L<span class="string">"%ls"</span>, (wchar_t*)env-&gt;GetStringChars(jMsg, NULL));
 }
 </pre></td></tr></table></figure>
 
