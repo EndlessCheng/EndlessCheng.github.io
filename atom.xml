@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-11-01T07:11:26.313Z</updated>
+  <updated>2014-11-01T07:16:14.785Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://jianyan.me/2014/11/01/how-to-write-a-bug-free-min-max-macro/"/>
     <id>http://jianyan.me/2014/11/01/how-to-write-a-bug-free-min-max-macro/</id>
     <published>2014-11-01T07:01:14.000Z</published>
-    <updated>2014-11-01T07:10:49.000Z</updated>
+    <updated>2014-11-01T07:15:52.000Z</updated>
     <content type="html"><![CDATA[<p>今天看了下 GHC 的源码，在 <a href="https://github.com/ghc/ghc/blob/master/includes/Rts.h" target="_blank" rel="external">Rts.h</a> 中，有如下宏定义：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre>1
 2
@@ -52,6 +52,8 @@
       <category term="C" scheme="http://jianyan.me/tags/C/"/>
     
       <category term="macro" scheme="http://jianyan.me/tags/macro/"/>
+    
+      <category term="GHC" scheme="http://jianyan.me/tags/GHC/"/>
     
   </entry>
   
