@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-11-01T07:16:14.785Z</updated>
+  <updated>2014-11-01T07:20:38.126Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -1096,7 +1096,7 @@ i = <span class="number">1</span>
     <link href="http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/"/>
     <id>http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</id>
     <published>2014-06-21T13:42:13.000Z</published>
-    <updated>2014-10-08T11:06:10.000Z</updated>
+    <updated>2014-11-01T07:19:39.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的 native 方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的 arraycopy 方法（第 482 行）、setOut0 方法（第 247 行）等。Google 一下后发现这是 Java Native Interface (JNI)，便花点时间学习了一下。</p>
 <h2 id="何谓JNI？">何谓JNI？</h2>
@@ -1217,6 +1217,10 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
       <category term="JNI" scheme="http://jianyan.me/tags/JNI/"/>
     
       <category term="「Hello World」" scheme="http://jianyan.me/tags/%E3%80%8CHello-World%E3%80%8D/"/>
+    
+      <category term="Java" scheme="http://jianyan.me/tags/Java/"/>
+    
+      <category term="C" scheme="http://jianyan.me/tags/C/"/>
     
   </entry>
   
