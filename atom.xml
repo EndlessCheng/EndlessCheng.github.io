@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-12-09T07:57:07.086Z</updated>
+  <updated>2014-12-09T08:06:14.317Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -741,11 +741,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[Git Django 中设置 css/js/images 路径的方法]]></title>
+    <title><![CDATA[Django 中设置 css/js/images 路径的方法]]></title>
     <link href="http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/"/>
     <id>http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/</id>
     <published>2014-09-18T13:30:00.000Z</published>
-    <updated>2014-12-09T07:50:04.000Z</updated>
+    <updated>2014-12-09T07:58:24.000Z</updated>
     <content type="html"><![CDATA[<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)</div><div class="line">STATICFILES_DIRS = (</div><div class="line">    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">)</div></pre></td></tr></table></figure>
 
