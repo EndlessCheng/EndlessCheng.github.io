@@ -1,6 +1,6 @@
 
  <!DOCTYPE HTML>
-<html lang="ch-ZN">
+<html >
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -11,12 +11,13 @@ var _hmt = _hmt || [];
 })();
 </script>
 <head>
+
   <meta charset="UTF-8">
   
     <title>如何搭建免费静态博客——Hexo 与 GitHub 使用小记 | 简言</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-    <meta name="author" content="EndlessCheng">
+    <meta name="author" content="简言">
     
     <meta name="description" itemprop="description" content="参考了下别人的经验，无需配置 SSH 等麻烦操作。">
     
@@ -33,6 +34,7 @@ var _hmt = _hmt || [];
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -53,11 +55,11 @@ var _hmt = _hmt || [];
 				<ul>
 					<ul>
 					 
-						<li><a href="/">首页</a></li>
+						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">归档</a></li>
+						<li><a href="/archives">Archives</a></li>
 					
-						<li><a href="/about">关于</a></li>
+						<li><a href="/about">About</a></li>
 					
 					<li>
  					
@@ -68,13 +70,13 @@ var _hmt = _hmt || [];
 					</form>
 					
 					</li>
-					
 				</ul>
 			</nav>			
 </div>
     </header>
     <div id="container">
       <div id="main" class="post" itemscope itemprop="blogPost">
+  
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
@@ -83,15 +85,14 @@ var _hmt = _hmt || [];
   </h1>
   <p class="article-author">By
        
-		<a href="http://jianyan.me/about" title="EndlessCheng" target="_blank" itemprop="author">EndlessCheng</a>
+		<a href="http://jianyan.me/about" title="简言" target="_blank" itemprop="author">简言</a>
 		
   <p class="article-time">
-    <time datetime="2014-06-21T11:42:13.000Z" itemprop="datePublished">Published Jun 21 2014</time>
+    <time datetime="2014-06-21T13:30:00.000Z" itemprop="datePublished"> Published Jun 21 2014</time>
     
   </p>
 </header>
 	<div class="article-content">
-		
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
@@ -103,93 +104,57 @@ var _hmt = _hmt || [];
 		<h2 id="缘起">缘起</h2>
 <p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）<br>其次，可能你会遇到修改了某些文字之后又想改回去的情况，这时 Github 上保存的历史记录就会帮到你了。</p>
 <h2 id="快速搭建">快速搭建</h2>
-<ol>
-<li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
-<li>然后修改成 Jacman 主题（或者你喜欢的其他主题）：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
-</pre></td></tr></table></figure></li>
-<li>修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code><strong>前面</strong>加入<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>stylus:
-   <span class="built_in">compress</span>: <span class="constant">true</span>
-</pre></td></tr></table></figure></li>
-<li>在<code>./source</code>文件夹中建立<code>tags</code>、<code>categories</code>和<code>about</code>文件夹，各文件夹内部新建一个<code>index.md</code>文件。内容分别为：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>layout: tags
-<span class="header">title: tags
----</span>
-</pre></td></tr></table></figure><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>layout: categories
-<span class="header">title: categories
----</span>
-</pre></td></tr></table></figure><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="header">title: 关于我
----</span>
-&lt;自我介绍&gt;
-</pre></td></tr></table></figure><br>如果你想让你的 tags 有标签云的效果，把<code>./themes/&lt;你的主题&gt;/_config.yml</code>中<code>widgets</code>下的<code>tags</code>修改成<code>tagcloud</code></li>
-<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>git add .
-git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
-</pre></td></tr></table></figure></li>
-<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/&lt;你的主题&gt;/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="attribute">disqus</span>: <span class="string"></span>
-  <span class="attribute">enable</span>: <span class="string">true</span>
-  <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
-</pre></td></tr></table></figure></li>
-<li>添加 RSS：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>plugins:
-<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman 主题自带）</li>
-<li>写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></li>
-<li>添加<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的body标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
-<span class="keyword">var</span> _bdhmProtocol = ((<span class="string">"https:"</span> == document.location.protocol) ? <span class="string">" https://"</span> : <span class="string">" http://"</span>);
-document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cscript src='"</span> + _bdhmProtocol + <span class="string">"hm.baidu.com/h.js%3Fcfedc723a9dc30bd7db67ad8e53a97fa' type='text/javascript'%3E%3C/script%3E"</span>));
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure><br>百度统计异步代码是以异步加载形式加载了网站分析代码，使用该代码能够大幅提升您网站的打开速度(目前使用百度统计异步代码会导致百度统计图标和代码检查功能的失效).使用这种方式需要将代码添加至网站全部页面的标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/head.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
-<span class="keyword">var</span> _hmt = _hmt || [];
-(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-  <span class="keyword">var</span> hm = document.createElement(<span class="string">"script"</span>);
-  hm.src = <span class="string">"//hm.baidu.com/hm.js?cfedc723a9dc30bd7db67ad8e53a97fa"</span>;
-  <span class="keyword">var</span> s = document.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure></li>
-<li>添加 sitemap：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>plugins:
-<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>随后提交给 Google 网站站长工具即可。</li>
-</ol>
+<p>1.首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a></p>
+<p><strong>注意，若生成文章之后首页文章显示异常（如出现空白文章或重复文章等），请先<code>hexo clean</code>之后再<code>hexo g</code></strong></p>
+<p>2.然后修改成 Jacman 主题（或者你喜欢的其他主题）：在根目录下右键选择 Git Bash 输入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/wuchong/jacman.git themes/jacman</div></pre></td></tr></table></figure>
+
+<p>3.修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code>前面加入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">stylu<span class="variable">s:</span></div><div class="line">   compres<span class="variable">s:</span> true</div></pre></td></tr></table></figure>
+
+<p>4.在<code>./source</code>文件夹中建立<code>tags</code>、<code>categories</code>和<code>about</code>文件夹，各文件夹内部新建一个<code>index.md</code>文件。内容分别为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">layout: tags</div><div class="line"><span class="header">title: tags</span></div><div class="line">---</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">layout: categories</div><div class="line"><span class="header">title: categories</span></div><div class="line">---</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="header">title: 关于我</span></div><div class="line">---</div><div class="line">&lt;自我介绍&gt;</div></pre></td></tr></table></figure>
+
+<p>如果你想让你的 tags 有标签云的效果，把<code>./themes/&lt;你的主题&gt;/_config.yml中widgets</code>下的<code>tag</code>修改成<code>tagcloud</code></p>
+<p>5.完成上述步骤后在 sync 时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m <span class="string">"update fancybox"</span></div></pre></td></tr></table></figure>
+
+<p>6.添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/&lt;你的主题&gt;/_config.yml</code>，找到<code>disqus_shortname</code>，修改如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">disqus_shortname</span>: <span class="string">&lt;你填的名字&gt;</span></div></pre></td></tr></table></figure>
+
+<p>7.添加 RSS：在根目录下运行 Git Bash，输入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> hexo-generator-feed</span></div></pre></td></tr></table></figure>
+
+<p>然后编辑<code>./_config.yml</code>，添加如下代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plugin<span class="variable">s:</span></div><div class="line">- hexo-generator-feed</div></pre></td></tr></table></figure>
+
+<p>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman 主题自带）</p>
+<p>8.写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></p>
+<p>9.添加 <a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的<code>&lt;body&gt;</code>标签<strong>前</strong>, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> _bdhmProtocol = ((<span class="string">"https:"</span> == <span class="built_in">document</span>.location.protocol) ? <span class="string">" https://"</span> : <span class="string">" http://"</span>);</div><div class="line"><span class="built_in">document</span>.write(<span class="built_in">unescape</span>(<span class="string">"%3Cscript src='"</span> + _bdhmProtocol + <span class="string">"hm.baidu.com/h.js%3Fcfedc723a9dc30bd7db67ad8e53a97fa' type='text/javascript'%3E%3C/script%3E"</span>));</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>百度统计异步代码是以异步加载形式加载了网站分析代码，使用该代码能够大幅提升您网站的打开速度(目前使用百度统计异步代码会导致百度统计图标和代码检查功能的失效).使用这种方式需要将代码添加至网站全部页面的标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/head.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> _hmt = _hmt || [];</div><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> hm = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">  hm.src = <span class="string">"//hm.baidu.com/hm.js?efd32d79f8a09abef26865f3b17a3fc7"</span>;</div><div class="line">  <span class="keyword">var</span> s = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>]; </div><div class="line">  s.parentNode.insertBefore(hm, s);</div><div class="line">})();</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>10.添加 sitemap：在根目录下运行 Git Bash，输入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> hexo-generator-sitemap</span></div></pre></td></tr></table></figure>
+
+<p>然后编辑<code>./_config.yml</code>，添加如下代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plugin<span class="variable">s:</span></div><div class="line">- hexo-generator-sitemap</div></pre></td></tr></table></figure>
+
+<p>随后提交给 Google 网站站长工具即可。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
+<div class="article-catetags">
 
 
   <div class="article-tags">
@@ -197,7 +162,7 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
   <span></span> <a href="/tags/Hexo/">Hexo</a><a href="/tags/GitHub/">GitHub</a><a href="/tags/Jacman/">Jacman</a>
   </div>
 
-
+</div>
 
 
 <div class="article-share" id="share">
@@ -224,7 +189,7 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 
 	
 
-<section class="comment">
+<section id="comments" class="comment">
   <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
@@ -258,9 +223,19 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
   <div class="linkslist">
   <p class="asidetitle">Links</p>
     <ul>
-      <li><a href="http://endless.logdown.com/" target="_blank">Logdown 博客</a></li>
-      <li><a href="http://blog.csdn.net/synapse7?viewmode=list" target="_blank">CSDN 博客</a></li>
-	  <li><a href="https://github.com/EndlessCheng" target="_blank">GitHub</a></li>
+        
+          <li>
+            <a href="http://endless.logdown.com/" target="_blank" title="Logdown 博客">Logdown 博客</a>
+          </li>
+        
+          <li>
+            <a href="http://blog.csdn.net/synapse7?viewmode=list" target="_blank" title="CSDN 博客">CSDN 博客</a>
+          </li>
+        
+          <li>
+            <a href="https://github.com/EndlessCheng" target="_blank" title="GitHub">GitHub</a>
+          </li>
+        
     </ul>
 </div>
 
@@ -275,9 +250,7 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 	
 	<div class="line">
 		<span></span>
-		
 		<div class="author"></div>
-		
 	</div>
 	
 	
@@ -290,15 +263,20 @@ document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cs
 		
 		
 		
+		
+		
 	</div>
 		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Pacman">Jacman</a> © 2014 
 		
-		<a href="http://jianyan.me/about" target="_blank" title="EndlessCheng">EndlessCheng</a>
+		<a href="http://jianyan.me/about" target="_blank" title="简言">简言</a>
 		
 		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){ 
   $('.navbar').click(function(){
@@ -385,15 +363,16 @@ $(document).ready(function(){
       url = $this.attr('data-url'),
       encodedUrl = encodeURIComponent(url),
       title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
   var html = [
   '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
   '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
   '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
   '<span title="Share to"></span>'
   ].join('');
   $this.append(html);
@@ -451,19 +430,28 @@ $(document).ready(function(){
 
 
 
-<div id="totop">
-<a title="Back to Top"><img src="/img/scrollup.png"/></a>
-</div>
+<!-- Analytics Begin -->
 
-<script src="/js/totop.js"></script>
 
-<script type="text/x-mathjax-config"> 
-MathJax.Hub.Config({ 
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} 
-}); 
-</script>
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
   </body>
 </html>

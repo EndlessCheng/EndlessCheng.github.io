@@ -1,6 +1,6 @@
 
  <!DOCTYPE HTML>
-<html lang="ch-ZN">
+<html >
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -11,22 +11,16 @@ var _hmt = _hmt || [];
 })();
 </script>
 <head>
+
   <meta charset="UTF-8">
   
-    <title>Django 中设置 css/js/images 路径的方法 | 简言</title>
+    <title>Git Django 中设置 css/js/images 路径的方法 | 简言</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
-    <meta name="author" content="EndlessCheng">
+    <meta name="author" content="简言">
     
     <meta name="description" content="在 settings.py 的最后一行你可以看到 STATIC_URL = &amp;#39;/static/&amp;#39; 这句话，在其后面加上：
-1
-2
-3
-4
-5
-6
-STATIC_ROOT = os.path.join(os.path.dirname(__file__),&#39;static&#39;)
-STATIC">
+123456STATIC_ROOT = os.path.join(os.path.dirname(__file__),&#39;static&#39;)STATICFILES_D">
     
     
     
@@ -41,6 +35,7 @@ STATIC">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
 </head>
 
   <body>
@@ -61,11 +56,11 @@ STATIC">
 				<ul>
 					<ul>
 					 
-						<li><a href="/">首页</a></li>
+						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">归档</a></li>
+						<li><a href="/archives">Archives</a></li>
 					
-						<li><a href="/about">关于</a></li>
+						<li><a href="/about">About</a></li>
 					
 					<li>
  					
@@ -76,30 +71,29 @@ STATIC">
 					</form>
 					
 					</li>
-					
 				</ul>
 			</nav>			
 </div>
     </header>
     <div id="container">
       <div id="main" class="post" itemscope itemprop="blogPost">
+  
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/09/18/django-sets-the-css-js-images-path/" title="Django 中设置 css/js/images 路径的方法" itemprop="url">Django 中设置 css/js/images 路径的方法</a>
+      <a href="/2014/09/18/django-sets-the-css-js-images-path/" title="Git Django 中设置 css/js/images 路径的方法" itemprop="url">Git Django 中设置 css/js/images 路径的方法</a>
   </h1>
   <p class="article-author">By
        
-		<a href="http://jianyan.me/about" title="EndlessCheng" target="_blank" itemprop="author">EndlessCheng</a>
+		<a href="http://jianyan.me/about" title="简言" target="_blank" itemprop="author">简言</a>
 		
   <p class="article-time">
-    <time datetime="2014-09-18T10:42:13.000Z" itemprop="datePublished">Published Sep 18 2014</time>
+    <time datetime="2014-09-18T13:30:00.000Z" itemprop="datePublished"> Published Sep 18 2014</time>
     
   </p>
 </header>
 	<div class="article-content">
-		
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
@@ -109,32 +103,18 @@ STATIC">
 		</div>
 		
 		<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)
-STATICFILES_DIRS = (
-    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
-    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
-    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
-)
-</pre></td></tr></table></figure><br>然后把你的 css/js/images 那些文件夹都丢进 static 文件夹中（此文件夹应建立在你的 view.py 所在目录下）<br>模板里面这么写：<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">link</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/static/css/login.css"</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)</div><div class="line">STATICFILES_DIRS = (</div><div class="line">    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>然后把你的 css/js/images 那些文件夹都丢进 static 文件夹中（此文件夹应建立在你的 view.py 所在目录下）<br>模板里面这么写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/static/css/login.css"</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>如果设置之后出现了与 Unicode 有关的错误，打开 <code>/Python27/Lib/mimetypes.py</code>，在 import 语句之后加入：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="keyword">if</span> sys.getdefaultencoding() != <span class="string">'gbk'</span>:
-    reload(sys)
-    sys.setdefaultencoding(<span class="string">'gbk'</span>)
-</pre></td></tr></table></figure>  
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> sys.getdefaultencoding() != <span class="string">'gbk'</span>:</div><div class="line">    reload(sys)</div><div class="line">    sys.setdefaultencoding(<span class="string">'gbk'</span>)</div></pre></td></tr></table></figure>
+
+  
 	</div>
 		<footer class="article-footer clearfix">
+<div class="article-catetags">
 
 
   <div class="article-tags">
@@ -142,12 +122,12 @@ STATICFILES_DIRS = (
   <span></span> <a href="/tags/Django/">Django</a>
   </div>
 
-
+</div>
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/" data-title="Django 中设置 css/js/images 路径的方法 | 简言" data-tsina="null" class="share clearfix">
+  <div data-url="http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/" data-title="Git Django 中设置 css/js/images 路径的方法 | 简言" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -177,7 +157,7 @@ STATICFILES_DIRS = (
 
 	
 
-<section class="comment">
+<section id="comments" class="comment">
   <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
@@ -211,9 +191,19 @@ STATICFILES_DIRS = (
   <div class="linkslist">
   <p class="asidetitle">Links</p>
     <ul>
-      <li><a href="http://endless.logdown.com/" target="_blank">Logdown 博客</a></li>
-      <li><a href="http://blog.csdn.net/synapse7?viewmode=list" target="_blank">CSDN 博客</a></li>
-	  <li><a href="https://github.com/EndlessCheng" target="_blank">GitHub</a></li>
+        
+          <li>
+            <a href="http://endless.logdown.com/" target="_blank" title="Logdown 博客">Logdown 博客</a>
+          </li>
+        
+          <li>
+            <a href="http://blog.csdn.net/synapse7?viewmode=list" target="_blank" title="CSDN 博客">CSDN 博客</a>
+          </li>
+        
+          <li>
+            <a href="https://github.com/EndlessCheng" target="_blank" title="GitHub">GitHub</a>
+          </li>
+        
     </ul>
 </div>
 
@@ -228,9 +218,7 @@ STATICFILES_DIRS = (
 	
 	<div class="line">
 		<span></span>
-		
 		<div class="author"></div>
-		
 	</div>
 	
 	
@@ -243,15 +231,20 @@ STATICFILES_DIRS = (
 		
 		
 		
+		
+		
 	</div>
 		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Pacman">Jacman</a> © 2014 
 		
-		<a href="http://jianyan.me/about" target="_blank" title="EndlessCheng">EndlessCheng</a>
+		<a href="http://jianyan.me/about" target="_blank" title="简言">简言</a>
 		
 		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){ 
   $('.navbar').click(function(){
@@ -338,15 +331,16 @@ $(document).ready(function(){
       url = $this.attr('data-url'),
       encodedUrl = encodeURIComponent(url),
       title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
   var html = [
   '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
   '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
   '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
   '<span title="Share to"></span>'
   ].join('');
   $this.append(html);
@@ -404,19 +398,28 @@ $(document).ready(function(){
 
 
 
-<div id="totop">
-<a title="Back to Top"><img src="/img/scrollup.png"/></a>
-</div>
+<!-- Analytics Begin -->
 
-<script src="/js/totop.js"></script>
 
-<script type="text/x-mathjax-config"> 
-MathJax.Hub.Config({ 
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} 
-}); 
-</script>
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
   </body>
 </html>

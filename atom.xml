@@ -4,12 +4,12 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-11-14T03:49:46.605Z</updated>
+  <updated>2014-12-09T07:57:07.086Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
-    <name><![CDATA[EndlessCheng]]></name>
-    <email><![CDATA[synapse5@163.com]]></email>
+    <name><![CDATA[简言]]></name>
+    
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
@@ -18,36 +18,21 @@
     <title><![CDATA[如何写一个无 bug 的 min/max 宏？]]></title>
     <link href="http://jianyan.me/2014/11/01/how-to-write-a-bug-free-min-max-macro/"/>
     <id>http://jianyan.me/2014/11/01/how-to-write-a-bug-free-min-max-macro/</id>
-    <published>2014-11-01T07:01:14.000Z</published>
-    <updated>2014-11-01T07:15:52.000Z</updated>
+    <published>2014-11-01T13:30:00.000Z</published>
+    <updated>2014-12-09T07:56:40.000Z</updated>
     <content type="html"><![CDATA[<p>今天看了下 GHC 的源码，在 <a href="https://github.com/ghc/ghc/blob/master/includes/Rts.h" target="_blank" rel="external">Rts.h</a> 中，有如下宏定义：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="preprocessor">#if defined(SUPPORTS_TYPEOF)</span>
-<span class="preprocessor">#define stg_min(a,b) ({typeof(a) _a = (a), _b = (b); _a &lt;= _b ? _a : _b; })</span>
-<span class="preprocessor">#define stg_max(a,b) ({typeof(a) _a = (a), _b = (b); _a &lt;= _b ? _b : _a; })</span>
-<span class="preprocessor">#else</span>
-<span class="preprocessor">#define stg_min(a,b) ((a) &lt;= (b) ? (a) : (b))</span>
-<span class="preprocessor">#define stg_max(a,b) ((a) &lt;= (b) ? (b) : (a))</span>
-<span class="preprocessor">#endif</span>
-</pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">if</span> defined(SUPPORTS_TYPEOF)</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_min(a,b) ({typeof(a) _a = (a), _b = (b); _a &lt;= _b ? _a : _b; })</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_max(a,b) ({typeof(a) _a = (a), _b = (b); _a &lt;= _b ? _b : _a; })</span></div><div class="line"><span class="preprocessor">#<span class="keyword">else</span></span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_min(a,b) ((a) &lt;= (b) ? (a) : (b))</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_max(a,b) ((a) &lt;= (b) ? (b) : (a))</span></div><div class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></div></pre></td></tr></table></figure>
 
-<p>那么问题来了：为什么不直接定义下面那种宏？</p>
-<p>原因在于传入的 a,b 可能是一个有副作用的表达式，比如 <code>++a</code>，使用下面这种宏会产生一个及其隐秘的 bug（谁知道哪天程序出错了 bug 会在这里）。</p>
-<p>个人觉得这真的是一个 GHC 的 bug..</p>
-<p>替代方案就正如源码中写的，使用 <code>typeof</code>，不过这需要 C 扩展支持。</p>
-<p>参考：</p>
+<p>那么问题来了：为什么不直接定义下面那种宏？<br>原因在于传入的 a,b 可能是一个有副作用的表达式，比如 <code>++a</code>，使用下面这种宏会产生一个及其隐秘的 bug（谁知道哪天程序出错了 bug 会在这里）。<br>个人觉得这真的是一个 GHC 的 bug..<br>替代方案就正如源码中写的，使用 <code>typeof</code>，不过这需要 C 扩展支持。<br>参考：</p>
 <ol>
 <li><a href="http://stackoverflow.com/questions/3437404/min-and-max-in-c" target="_blank" rel="external">macros - MIN and MAX in C - Stack Overflow</a></li>
 <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Typeof.html#Typeof" target="_blank" rel="external">Typeof - Using the GNU Compiler Collection (GCC)</a></li>
 </ol>
 ]]></content>
-    
+    <summary type="html">
+    <![CDATA[<p>今天看了下 GHC 的源码，在 <a href="https://github.com/ghc/ghc/blob/master/includes/Rts.h" target="_blank" rel="external">Rts.h</a> 中，有如下宏定义：</p>
+<f]]>
+    </summary>
     
       <category term="C" scheme="http://jianyan.me/tags/C/"/>
     
@@ -61,9 +46,88 @@
     <title><![CDATA[GitHub 秘籍]]></title>
     <link href="http://jianyan.me/2014/09/23/github-cheats/"/>
     <id>http://jianyan.me/2014/09/23/github-cheats/</id>
-    <published>2014-09-23T15:40:14.000Z</published>
-    <updated>2014-09-23T15:39:23.000Z</updated>
-    <content type="html"><![CDATA[<p>本秘籍收录了一些 Git 和 Github 非常酷同时又少有人知的功能。灵感来自于 <a href="https://github.com/holman" target="_blank" rel="external">Zach Holman</a> 在 2012 年 Aloha Ruby Conference 和 2013 年 WDCNZ 上所做的演讲：<a href="http://www.confreaks.com/videos/1229-aloharuby2012-git-and-github-secrets" target="_blank" rel="external">Git and GitHub Secrets</a>(<a href="https://speakerdeck.com/holman/git-and-github-secrets" target="_blank" rel="external">slides</a>) 和 <a href="https://vimeo.com/72955426" target="_blank" rel="external">More Git and GitHub Secrets</a>(<a href="https://speakerdeck.com/holman/more-git-and-github-secrets" target="_blank" rel="external">slides</a>)。</p>
+    <published>2014-09-23T13:30:00.000Z</published>
+    <updated>2014-12-09T07:54:41.000Z</updated>
+    <content type="html"><![CDATA[<p><strong>本文转载自 <a href="https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md" target="_blank" rel="external">GitHub</a></strong></p>
+<p>本秘籍收录了一些Git和Github非常酷同时又少有人知的功能。灵感来自于<a href="https://github.com/holman" target="_blank" rel="external">Zach Holman</a>在2012年Aloha Ruby Conference和2013年WDCNZ上所做的演讲：<a href="http://www.confreaks.com/videos/1229-aloharuby2012-git-and-github-secrets" target="_blank" rel="external">Git and GitHub Secrets</a>(<a href="https://speakerdeck.com/holman/git-and-github-secrets" target="_blank" rel="external">slides</a>)和<a href="https://vimeo.com/72955426" target="_blank" rel="external">More Git and GitHub Secrets</a>(<a href="https://speakerdeck.com/holman/more-git-and-github-secrets" target="_blank" rel="external">slides</a>)。</p>
+<p><em>Read this in other languages: <a href="README.md">English</a>, <a href="README.ko.md">한국어</a>, <a href="README.ja.md">日本語</a>, <a href="README.zh-cn.md">简体中文</a>.</em></p>
+<h1 id="目录">目录</h1>
+<ul>
+<li><a href="#github">GitHub</a><ul>
+<li><a href="#%E8%B0%83%E6%95%B4tab%E5%AD%97%E7%AC%A6%E6%89%80%E4%BB%A3%E8%A1%A8%E7%9A%84%E7%A9%BA%E6%A0%BC%E6%95%B0">忽略空白字符变化</a></li>
+<li><a href="#%E8%B0%83%E6%95%B4tab%E5%AD%97%E7%AC%A6%E6%89%80%E4%BB%A3%E8%A1%A8%E7%9A%84%E7%A9%BA%E6%A0%BC%E6%95%B0">调整Tab字符所代表的空格数</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E7%94%A8%E6%88%B7%E7%9A%84commit%E5%8E%86%E5%8F%B2">查看某个用户的Commit历史</a></li>
+<li><a href="#%E5%85%8B%E9%9A%86%E6%9F%90%E4%B8%AA%E4%BB%93%E5%BA%93">克隆某个仓库</a></li>
+<li><a href="#%E5%88%86%E6%94%AF">分支</a> <ul>
+<li><a href="#%E5%B0%86%E6%9F%90%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8E%E5%85%B6%E4%BB%96%E6%89%80%E6%9C%89%E5%88%86%E6%94%AF%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%AF%94">将某个分支与其他所有分支进行对比</a></li>
+<li><a href="#%E6%AF%94%E8%BE%83%E5%88%86%E6%94%AF">比较分支</a></li>
+<li><a href="#%E6%AF%94%E8%BE%83%E4%B8%8D%E5%90%8C%E6%B4%BE%E7%94%9F%E5%BA%93%E7%9A%84%E5%88%86%E6%94%AF">比较不同派生库的分支</a></li>
+</ul>
+</li>
+<li><a href="#gists">Gists</a></li>
+<li><a href="#gitio">Git.io</a></li>
+<li><a href="#%E9%94%AE%E7%9B%98%E5%BF%AB%E6%8D%B7%E9%94%AE">键盘快捷键</a></li>
+<li><a href="#%E6%95%B4%E8%A1%8C%E9%AB%98%E4%BA%AE">整行高亮</a></li>
+<li><a href="#%E7%94%A8commit%E4%BF%A1%E6%81%AF%E5%85%B3%E9%97%ADissue">用commit信息关闭Issue</a></li>
+<li><a href="#%E9%93%BE%E6%8E%A5%E5%85%B6%E4%BB%96%E4%BB%93%E5%BA%93%E7%9A%84issue">链接其他仓库的Issue</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AEci%E5%AF%B9%E6%AF%8F%E6%9D%A1pull-request%E9%83%BD%E8%BF%9B%E8%A1%8C%E6%9E%84%E5%BB%BA">设置CI对每条Pull Request都进行构建</a></li>
+<li><a href="#markdown%E6%96%87%E4%BB%B6%E9%AB%98%E4%BA%AE%E8%AF%AD%E6%B3%95">Markdown文件高亮语法</a></li>
+<li><a href="#%E8%A1%A8%E6%83%85%E7%AC%A6">表情符</a></li>
+<li><a href="#%E9%9D%99%E6%80%81%E4%B8%8E%E5%8A%A8%E6%80%81%E5%9B%BE%E7%89%87">静态与动态图片</a><ul>
+<li><a href="#%E5%9C%A8github-wiki%E4%B8%AD%E5%B5%8C%E5%85%A5%E5%9B%BE%E7%89%87">在GitHub Wiki中嵌入图片</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E5%BC%95%E7%94%A8">快速引用</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E6%B7%BB%E5%8A%A0%E8%AE%B8%E5%8F%AF%E8%AF%81">快速添加许可证</a></li>
+<li><a href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8">任务列表</a><ul>
+<li><a href="#markdown%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8">Markdown文件中的任务列表</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%B8%E5%AF%B9%E9%93%BE%E6%8E%A5">相对链接</a></li>
+<li><a href="#github-pages%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%8F%92%E4%BB%B6%E6%94%AF%E6%8C%81">GitHub Pages的元数据与插件支持</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8Byaml%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%85%83%E6%95%B0%E6%8D%AE">查看YAML格式的元数据</a></li>
+<li><a href="#%E6%B8%B2%E6%9F%93%E8%A1%A8%E6%A0%BC%E6%95%B0%E6%8D%AE">渲染表格数据</a></li>
+<li><a href="#%E6%92%A4%E9%94%80pull-request">撤销Pull Request</a></li>
+<li><a href="#diffs">Diffs</a><ul>
+<li><a href="#%E5%8F%AF%E6%B8%B2%E6%9F%93%E6%96%87%E6%A1%A3%E7%9A%84diffs">可渲染文档的Diffs</a></li>
+<li><a href="#%E5%8F%AF%E5%8F%98%E5%8C%96%E5%9C%B0%E5%9B%BE">可变化地图</a></li>
+<li><a href="#%E5%9C%A8diff%E4%B8%AD%E6%8A%98%E5%8F%A0%E4%B8%8E%E6%89%A9%E5%B1%95%E4%BB%A3%E7%A0%81">在diff中折叠与扩展代码</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8Bpull-request%E7%9A%84diff%E5%92%8Cpatch">查看Pull Request的diff和patch</a></li>
+<li><a href="#%E6%B8%B2%E6%9F%93%E5%9B%BE%E5%83%8F%E5%8F%91%E7%94%9F%E7%9A%84%E5%8F%98%E5%8A%A8">渲染图像发生的变动</a></li>
+</ul>
+</li>
+<li><a href="#hub">Hub</a></li>
+<li><a href="#%E8%B4%A1%E7%8C%AE%E5%86%85%E5%AE%B9%E7%9A%84%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5">贡献内容的自动检查</a></li>
+<li><a href="#%E8%B4%A1%E7%8C%AE%E8%80%85%E6%8C%87%E5%8D%97">贡献者指南</a></li>
+<li><a href="#github%E8%B5%84%E6%BA%90">GitHub资源</a><ul>
+<li><a href="#github%E8%AE%A8%E8%AE%BA">GitHub讨论</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#git">Git</a><ul>
+<li><a href="#%E5%89%8D%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF">前一个分支</a></li>
+<li><a href="#stripspace%E5%91%BD%E4%BB%A4">Stripspace命令</a></li>
+<li><a href="#%E6%A3%80%E5%87%BApull-requests">检出Pull Requests</a></li>
+<li><a href="#%E6%8F%90%E4%BA%A4%E7%A9%BA%E6%94%B9%E5%8A%A8-trollface">提交空改动 :trollface:</a></li>
+<li><a href="#%E6%9B%B4%E7%9B%B4%E8%A7%82%E7%9A%84git-status">更直观的Git Status</a></li>
+<li><a href="#%E6%9B%B4%E7%9B%B4%E8%A7%82%E7%9A%84git-log">更直观的Git Log</a></li>
+<li><a href="#git%E6%9F%A5%E8%AF%A2">Git查询</a></li>
+<li><a href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF">合并分支</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E7%BD%91%E9%A1%B5%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93">使用网页查看本地仓库</a></li>
+<li><a href="#git%E9%85%8D%E7%BD%AE">Git配置</a><ul>
+<li><a href="#git%E5%91%BD%E4%BB%A4%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%AB%E5%90%8D">Git命令自定义别名</a></li>
+<li><a href="#%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%AD%A3">自动更正</a></li>
+<li><a href="#%E5%B8%A6%E9%A2%9C%E8%89%B2%E8%BE%93%E5%87%BA">带颜色输出</a></li>
+</ul>
+</li>
+<li><a href="#git%E8%B5%84%E6%BA%90">Git资源</a><ul>
+<li><a href="#git%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D">Git参考书籍</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="GitHub">GitHub</h2>
 <h3 id="忽略空白字符变化">忽略空白字符变化</h3>
 <p>在任意diff页面的URL后加上<code>?w=1</code>，可以去掉那些只是空白字符的变化，使你能更专注于代码的变化。</p>
@@ -77,27 +141,25 @@
 <p><img src="http://i.imgur.com/70FL4H9.png" alt="After, tab space example"></p>
 <h3 id="查看某个用户的Commit历史">查看某个用户的Commit历史</h3>
 <p>查看某个用户的所有提交历史，只需在commits页面URL后加上<code>?author=username</code>。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="symbol">https:</span>/<span class="regexp">/github.com/rails</span><span class="regexp">/rails/commits</span><span class="regexp">/master?author=dhh</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http<span class="variable">s:</span>//github.<span class="keyword">com</span>/rails/rails/commits/master?author=dhh</div></pre></td></tr></table></figure>
 
 <p><img src="http://i.imgur.com/mDWwuaY.png" alt="DHH commit history"></p>
 <p><a href="https://help.github.com/articles/differences-between-commit-views" target="_blank" rel="external"><em>深入了解提交视图之间的区别</em></a></p>
 <h3 id="克隆某个仓库">克隆某个仓库</h3>
 <p>当我们克隆某一资源时，可以不要那个<code>.git</code>后缀。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git clone https://github.com/tiimgreen/github-cheat-sheet
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/tiimgreen/github-cheat-sheet</div></pre></td></tr></table></figure>
 
 <p><a href="http://git-scm.com/docs/git-clone" target="_blank" rel="external"><em>更多对 Git <code>clone</code> 命令的介绍.</em></a></p>
 <h3 id="分支">分支</h3>
 <h4 id="将某个分支与其他所有分支进行对比">将某个分支与其他所有分支进行对比</h4>
 <p>当你点击某个仓库的分支（Branches）选项卡时</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>https://github.com/<span class="list">{user}</span>/<span class="list">{repo}</span>/branches
-</pre></td></tr></table></figure><br>你会看到一个包含所有未合并的分支的列表。<br><br>你可以在这里查看比较（Compare）页面或点击删除某个分支。<br><br><img src="http://i.imgur.com/gKWPe8a.png" alt="Compare branches not merged into master in jquery/jquery repo - https://github.com/jquery/jquery/branches"><br><br>有的时候我们需要将多个分支与一个非主分支（master）进行对比，此时可以通过在URL后加入要比较的分支名来实现：<br><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>https://github.com/<span class="list">{user}</span>/<span class="list">{repo}</span>/branches/<span class="list">{branch}</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/<span class="list">{user}</span>/<span class="list">{repo}</span>/branches</div></pre></td></tr></table></figure>
+
+<p>你会看到一个包含所有未合并的分支的列表。</p>
+<p>你可以在这里查看比较（Compare）页面或点击删除某个分支。</p>
+<p><img src="http://i.imgur.com/gKWPe8a.png" alt="Compare branches not merged into master in jquery/jquery repo - https://github.com/jquery/jquery/branches"></p>
+<p>有的时候我们需要将多个分支与一个非主分支（master）进行对比，此时可以通过在URL后加入要比较的分支名来实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/<span class="list">{user}</span>/<span class="list">{repo}</span>/branches/<span class="list">{branch}</span></div></pre></td></tr></table></figure>
 
 <p><img src="http://i.imgur.com/jpc6Urb.png" alt="Compare branches not merged into `1.x-master` in jquery/jquery repo - https://github.com/jquery/jquery/branches/1.x-master"></p>
 <p>可以在URL后加上<code>?merged=1</code>来查看已经合并了的分支。</p>
@@ -105,23 +167,15 @@
 <p>你可以使用这个界面来替代命令行直接删除分支。</p>
 <h4 id="比较分支">比较分支</h4>
 <p>如果我们想要比较两个分支，可以像下面一样修改URL：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="symbol">https:</span>/<span class="regexp">/github.com/user</span><span class="regexp">/repo/compare</span><span class="regexp">/{range}</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">https:</span>/<span class="regexp">/github.com/user</span><span class="regexp">/repo/compare</span><span class="regexp">/{range}</span></div></pre></td></tr></table></figure>
 
 <p>其中<code>{range} = master...4-1-stable</code></p>
 <p>例如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="symbol">https:</span>/<span class="regexp">/github.com/rails</span><span class="regexp">/rails/compare</span><span class="regexp">/master...4-1-stable</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http<span class="variable">s:</span>//github.<span class="keyword">com</span>/rails/rails/compare/master...<span class="number">4</span>-<span class="number">1</span>-stable</div></pre></td></tr></table></figure>
 
 <p><img src="http://i.imgur.com/0Z52X5Y.png" alt="Rails branch compare example"></p>
 <p><code>{range}</code>还可以使用下面的形式:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="label">https:</span>//github<span class="preprocessor">.com</span>/rails/rails/compare/master@{<span class="number">1.</span>day<span class="preprocessor">.ago</span>}..<span class="preprocessor">.master</span>
-<span class="label">https:</span>//github<span class="preprocessor">.com</span>/rails/rails/compare/master@{<span class="number">2014</span>-<span class="number">10</span>-<span class="number">04</span>}..<span class="preprocessor">.master</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">https:<span class="comment">//github.com/rails/rails/compare/master@{1.day.ago}...master</span></div><div class="line">https:<span class="comment">//github.com/rails/rails/compare/master@{2014-10-04}...master</span></div></pre></td></tr></table></figure>
 
 <p><em>日期格式 <code>YYYY-DD-MM</code></em></p>
 <p><img src="http://i.imgur.com/5dtzESz.png" alt="Another compare example"></p>
@@ -129,14 +183,10 @@
 <p><a href="https://help.github.com/articles/comparing-commits-across-time" target="_blank" rel="external"><em>了解更多关于比较跨时间段的提交记录.</em></a></p>
 <h4 id="比较不同派生库的分支">比较不同派生库的分支</h4>
 <p>想要对派生仓库（Forked Repository）之间的分支进行比较，可以像下面这样修改URL实现：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>https://github.com/user/repo/compare/{foreign-user}:{branch}<span class="keyword">...</span>{own-branch}
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/user/repo/compare/{foreign-user}:{branch}<span class="keyword">...</span>{own-branch}</div></pre></td></tr></table></figure>
 
 <p>例如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="label">https:</span>//github<span class="preprocessor">.com</span>/rails/rails/compare/byroot:master..<span class="preprocessor">.master</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http<span class="variable">s:</span>//github.<span class="keyword">com</span>/rails/rails/compare/byroo<span class="variable">t:master</span>...master</div></pre></td></tr></table></figure>
 
 <p><img src="http://i.imgur.com/Q1W6qcB.png" alt="Forked branch compare"></p>
 <h3 id="Gists">Gists</h3>
@@ -144,41 +194,18 @@
 <p><img src="http://i.imgur.com/VkKI1LC.png?1" alt="Gist"></p>
 <p>Gist的URL后加上<code>.pibb</code>，可以得到更适合嵌入到其他网站的HTML版本。</p>
 <p>Gists还可以像任何标准仓库一样被克隆。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git clone https://gist.github.com/tiimgreen/<span class="number">10545817</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone https://gist.github.com/tiimgreen/<span class="number">10545817</span></div></pre></td></tr></table></figure>
 
 <p><img src="http://i.imgur.com/dULZXXo.png" alt="Gists"></p>
 <p>This means you can also modify and update Gists:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>$ git commit
-$ Username <span class="keyword">for</span> <span class="string">'https://gist.github.com'</span>: 
-$ Password <span class="keyword">for</span> <span class="string">'https://tiimgreen@gist.github.com'</span>:
-</pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git commit</div><div class="line">$ Username <span class="keyword">for</span> <span class="string">'https://gist.github.com'</span>: </div><div class="line">$ Password <span class="keyword">for</span> <span class="string">'https://tiimgreen@gist.github.com'</span>:</div></pre></td></tr></table></figure>
 
 <p><a href="https://help.github.com/articles/creating-gists" target="_blank" rel="external"><em>进一步了解如何创建 gists.</em></a></p>
 <h3 id="Git-io">Git.io</h3>
 <p><a href="http://git.io" target="_blank" rel="external">Git.io</a>是Github的短网址服务。</p>
 <p><img src="http://i.imgur.com/6JUfbcG.png?1" alt="Git.io"></p>
 <p>你可以通过Curl命令以普通HTTP协议使用它：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>$ curl -i http://git.io -F <span class="string">"url=https://github.com/..."</span>
-HTTP/<span class="number">1.1</span> <span class="number">201</span> Created
-Location: http://git.io/abc123
-
-$ curl -i http://git.io/abc123
-HTTP/<span class="number">1.1</span> <span class="number">302</span> Found
-Location: https://github.com/...
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ curl -i http://git.io -F <span class="string">"url=https://github.com/..."</span></div><div class="line">HTTP/<span class="number">1.1</span> <span class="number">201</span> Created</div><div class="line">Location: http://git.io/abc123</div><div class="line"></div><div class="line">$ curl -i http://git.io/abc123</div><div class="line">HTTP/<span class="number">1.1</span> <span class="number">302</span> Found</div><div class="line">Location: https://github.com/...</div></pre></td></tr></table></figure>
 
 <p><a href="https://github.com/blog/985-git-io-github-url-shortener" target="_blank" rel="external"><em>进一步了解 Git.io.</em></a></p>
 <h3 id="键盘快捷键">键盘快捷键</h3>
@@ -196,16 +223,12 @@ Location: https://github.com/...
 <h3 id="整行高亮">整行高亮</h3>
 <p>在代码文件地址后加上<code>#L52</code>或者单击行号52都会将第52行代码高亮显示。</p>
 <p>多行高亮也可以，比如用<code>#L53-L60</code>选择范围，或者按住 <code>shift</code>键，然后再点击选择的两行。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="symbol">https:</span>/<span class="regexp">/github.com/rails</span><span class="regexp">/rails/blob</span><span class="regexp">/master/activemodel</span><span class="regexp">/lib/active</span>_model.rb<span class="comment">#L53-L60</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">https:</span>/<span class="regexp">/github.com/rails</span><span class="regexp">/rails/blob</span><span class="regexp">/master/activemodel</span><span class="regexp">/lib/active</span>_model.rb<span class="comment">#L53-L60</span></div></pre></td></tr></table></figure>
 
 <p><img src="http://i.imgur.com/8AhjrCz.png" alt="整行高亮"></p>
 <h3 id="用commit信息关闭Issue">用commit信息关闭Issue</h3>
 <p>如果某个提交修复了一个Issue，当提交到master分支时，提交信息里可以使用<code>fix/fixes/fixed</code>, <code>close/closes/closed</code> 或者 <code>resolve/resolves/resolved</code>等关键词，后面再跟上Issue号，这样就会关闭这个Issue。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git commit -m <span class="string">"Fix screwup, fixes #12"</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"Fix screwup, fixes #12"</span></div></pre></td></tr></table></figure>
 
 <p>这将会关闭Issue #12，并且在Issue讨论列表里关联引用这次提交。</p>
 <p><img src="http://i.imgur.com/Uh1gZdx.png" alt="Closing Repo"></p>
@@ -220,87 +243,66 @@ Location: https://github.com/...
 <p><a href="https://github.com/blog/1227-commit-status-api" target="_blank" rel="external"><em>进一步了解 Commit status API.</em></a></p>
 <h3 id="Markdown文件高亮语法">Markdown文件高亮语法</h3>
 <p>例如，可以像下面这样在你的Markdown文件里为Ruby代码添加语法高亮：</p>
-<pre><code><span class="tag">&lt;<span class="title">hexoescape</span>&gt;</span>14<span class="tag">&lt;/<span class="title">hexoescape</span>&gt;</span>
-</code></pre><p>效果像下面这样：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="keyword">require</span> <span class="string">'tabbit'</span>
-table = <span class="constant">Tabbit</span>.new(<span class="string">'Name'</span>, <span class="string">'Email'</span>)
-table.add_row(<span class="string">'Tim Green'</span>, <span class="string">'tiimgreen@gmail.com'</span>)
-puts table.to_s
-</pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'tabbit'</span></div><div class="line">table = <span class="constant">Tabbit</span>.new(<span class="string">'Name'</span>, <span class="string">'Email'</span>)</div><div class="line">table.add_row(<span class="string">'Tim Green'</span>, <span class="string">'tiimgreen@gmail.com'</span>)</div><div class="line">puts table.to_s</div></pre></td></tr></table></figure>
+
+<p>效果像下面这样：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">'tabbit'</span></div><div class="line">table = <span class="constant">Tabbit</span>.new(<span class="string">'Name'</span>, <span class="string">'Email'</span>)</div><div class="line">table.add_row(<span class="string">'Tim Green'</span>, <span class="string">'tiimgreen@gmail.com'</span>)</div><div class="line">puts table.to_s</div></pre></td></tr></table></figure>
 
 <p>Github使用 <a href="https://github.com/github/linguist" target="_blank" rel="external">Linguist</a> 做语言识别和语法高亮。你可以仔细阅读 <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank" rel="external">languages YAML file</a>，了解有哪些可用的关键字。</p>
 <p><a href="https://help.github.com/articles/github-flavored-markdown" target="_blank" rel="external"><em>进一步了解 GitHub Flavored Markdown.</em></a></p>
 <h3 id="表情符">表情符</h3>
 <p>可以在Pull Requests, Issues, 提交消息, Markdown文件里加入表情符。使用方法<code>:name_of_emoji:</code></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="symbol">:smile</span><span class="symbol">:</span>
-</pre></td></tr></table></figure><br>将输出一个笑脸：<br><br>:smile:<br><br>Github支持的完整表情符号列表详见<a href="http://www.emoji-cheat-sheet.com/" target="_blank" rel="external">emoji-cheat-sheet.com</a> 或 <a href="https://github.com/scotch-io/All-Github-Emoji-Icons" target="_blank" rel="external">scotch-io/All-Github-Emoji-Icons</a>。<br><br>Github上使用最多的5个表情符号是：<br><br>1. :shipit: - <code>:shipit:</code><br>2. :sparkles: - <code>:sparkles:</code><br>3. :-1: - <code>:-1:</code><br>4. :+1: - <code>:+1:</code><br>5. :clap: - <code>:clap:</code><br><br>### 静态与动态图片<br>注释和README等文件里也可以使用图片和GIF动画：<br><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>![<span class="link_label">Alt Text</span>](<span class="link_url">http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif</span>)
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">:smile</span><span class="symbol">:</span></div></pre></td></tr></table></figure>
+
+<p>将输出一个笑脸：</p>
+<p>:smile:</p>
+<p>Github支持的完整表情符号列表详见<a href="http://www.emoji-cheat-sheet.com/" target="_blank" rel="external">emoji-cheat-sheet.com</a> 或 <a href="https://github.com/scotch-io/All-Github-Emoji-Icons" target="_blank" rel="external">scotch-io/All-Github-Emoji-Icons</a>。</p>
+<p>Github上使用最多的5个表情符号是：</p>
+<ol>
+<li>:shipit: - <code>:shipit:</code></li>
+<li>:sparkles: - <code>:sparkles:</code></li>
+<li>:-1: - <code>:-1:</code></li>
+<li>:+1: - <code>:+1:</code></li>
+<li>:clap: - <code>:clap:</code></li>
+</ol>
+<h3 id="静态与动态图片">静态与动态图片</h3>
+<p>注释和README等文件里也可以使用图片和GIF动画：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![<span class="link_label">Alt Text</span>](<span class="link_url">http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif</span>)</div></pre></td></tr></table></figure>
 
 <p>仓库中的原始图片可以被直接调用：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>![<span class="link_label">Alt Text</span>](<span class="link_url">https://github.com/(user</span>)/(repo)/raw/master/path/to/image.gif)
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![<span class="link_label">Alt Text</span>](<span class="link_url">https://github.com/(user</span>)/(repo)/raw/master/path/to/image.gif)</div></pre></td></tr></table></figure>
 
 <p><img src="http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif" alt="Peter don&#39;t care"></p>
 <p>所有图片都缓存在Gitub，不用担心你的站点不能访问时就看不到图片了。</p>
 <h4 id="在GitHub_Wiki中嵌入图片">在GitHub Wiki中嵌入图片</h4>
 <p>有多种方法可以在Wiki页面里嵌入图片。既可以像上一条里那样使用标准的Markdown语法，也可以像下面这样指定图片的高度或宽度：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>[[ http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif | height = 100px ]]
-</pre></td></tr></table></figure><br>结果：<br><br><img src="http://i.imgur.com/J5bMf7S.png" alt="Just a screenshot"><br><br>### 快速引用<br>在注释话题里引用之前某个人所说的，只需选中文本，然后按 <code>r</code>键，想要的就会以引用的形式复制到你的输入框里。<br><br><img src="https://f.cloud.github.com/assets/296432/124483/b0fa6204-6ef0-11e2-83c3-256c37fa7abc.gif" alt="Quick Quote"><br><br><a href="https://github.com/blog/1399-quick-quotes" target="_blank" rel="external"><em>进一步了解快速引用.</em></a><br><br>### 快速添加许可证<br>创建一个仓库时，Github会为你提供一个预置的软件许可列表：<br><br><img src="http://i.imgur.com/Chqj4Fg.png" alt="License"><br><br>对于已有的仓库，可以通过web界面创建文件来添加软件许可。输入<code>LICENSE</code>作为文件名后，同样可以从预置的列表中选择一个作为模板。<br><br><img src="http://i.imgur.com/fTjQict.png" alt="License"><br><br>这个技巧也适用于 <code>.gitignore</code> 文件。<br><br><a href="https://help.github.com/articles/open-source-licensing" target="_blank" rel="external"><em>进一步了解 open source licensing.</em></a><br><br>### 任务列表<br>Issues和Pull requests里可以添加复选框，语法如下（注意空白符）：<br><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>-<span class="ruby"> [ ] <span class="constant">Be</span> awesome
-</span>-<span class="ruby"> [ ] <span class="constant">Prepare</span> dinner
-</span>  -<span class="ruby"> [ ] <span class="constant">Research</span> recipe
-</span>  -<span class="ruby"> [ ] <span class="constant">Buy</span> ingredients
-</span>  -<span class="ruby"> [ ] <span class="constant">Cook</span> recipe
-</span>-<span class="ruby"> [ ] <span class="constant">Sleep</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[ http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif | height = 100px ]]</div></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="http://i.imgur.com/J5bMf7S.png" alt="Just a screenshot"></p>
+<h3 id="快速引用">快速引用</h3>
+<p>在注释话题里引用之前某个人所说的，只需选中文本，然后按 <code>r</code>键，想要的就会以引用的形式复制到你的输入框里。</p>
+<p><img src="https://f.cloud.github.com/assets/296432/124483/b0fa6204-6ef0-11e2-83c3-256c37fa7abc.gif" alt="Quick Quote"></p>
+<p><a href="https://github.com/blog/1399-quick-quotes" target="_blank" rel="external"><em>进一步了解快速引用.</em></a></p>
+<h3 id="快速添加许可证">快速添加许可证</h3>
+<p>创建一个仓库时，Github会为你提供一个预置的软件许可列表：</p>
+<p><img src="http://i.imgur.com/Chqj4Fg.png" alt="License"></p>
+<p>对于已有的仓库，可以通过web界面创建文件来添加软件许可。输入<code>LICENSE</code>作为文件名后，同样可以从预置的列表中选择一个作为模板。</p>
+<p><img src="http://i.imgur.com/fTjQict.png" alt="License"></p>
+<p>这个技巧也适用于 <code>.gitignore</code> 文件。</p>
+<p><a href="https://help.github.com/articles/open-source-licensing" target="_blank" rel="external"><em>进一步了解 open source licensing.</em></a></p>
+<h3 id="任务列表">任务列表</h3>
+<p>Issues和Pull requests里可以添加复选框，语法如下（注意空白符）：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby"> [ ] <span class="constant">Be</span> awesome</span></div><div class="line">-<span class="ruby"> [ ] <span class="constant">Prepare</span> dinner</span></div><div class="line">  -<span class="ruby"> [ ] <span class="constant">Research</span> recipe</span></div><div class="line">  -<span class="ruby"> [ ] <span class="constant">Buy</span> ingredients</span></div><div class="line">  -<span class="ruby"> [ ] <span class="constant">Cook</span> recipe</span></div><div class="line">-<span class="ruby"> [ ] <span class="constant">Sleep</span></span></div></pre></td></tr></table></figure>
 
 <p><img src="http://i.imgur.com/jJBXhsY.png" alt="Task List"></p>
 <p>当项目被选中时，它对应的Markdown源码也被更新了：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>-<span class="ruby"> [x] <span class="constant">Be</span> awesome
-</span>-<span class="ruby"> [ ] <span class="constant">Prepare</span> dinner
-</span>  -<span class="ruby"> [x] <span class="constant">Research</span> recipe
-</span>  -<span class="ruby"> [x] <span class="constant">Buy</span> ingredients
-</span>  -<span class="ruby"> [ ] <span class="constant">Cook</span> recipe
-</span>-<span class="ruby"> [ ] <span class="constant">Sleep</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby"> [x] <span class="constant">Be</span> awesome</span></div><div class="line">-<span class="ruby"> [ ] <span class="constant">Prepare</span> dinner</span></div><div class="line">  -<span class="ruby"> [x] <span class="constant">Research</span> recipe</span></div><div class="line">  -<span class="ruby"> [x] <span class="constant">Buy</span> ingredients</span></div><div class="line">  -<span class="ruby"> [ ] <span class="constant">Cook</span> recipe</span></div><div class="line">-<span class="ruby"> [ ] <span class="constant">Sleep</span></span></div></pre></td></tr></table></figure>
 
 <p><a href="https://help.github.com/articles/writing-on-github#task-lists" target="_blank" rel="external"><em>进一步了解任务列表.</em></a></p>
 <h4 id="Markdown文件中的任务列表">Markdown文件中的任务列表</h4>
 <p>在完全适配Markdown语法的文件中可以使用以下语法加入一个<strong>只读</strong>的任务列表</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>-<span class="ruby"> [ ] <span class="constant">Mercury</span>
-</span>-<span class="ruby"> [x] <span class="constant">Venus</span>
-</span>-<span class="ruby"> [x] <span class="constant">Earth</span>
-</span>  -<span class="ruby"> [x] <span class="constant">Moon</span>
-</span>-<span class="ruby"> [x] <span class="constant">Mars</span>
-</span>  -<span class="ruby"> [ ] <span class="constant">Deimos</span>
-</span>  -<span class="ruby"> [ ] <span class="constant">Phobos</span></span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby"> [ ] <span class="constant">Mercury</span></span></div><div class="line">-<span class="ruby"> [x] <span class="constant">Venus</span></span></div><div class="line">-<span class="ruby"> [x] <span class="constant">Earth</span></span></div><div class="line">  -<span class="ruby"> [x] <span class="constant">Moon</span></span></div><div class="line">-<span class="ruby"> [x] <span class="constant">Mars</span></span></div><div class="line">  -<span class="ruby"> [ ] <span class="constant">Deimos</span></span></div><div class="line">  -<span class="ruby"> [ ] <span class="constant">Phobos</span></span></div></pre></td></tr></table></figure>
 
 <ul>
 <li>[ ] Mercury</li>
@@ -318,104 +320,56 @@ puts table.to_s
 <p><a href="https://github.com/blog/1825-task-lists-in-all-markdown-documents" target="_blank" rel="external"><em>进一步了解Markdown文件中的任务列表</em></a></p>
 <h3 id="相对链接">相对链接</h3>
 <p>Markdown文件里链接到内部内容时推荐使用相对链接。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>[<span class="link_label">Link to a header</span>](<span class="link_url">#awesome-section</span>)
-[<span class="link_label">Link to a file</span>](<span class="link_url">docs/readme</span>)
-</pre></td></tr></table></figure><br>绝对链接会在URL改变时（例如重命名仓库、用户名改变，建立分支项目）被更新。使用相对链接能够保证你的文档不受此影响。<br><br><a href="https://help.github.com/articles/relative-links-in-readmes" target="_blank" rel="external"><em>进一步了解相对链接.</em></a><br><br>### GitHub Pages的元数据与插件支持<br>在Jekyll页面和文章里，仓库信息可在 <code>site.github</code> 命名空间下找到，也可以显示出来，例如，使用 <code>`显示项目标题。
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="link_label">Link to a header</span>](<span class="link_url">#awesome-section</span>)</div><div class="line">[<span class="link_label">Link to a file</span>](<span class="link_url">docs/readme</span>)</div></pre></td></tr></table></figure>
 
-Jemoji和jekyll-mentions插件为你的Jekyll文章和页面增加了[emoji](#emojis)和[@mentions](https://github.com/blog/821)功能。
+<p>绝对链接会在URL改变时（例如重命名仓库、用户名改变，建立分支项目）被更新。使用相对链接能够保证你的文档不受此影响。</p>
+<p><a href="https://help.github.com/articles/relative-links-in-readmes" target="_blank" rel="external"><em>进一步了解相对链接.</em></a></p>
+<h3 id="GitHub_Pages的元数据与插件支持">GitHub Pages的元数据与插件支持</h3>
+<p>在Jekyll页面和文章里，仓库信息可在 <code>site.github</code> 命名空间下找到，也可以显示出来，例如，使用 ``显示项目标题。</p>
+<p>Jemoji和jekyll-mentions插件为你的Jekyll文章和页面增加了<a href="#emojis">emoji</a>和<a href="https://github.com/blog/821" target="_blank" rel="external">@mentions</a>功能。</p>
+<p><a href="https://github.com/blog/1797-repository-metadata-and-plugin-support-for-github-pages" target="_blank" rel="external"><em>了解更多 GitHub Pages的元数据和插件支持.</em></a></p>
+<h3 id="查看YAML格式的元数据">查看YAML格式的元数据</h3>
+<p>许多博客站点，比如基于<a href="http://jekyllrb.com/" target="_blank" rel="external">Jekyll</a>的<a href="http://pages.github.com/" target="_blank" rel="external">GitHub Pages</a>，都依赖于一些文章头部的YAML格式的元数据。Github会将其渲染成一个水平表格，方便阅读。</p>
+<p><img src="https://camo.githubusercontent.com/47245aa16728e242f74a9a324ce0d24c0b916075/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f36343035302f313232383236372f65303439643063362d323761302d313165332d396464382d6131636432323539393334342e706e67" alt="YAML metadata"></p>
+<p><a href="https://github.com/blog/1647-viewing-yaml-metadata-in-your-documents" target="_blank" rel="external"><em>进一步了解 在文档里查看YAML元数据.</em></a></p>
+<h3 id="渲染表格数据">渲染表格数据</h3>
+<p>GitHub支持将 <code>.csv</code> (comma分隔)和<code>.tsv</code> (tab分隔)格式的文件渲染成表格数据。</p>
+<p><img src="https://camo.githubusercontent.com/1b6dd0157ffb45d9939abf14233a0cb13b3b4dfe/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f3238323735392f3937363436322f33323038336463652d303638642d313165332d393262322d3566323863313061353035392e706e67" alt="Tabular data"></p>
+<p><a href="https://github.com/blog/1601-see-your-csvs" target="_blank" rel="external"><em>进一步了解渲染表格数据.</em></a></p>
+<h3 id="撤销Pull_Request">撤销Pull Request</h3>
+<p>可以通过Pull Request中的Revert按钮来撤销一个已合并的Pull Request中的commit。按下按钮后会自动生成一个进行逆向操作的Pull Request。</p>
+<p><img src="https://camo.githubusercontent.com/0d3350caf2bb1cba53123ffeafc00ca702b1b164/68747470733a2f2f6769746875622d696d616765732e73332e616d617a6f6e6177732e636f6d2f68656c702f70756c6c5f72657175657374732f7265766572742d70756c6c2d726571756573742d6c696e6b2e706e67" alt="Revert button"></p>
+<p><a href="https://github.com/blog/1857-introducing-the-revert-button" target="_blank" rel="external">*进一步了解“撤销”按钮</a></p>
+<h3 id="Diffs">Diffs</h3>
+<h4 id="可渲染文档的Diffs">可渲染文档的Diffs</h4>
+<p>提交和Pull Requests里包含有Github支持的可渲染文档（比如Markdown）会提供<em>source</em> 和 <em>rendered</em> 两个视图功能。</p>
+<p><img src="https://github-images.s3.amazonaws.com/help/repository/rendered_prose_diff.png" alt="Source / Rendered view"></p>
+<p>点击 “rendered” 按钮，看看改动在渲染后的显示效果。当你添加、删除或修改文本时，渲染纯文本视图非常方便。</p>
+<p><img src="https://f.cloud.github.com/assets/17715/2003056/3997edb4-862b-11e3-90be-5e9586edecd7.png" alt="Rendered Prose Diffs"></p>
+<p><a href="https://github.com/blog/1784-rendered-prose-diffs" target="_blank" rel="external"><em>进一步了解渲染纯文本视图Diffs.</em></a></p>
+<h4 id="可变化地图">可变化地图</h4>
+<p>当你在GitHub上查看一个包含地理数据的提交或pull request时，Github可以显示数据变动的视觉表示。</p>
+<p><a href="https://github.com/benbalter/congressional-districts/commit/2233c76ca5bb059582d796f053775d8859198ec5" target="_blank" rel="external"><img src="https://f.cloud.github.com/assets/282759/2090660/63f2e45a-8e97-11e3-9d8b-d4c8078b004e.gif" alt="Diffable Maps"></a></p>
+<p><a href="https://github.com/blog/1772-diffable-more-customizable-maps" target="_blank" rel="external"><em>进一步了解可比较地图.</em></a></p>
+<h4 id="在diff中折叠与扩展代码">在diff中折叠与扩展代码</h4>
+<p>你可以通过点击diff边栏里的 <em>unfold</em> 按钮来多显示几行上下文。你可以一直点击 <em>unfold</em> 按钮直到显示了文件的全部内容。这个功能在所有GitHub产生的diff界面都可以使用。</p>
+<p><img src="https://f.cloud.github.com/assets/22635/1610539/863c1f64-5584-11e3-82bf-151b406a272f.gif" alt="Expanding Context in Diffs"></p>
+<p><a href="https://github.com/blog/1705-expanding-context-in-diffs" target="_blank" rel="external"><em>进一步了解扩展Diff上下文.</em></a></p>
+<h4 id="查看Pull_Request的diff和patch">查看Pull Request的diff和patch</h4>
+<p>在Pull Request的URL后面加上 <code>.diff</code> 或 <code>.patch</code> 的扩展名就可以得到它的diff或patch文件，例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">http<span class="variable">s:</span>//github.<span class="keyword">com</span>/tiimgreen/github-cheat-sheet/pull/<span class="number">15</span></div><div class="line">http<span class="variable">s:</span>//github.<span class="keyword">com</span>/tiimgreen/github-cheat-sheet/pull/<span class="number">15</span>.diff</div><div class="line">http<span class="variable">s:</span>//github.<span class="keyword">com</span>/tiimgreen/github-cheat-sheet/pull/<span class="number">15</span>.patch</div></pre></td></tr></table></figure>
 
-[*了解更多 GitHub Pages的元数据和插件支持.*](https://github.com/blog/1797-repository-metadata-and-plugin-support-for-github-pages)
+<p><code>.diff</code> 扩展会使用普通文本格式显示如下内容：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">diff --git a/README.md b/README.md</div><div class="line">index 88fcf69..8614873 100644</div><div class="line"><span class="horizontal_rule">--- a/README.md</span></div><div class="line">+++ b/README.md</div><div class="line">@@ -28,6 +28,7 @@ All the hidden and not hidden features of Git and GitHub. This cheat sheet was i</div><div class="line"> - [<span class="link_label">Merged Branches</span>](<span class="link_url">#merged-branches</span>)</div><div class="line"> - [<span class="link_label">Quick Licensing</span>](<span class="link_url">#quick-licensing</span>)</div><div class="line"> - [<span class="link_label">TODO Lists</span>](<span class="link_url">#todo-lists</span>)</div><div class="line">+- [<span class="link_label">Relative Links</span>](<span class="link_url">#relative-links</span>)</div><div class="line"> - [<span class="link_label">.gitconfig Recommendations</span>](<span class="link_url">#gitconfig-recommendations</span>)</div><div class="line"><span class="code">     - [Aliases](#aliases)</span></div><div class="line"><span class="code">     - [Auto-correct](#auto-correct)</span></div><div class="line">@@ -381,6 +382,19 @@ When they are clicked, they will be updated in the pure Markdown:</div><div class="line"> - [ ] Sleep</div><div class="line"></div><div class="line">(...)</div></pre></td></tr></table></figure>
 
-### 查看YAML格式的元数据
-许多博客站点，比如基于[Jekyll](http://jekyllrb.com/)的[GitHub Pages](http://pages.github.com/)，都依赖于一些文章头部的YAML格式的元数据。Github会将其渲染成一个水平表格，方便阅读。
-
-![YAML metadata](https://camo.githubusercontent.com/47245aa16728e242f74a9a324ce0d24c0b916075/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f36343035302f313232383236372f65303439643063362d323761302d313165332d396464382d6131636432323539393334342e706e67)
-
-[*进一步了解 在文档里查看YAML元数据.*](https://github.com/blog/1647-viewing-yaml-metadata-in-your-documents)
-
-### 渲染表格数据
-
-GitHub支持将</code>.csv<code>(comma分隔)和</code>.tsv<code>(tab分隔)格式的文件渲染成表格数据。
-
-![Tabular data](https://camo.githubusercontent.com/1b6dd0157ffb45d9939abf14233a0cb13b3b4dfe/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f3238323735392f3937363436322f33323038336463652d303638642d313165332d393262322d3566323863313061353035392e706e67)
-
-[*进一步了解渲染表格数据.*](https://github.com/blog/1601-see-your-csvs)
-
-### 撤销Pull Request
-
-可以通过Pull Request中的Revert按钮来撤销一个已合并的Pull Request中的commit。按下按钮后会自动生成一个进行逆向操作的Pull Request。
-
-![Revert button](https://camo.githubusercontent.com/0d3350caf2bb1cba53123ffeafc00ca702b1b164/68747470733a2f2f6769746875622d696d616765732e73332e616d617a6f6e6177732e636f6d2f68656c702f70756c6c5f72657175657374732f7265766572742d70756c6c2d726571756573742d6c696e6b2e706e67)
-
-[*进一步了解“撤销”按钮](https://github.com/blog/1857-introducing-the-revert-button)
-
-### Diffs
-#### 可渲染文档的Diffs
-
-提交和Pull Requests里包含有Github支持的可渲染文档（比如Markdown）会提供*source* 和 *rendered* 两个视图功能。
-
-![Source / Rendered view](https://github-images.s3.amazonaws.com/help/repository/rendered_prose_diff.png)
-
-点击 &quot;rendered&quot; 按钮，看看改动在渲染后的显示效果。当你添加、删除或修改文本时，渲染纯文本视图非常方便。
-
-![Rendered Prose Diffs](https://f.cloud.github.com/assets/17715/2003056/3997edb4-862b-11e3-90be-5e9586edecd7.png)
-
-[*进一步了解渲染纯文本视图Diffs.*](https://github.com/blog/1784-rendered-prose-diffs)
-
-#### 可变化地图
-当你在GitHub上查看一个包含地理数据的提交或pull request时，Github可以显示数据变动的视觉表示。
-
-[![Diffable Maps](https://f.cloud.github.com/assets/282759/2090660/63f2e45a-8e97-11e3-9d8b-d4c8078b004e.gif)](https://github.com/benbalter/congressional-districts/commit/2233c76ca5bb059582d796f053775d8859198ec5)
-
-[*进一步了解可比较地图.*](https://github.com/blog/1772-diffable-more-customizable-maps)
-
-#### 在diff中折叠与扩展代码
-你可以通过点击diff边栏里的 *unfold* 按钮来多显示几行上下文。你可以一直点击 *unfold* 按钮直到显示了文件的全部内容。这个功能在所有GitHub产生的diff界面都可以使用。
-
-![Expanding Context in Diffs](https://f.cloud.github.com/assets/22635/1610539/863c1f64-5584-11e3-82bf-151b406a272f.gif)
-
-[*进一步了解扩展Diff上下文.*](https://github.com/blog/1705-expanding-context-in-diffs)
-
-#### 查看Pull Request的diff和patch
-在Pull Request的URL后面加上</code>.diff<code>或</code>.patch<code>的扩展名就可以得到它的diff或patch文件，例如：
-
-&lt;hexoescape&gt;24&lt;/hexoescape&gt;</code>.diff` 扩展会使用普通文本格式显示如下内容：<br><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="code"><pre>diff --git a/README.md b/README.md
-index 88fcf69..8614873 100644
-<span class="horizontal_rule">--- a/README.md</span>
-+++ b/README.md
-@@ -28,6 +28,7 @@ All the hidden and not hidden features of Git and GitHub. This cheat sheet was i
- - [<span class="link_label">Merged Branches</span>](<span class="link_url">#merged-branches</span>)
- - [<span class="link_label">Quick Licensing</span>](<span class="link_url">#quick-licensing</span>)
- - [<span class="link_label">TODO Lists</span>](<span class="link_url">#todo-lists</span>)
-+- [<span class="link_label">Relative Links</span>](<span class="link_url">#relative-links</span>)
- - [<span class="link_label">.gitconfig Recommendations</span>](<span class="link_url">#gitconfig-recommendations</span>)
-<span class="code">     - [Aliases](#aliases)</span>
-<span class="code">     - [Auto-correct](#auto-correct)</span>
-@@ -381,6 +382,19 @@ When they are clicked, they will be updated in the pure Markdown:
- - [ ] Sleep
-
-(...)
-</pre></td></tr></table></figure><br>#### 渲染图像发生的变动<br>GitHub可以显示包括PNG、JPG、GIF、PSD在内的多种图片格式并提供了几种方式来比较这些格式的图片文件版本间的不同。<br><br><a href="https://github.com/blog/1845-psd-viewing-diffing" target="_blank" rel="external"><img src="https://cloud.githubusercontent.com/assets/2546/3165594/55f2798a-eb56-11e3-92e7-b79ad791a697.gif" alt="Diffable PSD"></a><br><br><a href="https://help.github.com/articles/rendering-and-diffing-images" target="_blank" rel="external"><em>查看更多关于渲染图像变动的内容</em></a><br><br>### Hub<br><a href="https://github.com/github/hub" target="_blank" rel="external">Hub</a>是一个对Git进行了封装的命令行工具，可以帮助你更方便的使用Github。<br><br>这使得你可以像下面这样进行克隆：<br><br><figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ hub clone tiimgreen/toc
-</pre></td></tr></table></figure>
+<h4 id="渲染图像发生的变动">渲染图像发生的变动</h4>
+<p>GitHub可以显示包括PNG、JPG、GIF、PSD在内的多种图片格式并提供了几种方式来比较这些格式的图片文件版本间的不同。</p>
+<p><a href="https://github.com/blog/1845-psd-viewing-diffing" target="_blank" rel="external"><img src="https://cloud.githubusercontent.com/assets/2546/3165594/55f2798a-eb56-11e3-92e7-b79ad791a697.gif" alt="Diffable PSD"></a></p>
+<p><a href="https://help.github.com/articles/rendering-and-diffing-images" target="_blank" rel="external"><em>查看更多关于渲染图像变动的内容</em></a></p>
+<h3 id="Hub">Hub</h3>
+<p><a href="https://github.com/github/hub" target="_blank" rel="external">Hub</a>是一个对Git进行了封装的命令行工具，可以帮助你更方便的使用Github。</p>
+<p>这使得你可以像下面这样进行克隆：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hub clone tiimgreen/toc</div></pre></td></tr></table></figure>
 
 <p><a href="https://github.com/github/hub#commands" target="_blank" rel="external"><em>查看更多Hub提供的超酷命令.</em></a></p>
 <h3 id="贡献内容的自动检查">贡献内容的自动检查</h3>
@@ -492,23 +446,7 @@ index 88fcf69..8614873 100644
 <h2 id="Git">Git</h2>
 <h3 id="前一个分支">前一个分支</h3>
 <p>快速检出上一个分支：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>$ git checkout -
-<span class="comment"># Switched to branch 'master'</span>
-
-$ git checkout -
-<span class="comment"># Switched to branch 'next'</span>
-
-$ git checkout -
-<span class="comment"># Switched to branch 'master'</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git checkout -</div><div class="line"><span class="comment"># Switched to branch 'master'</span></div><div class="line"></div><div class="line">$ git checkout -</div><div class="line"><span class="comment"># Switched to branch 'next'</span></div><div class="line"></div><div class="line">$ git checkout -</div><div class="line"><span class="comment"># Switched to branch 'master'</span></div></pre></td></tr></table></figure>
 
 <p><a href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging" target="_blank" rel="external"><em>进一步了解 Git 分支.</em></a></p>
 <h3 id="Stripspace命令">Stripspace命令</h3>
@@ -519,68 +457,41 @@ $ git checkout -
 <li>必要时在文件末尾增加一个空行</li>
 </ul>
 <p>使用此命令时必须传入一个文件，像这样：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git stripspace &lt; README.md
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git stripspace &lt; README.md</div></pre></td></tr></table></figure>
 
 <p><a href="http://git-scm.com/docs/git-stripspace" target="_blank" rel="external"><em>进一步了解 Git <code>stripspace</code> 命令.</em></a></p>
 <h3 id="检出Pull_Requests">检出Pull Requests</h3>
 <p>Pull Request是一种GitHub上可以通过以下多种方式在本地被检索的特别分支：</p>
 <p>检索某个分支并临时储存在本地的<code>FETCH_HEAD</code>中以便快速查看更改(diff)以及合并(merge)：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git fetch origin refs/pull/[PR-Number]/head
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git fetch origin refs/pull/[PR-Number]/head</div></pre></td></tr></table></figure>
 
 <p>通过refspec获取所有的Pull Request为本地分支：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git fetch origin <span class="string">'+refs/pull/*/head:refs/remotes/origin/pr/*'</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git fetch origin <span class="string">'+refs/pull/*/head:refs/remotes/origin/pr/*'</span></div></pre></td></tr></table></figure>
 
 <p>或在仓库的<code>.git/config</code>中加入下列设置来自动获取远程仓库中的Pull Request</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>[remote <span class="string">"origin"</span>]
-    fetch = +refs/heads/*<span class="symbol">:refs/remotes/origin/*</span>
-    url = git<span class="variable">@github</span>.<span class="symbol">com:</span>tiimgreen/github-cheat-sheet.git
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[remote <span class="string">"origin"</span>]</div><div class="line">    fetch = +refs/heads/*<span class="symbol">:refs/remotes/origin/*</span></div><div class="line">    url = git<span class="variable">@github</span>.<span class="symbol">com:</span>tiimgreen/github-cheat-sheet.git</div></pre></td></tr></table></figure>
 
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>[remote <span class="string">"origin"</span>]
-    fetch = +refs/heads/*<span class="symbol">:refs/remotes/origin/*</span>
-    url = git<span class="variable">@github</span>.<span class="symbol">com:</span>tiimgreen/github-cheat-sheet.git
-    fetch = +refs/pull/*<span class="regexp">/head:refs/remotes</span><span class="regexp">/origin/pr</span><span class="regexp">/*</span>
-</pre></td></tr></table></figure>
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[remote <span class="string">"origin"</span>]</div><div class="line">    fetch = +refs/heads/*<span class="symbol">:refs/remotes/origin/*</span></div><div class="line">    url = git<span class="variable">@github</span>.<span class="symbol">com:</span>tiimgreen/github-cheat-sheet.git</div><div class="line">    fetch = +refs/pull/*<span class="regexp">/head:refs/remotes</span><span class="regexp">/origin/pr</span><span class="regexp">/*</span></div></pre></td></tr></table></figure>
 
 <p>对基于派生库的Pull Request，可以通过先<code>checkout</code>代表此Pull Request的远端分支再由此分支建立一个本地分支：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git checkout pr/<span class="number">42</span> pr-<span class="number">42</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout pr/<span class="number">42</span> pr-<span class="number">42</span></div></pre></td></tr></table></figure>
 
 <p>操作多个仓库的时候，可以在Git中设置获取Pull Request的全局选项。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>git config --global --<span class="keyword">add</span> remote<span class="preprocessor">.origin</span><span class="preprocessor">.fetch</span> <span class="string">"+refs/pull/*/head:refs/remotes/origin/pr/*"</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --<span class="keyword">global</span> --<span class="built_in">add</span> remote.origin.fetch <span class="string">"+refs/pull/*/head:refs/remotes/origin/pr/*"</span></div></pre></td></tr></table></figure>
 
 <p>此时可以在任意仓库中使用以下命令：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>git fetch origin
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> fetch origin</div></pre></td></tr></table></figure>
 
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>git checkout pr/42
-</pre></td></tr></table></figure>
 
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> checkout pr/<span class="number">42</span></div></pre></td></tr></table></figure>
 
 <p><a href="https://help.github.com/articles/checking-out-pull-requests-locally" target="_blank" rel="external"><em>进一步了解如何检出pull request到本地.</em></a></p>
 <h3 id="提交空改动_:trollface:">提交空改动 :trollface:</h3>
 <p>可以使用<code>--allow-empty</code>选项强制创建一个没有任何改动的提交：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git commit -m <span class="string">"Big-ass commit"</span> --allow-empty
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"Big-ass commit"</span> --allow-empty</div></pre></td></tr></table></figure>
 
 <p>这样做在如下几种情况下是有意义的：</p>
 <ul>
@@ -591,25 +502,19 @@ $ git checkout -
 </ul>
 <h3 id="更直观的Git_Status">更直观的Git Status</h3>
 <p>在命令行输入如下命令:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git status
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git status</div></pre></td></tr></table></figure>
 
 <p>可以看到:</p>
 <p><img src="http://i.imgur.com/o3PEHAA.png" alt="git status"></p>
 <p>加上<code>-sb</code>选项:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git status -sb
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git status -sb</div></pre></td></tr></table></figure>
 
 <p>这回得到:</p>
 <p><img src="http://i.imgur.com/xNI1bT0.png" alt="git status -sb"></p>
 <p><a href="http://git-scm.com/docs/git-status" target="_blank" rel="external"><em>进一步了解 Git <code>status</code> 命令.</em></a></p>
 <h3 id="更直观的Git_Log">更直观的Git Log</h3>
 <p>输入如下命令:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git log --all --graph --pretty=format:<span class="string">'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset'</span> --abbrev-commit --date=relative
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --all --graph --pretty=format:<span class="string">'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset'</span> --abbrev-commit --date=relative</div></pre></td></tr></table></figure>
 
 <p>可以看到:</p>
 <p><img src="http://i.imgur.com/R2z8l7c.png" alt="git log --all --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit --date=relative"></p>
@@ -618,30 +523,28 @@ $ git checkout -
 <p><a href="http://git-scm.com/docs/git-log" target="_blank" rel="external"><em>进一步了解 Git <code>log</code> 命令.</em></a></p>
 <h3 id="Git查询">Git查询</h3>
 <p>Git查询运行你在之前的所有提交信息里进行搜索，找到其中和搜索条件相匹配的最近的一条。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git show :/query
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git show :/query</div></pre></td></tr></table></figure>
 
 <p>这里 <code>query</code> （区别大小写）是你想要搜索的词语， 这条命令会找到包含这个词语的最后那个提交并显示变动详情。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git show :/typo
-</pre></td></tr></table></figure><br><img src="http://i.imgur.com/icaGiNt.png" alt="git show :/query"><br><br><em> 按 <code>q</code> 键退出命令。</em><br><br>### 合并分支<br>输入命令:<br><br><figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git branch --merged
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git show :/typo</div></pre></td></tr></table></figure>
+
+<p><img src="http://i.imgur.com/icaGiNt.png" alt="git show :/query"></p>
+<ul>
+<li>按 <code>q</code> 键退出命令。*</li>
+</ul>
+<h3 id="合并分支">合并分支</h3>
+<p>输入命令:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch --merged</div></pre></td></tr></table></figure>
 
 <p>这会显示所有已经合并到你当前分支的分支列表。 </p>
 <p>相反地：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git branch --no-merged
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch --no-merged</div></pre></td></tr></table></figure>
 
 <p>会显示所有还没有合并到你当前分支的分支列表。</p>
 <p><a href="http://git-scm.com/docs/git-branch" target="_blank" rel="external"><em>进一步了解 Git <code>branch</code> 命令.</em></a></p>
 <h3 id="使用网页查看本地仓库">使用网页查看本地仓库</h3>
 <p>使用Git的 <code>instaweb</code> 可以立即在 <code>gitweb</code>中浏览你的工作仓库。这个命令是个简单的脚步，配置了<code>gitweb</code>和用来浏览本地仓库的Web服务器。<em>（译者注：默认需要lighttpd支持）</em></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git instaweb
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git instaweb</div></pre></td></tr></table></figure>
 
 <p>执行后打开：</p>
 <p><img src="http://i.imgur.com/Dxekmqc.png" alt="Git instaweb"></p>
@@ -651,38 +554,16 @@ $ git checkout -
 <h4 id="Git命令自定义别名">Git命令自定义别名</h4>
 <p>别名用来帮助你定义自己的git命令。比如你可以定义 <code>git a</code> 来运行 <code>git add --all</code>。</p>
 <p>要添加一个别名， 一种方法是打开 <code>~/.gitconfig</code> 文件并添加如下内容：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>[alias]
-  co = checkout
-  cm = <span class="operator"><span class="keyword">commit</span>
-  p = push
-  # <span class="keyword">Show</span> verbose <span class="keyword">output</span> about tags, branches <span class="keyword">or</span> remotes
-  tags = tag -l
-  branches = branch -a
-  remotes = remote -v</span>
-</pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[alias]</div><div class="line">  <span class="keyword">co</span> = checkout</div><div class="line">  <span class="keyword">cm</span> = commit</div><div class="line">  <span class="keyword">p</span> = push</div><div class="line">  # Show <span class="keyword">verbose</span> output about <span class="keyword">tags</span>, branches <span class="built_in">or</span> remotes</div><div class="line">  <span class="keyword">tags</span> = <span class="keyword">tag</span> -<span class="keyword">l</span></div><div class="line">  branches = branch -<span class="keyword">a</span></div><div class="line">  remotes = remote -<span class="keyword">v</span></div></pre></td></tr></table></figure>
 
 <p>…或者在命令行里键入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git config --global alias.new_alias git_function
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global alias.new_alias git_function</div></pre></td></tr></table></figure>
 
 <p>例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git config --global alias.cm commit
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global alias.cm commit</div></pre></td></tr></table></figure>
 
 <p>指向多个命令的别名可以用引号来定义：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git config --global alias.ac <span class="string">'add -A . && commit'</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global alias.ac <span class="string">'add -A . && commit'</span></div></pre></td></tr></table></figure>
 
 <p>下面列出了一些有用的别名：</p>
 <table>
@@ -738,39 +619,17 @@ $ git checkout -
 </table>
 <h4 id="自动更正">自动更正</h4>
 <p>如果键入 <code>git comit</code> 你会看到如下输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre>$ git comit -m <span class="string">"Message"</span>
-<span class="comment"># git: 'comit' is not a git command. See 'git --help'.</span>
-
-<span class="comment"># Did you mean this?</span>
-<span class="comment">#   commit</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git comit -m <span class="string">"Message"</span></div><div class="line"><span class="comment"># git: 'comit' is not a git command. See 'git --help'.</span></div><div class="line"></div><div class="line"><span class="comment"># Did you mean this?</span></div><div class="line"><span class="comment">#   commit</span></div></pre></td></tr></table></figure>
 
 <p>为了在键入 <code>comit</code> 调用 <code>commit</code>命令，只需启用自动纠错功能：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git config --global help.autocorrect <span class="number">1</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global help.autocorrect <span class="number">1</span></div></pre></td></tr></table></figure>
 
 <p>现在你就会看到：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre>$ git comit -m <span class="string">"Message"</span>
-<span class="comment"># WARNING: You called a Git command named 'comit', which does not exist.</span>
-<span class="comment"># Continuing under the assumption that you meant 'commit'</span>
-<span class="comment"># in 0.1 seconds automatically...</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git comit -m <span class="string">"Message"</span></div><div class="line"><span class="comment"># WARNING: You called a Git command named 'comit', which does not exist.</span></div><div class="line"><span class="comment"># Continuing under the assumption that you meant 'commit'</span></div><div class="line"><span class="comment"># in 0.1 seconds automatically...</span></div></pre></td></tr></table></figure>
 
 <h4 id="带颜色输出">带颜色输出</h4>
 <p>要在你的Git命令输出里加上颜色的话，可以用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>$ git config --global color.ui <span class="number">1</span>
-</pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global color.ui <span class="number">1</span></div></pre></td></tr></table></figure>
 
 <p><a href="http://git-scm.com/docs/git-config" target="_blank" rel="external"><em>进一步了解 Git <code>config</code> 命令.</em></a></p>
 <h3 id="Git资源">Git资源</h3>
@@ -867,9 +726,11 @@ $ git checkout -
 </tr>
 </tbody>
 </table>
-<p>本文转载自 <a href="https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md" target="_blank" rel="external">https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md</a></p>
 ]]></content>
+    <summary type="html">
+    <![CDATA[本秘籍收录了一些 Git 和 Github 非常酷同时又少有人知的功能。]]>
     
+    </summary>
     
       <category term="Git" scheme="http://jianyan.me/tags/Git/"/>
     
@@ -880,37 +741,25 @@ $ git checkout -
   </entry>
   
   <entry>
-    <title><![CDATA[Django 中设置 css/js/images 路径的方法]]></title>
+    <title><![CDATA[Git Django 中设置 css/js/images 路径的方法]]></title>
     <link href="http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/"/>
     <id>http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/</id>
-    <published>2014-09-18T10:42:13.000Z</published>
-    <updated>2014-09-18T10:47:41.000Z</updated>
+    <published>2014-09-18T13:30:00.000Z</published>
+    <updated>2014-12-09T07:50:04.000Z</updated>
     <content type="html"><![CDATA[<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)
-STATICFILES_DIRS = (
-    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
-    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
-    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),
-)
-</pre></td></tr></table></figure><br>然后把你的 css/js/images 那些文件夹都丢进 static 文件夹中（此文件夹应建立在你的 view.py 所在目录下）<br>模板里面这么写：<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">link</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/static/css/login.css"</span>&gt;</span>
-</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)</div><div class="line">STATICFILES_DIRS = (</div><div class="line">    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>然后把你的 css/js/images 那些文件夹都丢进 static 文件夹中（此文件夹应建立在你的 view.py 所在目录下）<br>模板里面这么写：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"/static/css/login.css"</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>如果设置之后出现了与 Unicode 有关的错误，打开 <code>/Python27/Lib/mimetypes.py</code>，在 import 语句之后加入：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="keyword">if</span> sys.getdefaultencoding() != <span class="string">'gbk'</span>:
-    reload(sys)
-    sys.setdefaultencoding(<span class="string">'gbk'</span>)
-</pre></td></tr></table></figure>]]></content>
-    
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> sys.getdefaultencoding() != <span class="string">'gbk'</span>:</div><div class="line">    reload(sys)</div><div class="line">    sys.setdefaultencoding(<span class="string">'gbk'</span>)</div></pre></td></tr></table></figure>
+
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
+<figure class="highlight python"><table><tr><td cla]]>
+    </summary>
     
       <category term="Django" scheme="http://jianyan.me/tags/Django/"/>
     
@@ -920,15 +769,19 @@ STATICFILES_DIRS = (
     <title><![CDATA[Git 用的越早，你就活得越久]]></title>
     <link href="http://jianyan.me/2014/07/04/earlier-for-git-youll-live-longer/"/>
     <id>http://jianyan.me/2014/07/04/earlier-for-git-youll-live-longer/</id>
-    <published>2014-07-04T04:40:14.000Z</published>
-    <updated>2014-07-04T05:14:45.000Z</updated>
+    <published>2014-07-04T13:30:00.000Z</published>
+    <updated>2014-12-09T07:47:50.000Z</updated>
     <content type="html"><![CDATA[<p>这是我最近这段时间使用 Git 的感受。<br>Git 的核心功能是版本控制，基于此，我们可以：</p>
 <ol>
 <li>利用其强大的「历史」功能，我们可以把一些频繁修改的东西（不仅限于代码），都使用 Git 来管理。这样，我们可以轻松找回 n 天前删掉的代码或文字。</li>
 <li>利用其强大的「分支管理」功能，我们可以将某一项目的编码过程拆分成「受精卵-卵裂-原肠胚-器官形成-出生-发育」，同时再推广 Java 类库的设计思想，从而简化软件开发流程。</li>
 </ol>
 ]]></content>
-    
+    <summary type="html">
+    <![CDATA[<p>这是我最近这段时间使用 Git 的感受。<br>Git 的核心功能是版本控制，基于此，我们可以：</p>
+<ol>
+<li>利用其强大的「历史」功能，我们可以把一些频繁修改的东西（不仅限于代码），都使用 Git 来管理。这样，我们可以轻松找回 n 天前删掉的代码或文字。</]]>
+    </summary>
     
       <category term="Git" scheme="http://jianyan.me/tags/Git/"/>
     
@@ -940,148 +793,25 @@ STATICFILES_DIRS = (
     <title><![CDATA[Python 爬虫学习——收集「有趣」信息（8月16日更新）]]></title>
     <link href="http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/"/>
     <id>http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/</id>
-    <published>2014-06-24T05:36:39.000Z</published>
-    <updated>2014-09-29T02:53:24.000Z</updated>
+    <published>2014-06-24T13:30:00.000Z</published>
+    <updated>2014-12-07T15:27:48.000Z</updated>
     <content type="html"><![CDATA[<p>我们使用 urllib2 这个组件来抓取网页，这是 Python 的一个获取 URLs (Uniform Resource Locators)的组件，它以 urlopen 函数的形式提供了一个非常简单的接口。</p>
-<p>以获取某 <del>id 为 EndlessCheng</del> 用户的 repository 列表为例：<br>（阅读下面代码之前建议先看看<a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a>的源码）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-</pre></td><td class="code"><pre><span class="comment"># -*- coding: UTF-8 -*-</span>
+<p>以获取某 <del>id 为 EndlessCheng</del> 用户的 repository 列表为例：</p>
+<p>（阅读下面代码之前建议先看看 <a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a> 的源码）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"></div><div class="line">USERNAME = <span class="string">'EndlessCheng'</span></div><div class="line">response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'?tab=repositories'</span>)  </div><div class="line">html = response.read()  </div><div class="line"></div><div class="line">STEP = <span class="number">20</span></div><div class="line">cnt = next = <span class="number">1</span></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    end = html.find(<span class="string">'&lt;/h3&gt;'</span>, next, len(html))  <span class="comment"># 获取 repolist-name 尾位置</span></div><div class="line">    <span class="keyword">if</span> end == -<span class="number">1</span>:</div><div class="line">        <span class="keyword">break</span></div><div class="line">    next = end + STEP</div><div class="line">    end = html.rfind(<span class="string">'&lt;/a&gt;'</span>, <span class="number">0</span>, end) </div><div class="line">    begin = html.rfind(<span class="string">'&gt;'</span>, <span class="number">0</span>, end) + <span class="number">1</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"%3d  %s"</span> % (cnt, html[begin:end])</div><div class="line">    cnt += <span class="number">1</span></div></pre></td></tr></table></figure>
 
-<span class="keyword">import</span> urllib2
-
-USERNAME = <span class="string">'EndlessCheng'</span>
-response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'?tab=repositories'</span>)  
-html = response.read()  
-
-STEP = <span class="number">20</span>
-cnt = next = <span class="number">1</span>
-<span class="keyword">while</span> <span class="keyword">True</span>:
-    end = html.find(<span class="string">'&lt;/h3&gt;'</span>, next, len(html))  <span class="comment"># 获取 repolist-name 尾位置</span>
-    <span class="keyword">if</span> end == -<span class="number">1</span>:
-        <span class="keyword">break</span>
-    next = end + STEP
-    end = html.rfind(<span class="string">'&lt;/a&gt;'</span>, <span class="number">0</span>, end) 
-    begin = html.rfind(<span class="string">'&gt;'</span>, <span class="number">0</span>, end) + <span class="number">1</span>
-    <span class="keyword">print</span> <span class="string">"%3d  %s"</span> % (cnt, html[begin:end])
-    cnt += <span class="number">1</span>
-</pre></td></tr></table></figure><br>源网页：<br><img src="http://endless.qiniudn.com/blogrepo.png" alt=""><br>输出结果：<br><img src="http://endless.qiniudn.com/blogoutput.png" alt=""><br><br>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br>（晕，代码中的 EscapeCharacterDict 的转义字符被直接转换了，可以去 <a href="https://github.com/EndlessCheng/Commits-Crawler/blob/master/Core.py" target="_blank" rel="external">原项目</a> 查看）<br><figure class="highlight python"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-</pre></td><td class="code"><pre><span class="comment"># -*- coding: UTF-8 -*-</span>
-
-<span class="keyword">import</span> urllib2
-
-EscapeCharacterDict = {<span class="string">'&amp;'</span>: <span class="string">'&'</span>, <span class="string">'&lt;'</span>: <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>: <span class="string">'&gt;'</span>, <span class="string">'&quot;'</span>: <span class="string">'"'</span>, <span class="string">'&#39;'</span>: <span class="string">'\''</span>}
-
-
-<span class="function"><span class="keyword">def</span> <span class="title">deal</span><span class="params">(response)</span>:</span>
-    html = response.read()
-
-    <span class="keyword">global</span> cnt
-    <span class="keyword">global</span> fp
-    step = <span class="number">24</span>
-    end = <span class="number">1000</span>
-
-    <span class="keyword">while</span> <span class="keyword">True</span>:
-        begin = html.find(<span class="string">'data-pjax="true" title='</span>, end, len(html))  <span class="comment"># 获取 commit 首位置</span>
-        <span class="keyword">if</span> begin == -<span class="number">1</span>:
-            <span class="keyword">break</span>
-        begin += step
-        keywords = <span class="string">'"&gt;'</span> <span class="keyword">if</span> html[begin - <span class="number">1</span>] == <span class="string">'"'</span> <span class="keyword">else</span> <span class="string">'\'&gt;'</span>
-        end = html.find(keywords, begin, len(html))
-        s = html[begin:end]
-        <span class="keyword">for</span> k, v <span class="keyword">in</span> EscapeCharacterDict.iteritems():
-            s = s.replace(k, v)
-        fp.write(<span class="string">"%3d  %s\n"</span> % (cnt, s))
-        cnt += <span class="number">1</span>
-
-USERNAME = <span class="string">'rogerwang'</span> <span class="comment"># 修改这里</span>
-REPONAME = <span class="string">'node-webkit'</span> <span class="comment"># 修改这里</span>
-
-fp = open(USERNAME + <span class="string">'#'</span> + REPONAME + <span class="string">'#commits.txt'</span>, <span class="string">'w'</span>)
-
-cnt = <span class="number">1</span>
-i = <span class="number">1</span>
-<span class="keyword">while</span> <span class="keyword">True</span>:
-    <span class="keyword">try</span>:
-        response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'/'</span> + REPONAME + <span class="string">'/commits?page='</span> + str(i))
-        deal(response)
-        <span class="keyword">print</span> <span class="string">'Cheaked'</span>, i, <span class="string">'page(s).'</span>
-        i += <span class="number">1</span>
-    <span class="keyword">except</span> urllib2.HTTPError, err:
-        <span class="keyword">if</span> err.code == <span class="number">404</span>:
-            <span class="keyword">print</span> <span class="string">''</span>
-            <span class="keyword">print</span> <span class="string">'Cheaked'</span>, i - <span class="number">1</span>, <span class="string">'page(s),'</span>, cnt - <span class="number">1</span>, <span class="string">'commit(s) found.'</span>
-            <span class="keyword">break</span>
-        <span class="keyword">else</span>:
-            <span class="keyword">raise</span>
-</pre></td></tr></table></figure>
+<p>源网页：</p>
+<p><img src="http://endless.qiniudn.com/blogrepo.png" alt=""></p>
+<p>输出结果：</p>
+<p><img src="http://endless.qiniudn.com/blogoutput.png" alt=""></p>
+<p>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br>（晕，代码中的 EscapeCharacterDict 的转义字符被直接转换了，可以去 <a href="https://github.com/EndlessCheng/Commits-Crawler/blob/master/Core.py" target="_blank" rel="external">原项目</a> 查看）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"></div><div class="line">EscapeCharacterDict = {<span class="string">'&'</span>: <span class="string">'&'</span>, <span class="string">'&lt;'</span>: <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>: <span class="string">'&gt;'</span>, <span class="string">'"'</span>: <span class="string">'"'</span>, <span class="string">''': '\''}</span></div><div class="line"></div><div class="line"></div><div class="line">def deal(response):</div><div class="line">    html = response.read()</div><div class="line"></div><div class="line">    global cnt</div><div class="line">    global fp</div><div class="line">    step = 24</div><div class="line">    end = 1000</div><div class="line"></div><div class="line">    while True:</div><div class="line">        begin = html.find('data-pjax="true" title=', end, len(html))  # 获取 commit 首位置</div><div class="line">        if begin == -1:</div><div class="line">            break</div><div class="line">        begin += step</div><div class="line">        keywords = '"&gt;' if html[begin - 1] == '"' else '\'&gt;'</div><div class="line">        end = html.find(keywords, begin, len(html))</div><div class="line">        s = html[begin:end]</div><div class="line">        for k, v in EscapeCharacterDict.iteritems():</div><div class="line">            s = s.replace(k, v)</div><div class="line">        fp.write("%3d  %s\n" % (cnt, s))</div><div class="line">        cnt += 1</div><div class="line"></div><div class="line">USERNAME = 'rogerwang' # 修改这里</div><div class="line">REPONAME = 'node-webkit' # 修改这里</div><div class="line"></div><div class="line">fp = open(USERNAME + '#' + REPONAME + '#commits.txt', 'w')</div><div class="line"></div><div class="line">cnt = 1</div><div class="line">i = 1</div><div class="line">while True:</div><div class="line">    try:</div><div class="line">        response = urllib2.urlopen('https://github.com/' + USERNAME + '/' + REPONAME + '/commits?page=' + str(i))</div><div class="line">        deal(response)</div><div class="line">        print 'Cheaked', i, 'page(s).'</div><div class="line">        i += 1</div><div class="line">    except urllib2.HTTPError, err:</div><div class="line">        if err.code == 404:</div><div class="line">            print ''</div><div class="line">            print 'Cheaked', i - 1, 'page(s),', cnt - 1, 'commit(s) found.'</div><div class="line">            break</div><div class="line">        else:</div><div class="line">            raise</div></pre></td></tr></table></figure>
 
 ]]></content>
+    <summary type="html">
+    <![CDATA[从获取 GitHub 等网站的我们感兴趣的信息开始，学习 Python 爬虫的使用方法。]]>
     
+    </summary>
     
       <category term="Python" scheme="http://jianyan.me/tags/Python/"/>
     
@@ -1095,122 +825,42 @@ i = <span class="number">1</span>
     <title><![CDATA[Java 与 C++ 混合编程——JNI 学习小记]]></title>
     <link href="http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/"/>
     <id>http://jianyan.me/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/</id>
-    <published>2014-06-21T13:42:13.000Z</published>
-    <updated>2014-11-01T07:19:39.000Z</updated>
+    <published>2014-06-21T14:30:00.000Z</published>
+    <updated>2014-12-07T15:17:03.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
-<p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的 native 方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的 arraycopy 方法（第 482 行）、setOut0 方法（第 247 行）等。Google 一下后发现这是 Java Native Interface (JNI)，便花点时间学习了一下。</p>
+<p>最近对<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java" target="_blank" rel="external">OpenJDK源码</a>产生了很大的兴趣，而其中有较多的native方法，如<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/cf44386c8fe3/src/share/classes/java/lang/System.java" target="_blank" rel="external">System.java</a>中的arraycopy方法（第482行）、setOut0方法（第247行）等。Google一下后发现这是Java Native Interface(JNI)，便花点时间学习了一下。</p>
 <h2 id="何谓JNI？">何谓JNI？</h2>
-<p>JNI 是 Java 平台中的一个强大特性。<br>应用程序可以通过 JNI 把 C/C++ （或者其他语言）代码集成进 Java 程序中，这样开发者在利用 Java 平台强大功能的同时，又不必放弃对原有代码的投资。</p>
+<p>JNI是Java平台中的一个强大特性。<br>应用程序可以通过JNI把C/C++代码集成进Java程序中，这样开发者在利用Java平台强大功能的同时，又不必放弃对原有代码的投资。</p>
 <h2 id="HelloWorld">HelloWorld</h2>
 <p>闲话少说，先看代码：</p>
-<p>新建一个 class，名称为 Algorithm</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Algorithm</span> {</span>
+<a id="more"></a>
 
-	<span class="keyword">static</span> {
-		System.loadLibrary(<span class="string">"Hello"</span>);
-	}
+<p>新建一个class，名称为Algorithm</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Algorithm</span> </span>{</div><div class="line"></div><div class="line">	<span class="keyword">static</span> {</div><div class="line">		System.loadLibrary(<span class="string">"Hello"</span>);</div><div class="line">	}</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">write</span>(String msg);</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(String[] args) {</div><div class="line">		write(<span class="string">"Hello, 混合编程！"</span>);</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
 
-	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">write</span>(String msg);
+<p>保存。</p>
+<p>打开cmd，cd到\src，执行<code>javah Algorithm</code>（如果你的.java文件在某一package下的话，比如在\mjava\lang\里面，就执行<code>javah mjava.lang.Algorithm</code>），生成<code>Algorithm.h</code>文件，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* DO NOT EDIT THIS FILE - it is machine generated */</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;jni.h&gt;</span></div><div class="line"><span class="comment">/* Header for class Algorithm */</span></div><div class="line"></div><div class="line"><span class="preprocessor">#ifndef _Included_Algorithm</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> _Included_Algorithm</span></div><div class="line"><span class="preprocessor">#ifdef __cplusplus</span></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> {</div><div class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></div><div class="line"><span class="comment">/*</span></div><div class="line"> * Class:     Algorithm</div><div class="line"> * Method:    write</div><div class="line"> * Signature: (Ljava/lang/String;)V</div><div class="line"> */</div><div class="line">JNIEXPORT <span class="keyword">void</span> JNICALL Java_Algorithm_write</div><div class="line">  (JNIEnv *, jclass, jstring);</div><div class="line"></div><div class="line"><span class="preprocessor">#ifdef __cplusplus</span></div><div class="line">}</div><div class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></div><div class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></div></pre></td></tr></table></figure>
 
-	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(String[] args) {
-		write(<span class="string">"Hello, 混合编程！"</span>);
-	}
-}
-</pre></td></tr></table></figure><br>保存。<br><br>打开 cmd，cd 到 \src，执行<code>javah Algorithm</code>（如果你的 .java 文件在某一 package 下的话，比如在 \mjava\lang\ 里面，就执行<code>javah mjava.lang.Algorithm</code>），生成<code>Algorithm.h</code>文件，如下：<br><br><figure class="highlight c++"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-</pre></td><td class="code"><pre><span class="comment">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
-<span class="preprocessor">#include &lt;jni.h&gt;</span>
-<span class="comment">/* Header for class Algorithm */</span>
+<p>对于Windows下的JDK来说，可以在JDK目录<code>\include\win32\jni_md.h</code>中找到如下定义</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">define</span> JNIEXPORT __declspec(dllexport)</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> JNIIMPORT __declspec(dllimport)</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> JNICALL __stdcall</span></div></pre></td></tr></table></figure>
 
-<span class="preprocessor">#ifndef _Included_Algorithm</span>
-<span class="preprocessor">#define _Included_Algorithm</span>
-<span class="preprocessor">#ifdef __cplusplus</span>
-extern <span class="string">"C"</span> {
-<span class="preprocessor">#endif</span>
-<span class="comment">/*
- * Class:     Algorithm
- * Method:    write
- * Signature: (Ljava/lang/String;)V
- */</span>
-JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </span>Java_Algorithm_write
-  (JNIEnv *, jclass, jstring);
+<p>其中<code>__declspec</code>用于指定所给定类型的实例的与Microsoft相关的存储方式。<br><code>dllexport</code>用来从dll中导出函数，数据或对象，<code>dllimport</code>用来从dll导入函数，数据，或对象。<br>这相当于定义了dll的接口，提供可被Java使用的C/C++函数，数据，或对象。<br><code>__stdcall</code>见<a href="http://baike.baidu.com/view/1276580.htm" target="_blank" rel="external">百度百科</a>。<br><code>JNIEnv</code>，<code>jclass</code>和<code>jstring</code>的定义见<code>\include\jni.h</code>，也可以参考<a href="http://wenku.baidu.com/link?url=khOHgORmPEnOlIwZ_Zi7VBnueTNQcSp60EV-Grmiw12bgrLt0YT9rxTQq8PeOiBVecVewsW54EIBdKIt_DogruJUeqHaoYO9rFy8vDWs9Ce" target="_blank" rel="external">jni详解</a>。</p>
+<p>随后打开VS2012，新建 Win32项目，名称随便：<br><img src="http://endless.qiniudn.com/blogjni01.png" alt=""><br>应用程序类型选择DLL：<br><img src="http://endless.qiniudn.com/blogjni02.png" alt=""><br>按<code>alt</code>+<code>F7</code>，点击<code>配置属性</code>-<code>VC++目录</code>，如果你的JDK是64位的话，你的VS2012也应该是64位，此时做如下修改：（32位可以无视）<br><img src="http://endless.qiniudn.com/blogjni05.png" alt=""><br>然后点击<code>包含目录</code>-<code>编辑</code>：<br><img src="http://endless.qiniudn.com/blogjni04.png" alt=""><br>点击文件夹图标，把<code>\include\</code>，<code>\include\win32\</code>和<code>Algorithm.h</code>所在目录加进去。<br>随后点击<code>常规</code>，把<code>配置类型</code>改为<code>动态库(.dll)</code>。</p>
+<p>打开<code>&lt;项目名&gt;.cpp</code>，这里<code>&lt;项目名&gt;</code>是你自己输入的名字，输入如下代码：（函数名必须与Algorithm.h中声明的一致）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">include</span> "stdafx.h"</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> "Algorithm.h"</span></div><div class="line"></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;clocale&gt;</span></div><div class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;cwchar&gt;</span></div><div class="line"></div><div class="line">JNIEXPORT <span class="keyword">void</span> JNICALL Java_Algorithm_write(JNIEnv * env, jclass obj, jstring jMsg)</div><div class="line">{</div><div class="line">	setlocale(LC_ALL, <span class="string">"Chinese-simplified"</span>); <span class="comment">// clocale</span></div><div class="line">	   wprintf(L<span class="string">"%ls"</span>, (<span class="keyword">wchar_t</span>*)env-&gt;GetStringChars(jMsg, NULL));</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<span class="preprocessor">#ifdef __cplusplus</span>
-}
-<span class="preprocessor">#endif</span>
-<span class="preprocessor">#endif</span>
-</pre></td></tr></table></figure>
-
-<p>对于 Windows 下的 JDK 来说，可以在 JDK 目录<code>\include\win32\jni_md.h</code>中找到如下定义</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="preprocessor">#<span class="keyword">define</span> JNIEXPORT __declspec(dllexport)</span>
-<span class="preprocessor">#<span class="keyword">define</span> JNIIMPORT __declspec(dllimport)</span>
-<span class="preprocessor">#<span class="keyword">define</span> JNICALL __stdcall</span>
-</pre></td></tr></table></figure><br>其中<code>__declspec</code>用于指定所给定类型的实例的与 Microsoft 相关的存储方式。<br><code>dllexport</code>用来从 dll 中导出函数，数据或对象，<code>dllimport</code>用来从 dll 导入函数，数据，或对象。<br>这相当于定义了 dll 的接口，提供可被 Java 使用的 C/C++ 函数，数据，或对象。<br><code>__stdcall</code>见<a href="http://baike.baidu.com/view/1276580.htm" target="_blank" rel="external">百度百科</a>。<br><code>JNIEnv</code>，<code>jclass</code>和<code>jstring</code>的定义见<code>\include\jni.h</code>，也可以参考<a href="http://wenku.baidu.com/link?url=khOHgORmPEnOlIwZ_Zi7VBnueTNQcSp60EV-Grmiw12bgrLt0YT9rxTQq8PeOiBVecVewsW54EIBdKIt_DogruJUeqHaoYO9rFy8vDWs9Ce" target="_blank" rel="external">jni详解</a>。<br><br><br>随后打开 VS2012，新建 Win32 项目，名称随便：<br><img src="http://endless.qiniudn.com/blogjni01.png" alt=""><br>应用程序类型选择 DLL：<br><img src="http://endless.qiniudn.com/blogjni02.png" alt=""><br>按<code>alt</code>+<code>F7</code>，点击<code>配置属性</code>-<code>VC++目录</code>，如果你的 JDK 是 64 位的话，你的 VS2012 也应该是 64 位，此时做如下修改：（32 位可以无视）<br><img src="http://endless.qiniudn.com/blogjni05.png" alt=""><br>然后点击<code>包含目录</code>-<code>编辑</code>：<br><img src="http://endless.qiniudn.com/blogjni04.png" alt=""><br>点击文件夹图标，把<code>\include\</code>，<code>\include\win32\</code>和<code>Algorithm.h</code>所在目录加进去。<br>随后点击<code>常规</code>，把<code>配置类型</code>改为<code>动态库(.dll)</code>。<br><br>打开<code>&lt;项目名&gt;.cpp</code>，这里<code>&lt;项目名&gt;</code>是你自己输入的名字，输入如下代码：（函数名必须与 Algorithm.h 中声明的一致）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="preprocessor">#include "stdafx.h"</span>
-<span class="preprocessor">#include "Algorithm.h"</span>
-
-<span class="preprocessor">#include &lt;clocale&gt;</span>
-<span class="preprocessor">#include &lt;cwchar&gt;</span>
-
-JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </span>Java_Algorithm_write(JNIEnv * env, jclass obj, jstring jMsg)
-{
-	setlocale(LC_ALL, <span class="string">"Chinese-simplified"</span>); <span class="comment">// clocale</span>
-	wprintf(L<span class="string">"%ls"</span>, (wchar_t*)env-&gt;GetStringChars(jMsg, NULL));
-}
-</pre></td></tr></table></figure>
-
-<p>这里<code>setlocale</code>函数用来配置地域化信息，<code>GetStringChars</code>函数将 jstring 转化成 jchar 数组并返回 jchar*，这里 jchar 被定义为unsigned short，所以可以转化成 wchar_t 类型。</p>
+<p>这里<code>setlocale</code>函数用来配置地域化信息，<code>GetStringChars</code>函数将jstring转化成jchar数组并返回jchar*，这里jchar被定义为unsigned short，所以可以转化成wchar_t类型。</p>
 <p>按<code>F7</code>。</p>
-<p>在你的项目文件夹中找到<code>&lt;项目名&gt;.dll</code>文件，复制，粘贴到你的工程下（直接在 Eclipse 中单击工程名然后<code>ctrl</code>+<code>V</code>），并重命名为<code>Hello.dll</code>。</p>
-<p>回到 Eclipse，按下<code>Ctrl</code>+<code>F11</code>，Well done！<br><img src="http://endless.qiniudn.com/blogjni06.png" alt=""></p>
+<p>在你的项目文件夹中找到<code>&lt;项目名&gt;.dll</code>文件，复制，粘贴到你的工程下（直接在Eclipse中单击工程名然后<code>ctrl</code>+<code>V</code>），并重命名为<code>Hello.dll</code>。</p>
+<p>回到Eclipse，按下<code>Ctrl</code>+<code>F11</code>，Well done！<br><img src="http://endless.qiniudn.com/blogjni06.png" alt=""></p>
 <h2 id="More">More</h2>
-<p>自定义 readLine() 方法的实现，见<a href="https://github.com/EndlessCheng/OpenJDK-7u4-analysis" target="_blank" rel="external">GitHub</a></p>
+<p>自定义readLine()方法的实现，见<a href="https://github.com/EndlessCheng/OpenJDK-7u4-analysis" target="_blank" rel="external">GitHub</a></p>
 ]]></content>
+    <summary type="html">
+    <![CDATA[最近对 OpenJDK 源码产生了很大的兴趣，而其中有较多的 native 方法，遂花点时间研究了下 JNI，本文就是教你如何入门的。(for Windows)]]>
     
+    </summary>
     
       <category term="混合编程" scheme="http://jianyan.me/tags/%E6%B7%B7%E5%90%88%E7%BC%96%E7%A8%8B/"/>
     
@@ -1228,97 +878,63 @@ JNIEXPORT <span class="keyword">void</span><span class="constant"> JNICALL </spa
     <title><![CDATA[如何搭建免费静态博客——Hexo 与 GitHub 使用小记]]></title>
     <link href="http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/"/>
     <id>http://jianyan.me/2014/06/21/how-to-build-a-free-static-blog-hexo-and-github-notes/</id>
-    <published>2014-06-21T11:42:13.000Z</published>
-    <updated>2014-11-14T03:48:23.000Z</updated>
+    <published>2014-06-21T13:30:00.000Z</published>
+    <updated>2014-12-09T07:45:56.000Z</updated>
     <content type="html"><![CDATA[<h2 id="缘起">缘起</h2>
 <p>把网页托管在 GitHub 上有什么好处呢？——秒开。（吐槽下某些空间服务商的速度。。）<br>其次，可能你会遇到修改了某些文字之后又想改回去的情况，这时 Github 上保存的历史记录就会帮到你了。</p>
 <h2 id="快速搭建">快速搭建</h2>
-<ol>
-<li>首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a><br></li>
-<li>然后修改成 Jacman 主题（或者你喜欢的其他主题）：在根目录下右键选择 Git Bash 输入<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>git clone <span class="symbol">https:</span>/<span class="regexp">/github.com/wuchong</span><span class="regexp">/jacman.git themes/jacman</span>
-</pre></td></tr></table></figure></li>
-<li>修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code><strong>前面</strong>加入<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>stylus:
-   <span class="built_in">compress</span>: <span class="constant">true</span>
-</pre></td></tr></table></figure></li>
-<li>在<code>./source</code>文件夹中建立<code>tags</code>、<code>categories</code>和<code>about</code>文件夹，各文件夹内部新建一个<code>index.md</code>文件。内容分别为：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>layout: tags
-<span class="header">title: tags
----</span>
-</pre></td></tr></table></figure><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>layout: categories
-<span class="header">title: categories
----</span>
-</pre></td></tr></table></figure><br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="header">title: 关于我
----</span>
-&lt;自我介绍&gt;
-</pre></td></tr></table></figure><br>如果你想让你的 tags 有标签云的效果，把<code>./themes/&lt;你的主题&gt;/_config.yml</code>中<code>widgets</code>下的<code>tags</code>修改成<code>tagcloud</code></li>
-<li>完成上述步骤后在<code>sync</code>时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>git add .
-git <span class="operator"><span class="keyword">commit</span> -m <span class="string">"update fancybox"</span></span>
-</pre></td></tr></table></figure></li>
-<li>添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/&lt;你的主题&gt;/_config.yml</code>，找到<code>disqus</code>，修改如下：<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="attribute">disqus</span>: <span class="string"></span>
-  <span class="attribute">enable</span>: <span class="string">true</span>
-  <span class="attribute">short_name</span>: <span class="string">&lt;你填的名字&gt;</span>
-</pre></td></tr></table></figure></li>
-<li>添加 RSS：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>plugins:
-<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-feed</span>
-</pre></td></tr></table></figure><br>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman 主题自带）</li>
-<li>写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></li>
-<li>添加<a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的body标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
-<span class="keyword">var</span> _bdhmProtocol = ((<span class="string">"https:"</span> == document.location.protocol) ? <span class="string">" https://"</span> : <span class="string">" http://"</span>);
-document.write(<span class="built_in">unescape</span>(<span class="string">"%3Cscript src='"</span> + _bdhmProtocol + <span class="string">"hm.baidu.com/h.js%3Fcfedc723a9dc30bd7db67ad8e53a97fa' type='text/javascript'%3E%3C/script%3E"</span>));
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure><br>百度统计异步代码是以异步加载形式加载了网站分析代码，使用该代码能够大幅提升您网站的打开速度(目前使用百度统计异步代码会导致百度统计图标和代码检查功能的失效).使用这种方式需要将代码添加至网站全部页面的标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/head.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）<br><figure class="highlight html"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
-<span class="keyword">var</span> _hmt = _hmt || [];
-(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-  <span class="keyword">var</span> hm = document.createElement(<span class="string">"script"</span>);
-  hm.src = <span class="string">"//hm.baidu.com/hm.js?cfedc723a9dc30bd7db67ad8e53a97fa"</span>;
-  <span class="keyword">var</span> s = document.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure></li>
-<li>添加 sitemap：在根目录下运行 Git Bash，输入<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre>npm install hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>然后编辑<code>./_config.yml</code>，添加如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>plugins:
-<span class="subst">-</span> hexo<span class="attribute">-generator</span><span class="attribute">-sitemap</span>
-</pre></td></tr></table></figure><br>随后提交给 Google 网站站长工具即可。</li>
-</ol>
+<p>1.首先参见最简单的搭建教程：<a href="http://wsgzao.github.io/post/hexo-guide/" target="_blank" rel="external">Github+Hexo搭建静态Blog小结</a></p>
+<p><strong>注意，若生成文章之后首页文章显示异常（如出现空白文章或重复文章等），请先<code>hexo clean</code>之后再<code>hexo g</code></strong></p>
+<p>2.然后修改成 Jacman 主题（或者你喜欢的其他主题）：在根目录下右键选择 Git Bash 输入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/wuchong/jacman.git themes/jacman</div></pre></td></tr></table></figure>
+
+<p>3.修改<code>./_config.yml</code>配置文件中的<code>theme</code>属性，将其设置为<code>jacman</code>。然后在<code>deploy</code>前面加入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">stylu<span class="variable">s:</span></div><div class="line">   compres<span class="variable">s:</span> true</div></pre></td></tr></table></figure>
+
+<p>4.在<code>./source</code>文件夹中建立<code>tags</code>、<code>categories</code>和<code>about</code>文件夹，各文件夹内部新建一个<code>index.md</code>文件。内容分别为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">layout: tags</div><div class="line"><span class="header">title: tags</span></div><div class="line">---</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">layout: categories</div><div class="line"><span class="header">title: categories</span></div><div class="line">---</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="header">title: 关于我</span></div><div class="line">---</div><div class="line">&lt;自我介绍&gt;</div></pre></td></tr></table></figure>
+
+<p>如果你想让你的 tags 有标签云的效果，把<code>./themes/&lt;你的主题&gt;/_config.yml中widgets</code>下的<code>tag</code>修改成<code>tagcloud</code></p>
+<p>5.完成上述步骤后在 sync 时可能会遇到<code>fancybox</code>文件夹内部的文件无法同步的问题，这时需要在<code>./fancybox</code>下右键打开 Git Bash，输入以下内容即可：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit -m <span class="string">"update fancybox"</span></div></pre></td></tr></table></figure>
+
+<p>6.添加 Disqus（多说明明有回复评论后邮箱提醒却不给我发邮件，差评）：点击 <a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a> 添加站点，填完，记住<code>shortname</code>中填的名字，无视掉验证。然后打开<code>./themes/&lt;你的主题&gt;/_config.yml</code>，找到<code>disqus_shortname</code>，修改如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">disqus_shortname</span>: <span class="string">&lt;你填的名字&gt;</span></div></pre></td></tr></table></figure>
+
+<p>7.添加 RSS：在根目录下运行 Git Bash，输入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> hexo-generator-feed</span></div></pre></td></tr></table></figure>
+
+<p>然后编辑<code>./_config.yml</code>，添加如下代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plugin<span class="variable">s:</span></div><div class="line">- hexo-generator-feed</div></pre></td></tr></table></figure>
+
+<p>之后确认在<code>./themes/&lt;你的主题&gt;/_config.yml</code>中有<code>rss: /atom.xml</code>这一行（Jacman 主题自带）</p>
+<p>8.写新文章时，建议在<code>---</code>上方添加<code>description: &lt;文章纲要&gt;</code></p>
+<p>9.添加 <a href="http://tongji.baidu.com/web/welcome/login" target="_blank" rel="external">百度统计</a>：有两种方法, 一种是默认加载, 一种是异步加载。<br>默认加载这种方式只需将代码添加至网站全部页面的<code>&lt;body&gt;</code>标签<strong>前</strong>, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/after_footer.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> _bdhmProtocol = ((<span class="string">"https:"</span> == <span class="built_in">document</span>.location.protocol) ? <span class="string">" https://"</span> : <span class="string">" http://"</span>);</div><div class="line"><span class="built_in">document</span>.write(<span class="built_in">unescape</span>(<span class="string">"%3Cscript src='"</span> + _bdhmProtocol + <span class="string">"hm.baidu.com/h.js%3Fcfedc723a9dc30bd7db67ad8e53a97fa' type='text/javascript'%3E%3C/script%3E"</span>));</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>百度统计异步代码是以异步加载形式加载了网站分析代码，使用该代码能够大幅提升您网站的打开速度(目前使用百度统计异步代码会导致百度统计图标和代码检查功能的失效).使用这种方式需要将代码添加至网站全部页面的标签前, 因此只需要在<code>./themes/&lt;你的主题&gt;/layout/_partial/head.ejs</code>里添加如下代码（这里添加的是我的代码, 请适当修改）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> _hmt = _hmt || [];</div><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> hm = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">  hm.src = <span class="string">"//hm.baidu.com/hm.js?efd32d79f8a09abef26865f3b17a3fc7"</span>;</div><div class="line">  <span class="keyword">var</span> s = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"script"</span>)[<span class="number">0</span>]; </div><div class="line">  s.parentNode.insertBefore(hm, s);</div><div class="line">})();</div><div class="line"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>10.添加 sitemap：在根目录下运行 Git Bash，输入</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="operator"><span class="keyword">install</span> hexo-generator-sitemap</span></div></pre></td></tr></table></figure>
+
+<p>然后编辑<code>./_config.yml</code>，添加如下代码：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plugin<span class="variable">s:</span></div><div class="line">- hexo-generator-sitemap</div></pre></td></tr></table></figure>
+
+<p>随后提交给 Google 网站站长工具即可。</p>
 ]]></content>
+    <summary type="html">
+    <![CDATA[参考了下别人的经验，无需配置 SSH 等麻烦操作。]]>
     
+    </summary>
     
       <category term="Hexo" scheme="http://jianyan.me/tags/Hexo/"/>
     
