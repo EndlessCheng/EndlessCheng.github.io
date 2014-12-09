@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-12-09T08:16:25.975Z</updated>
+  <updated>2014-12-09T08:45:22.164Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -15,11 +15,42 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Pillow 模块小记：在图片上添加文字]]></title>
+    <link href="http://jianyan.me/2014/12/09/notes-of-the-pillow-moudle-adding-text-on-the-picture/"/>
+    <id>http://jianyan.me/2014/12/09/notes-of-the-pillow-moudle-adding-text-on-the-picture/</id>
+    <published>2014-12-09T09:00:00.000Z</published>
+    <updated>2014-12-09T08:45:08.000Z</updated>
+    <content type="html"><![CDATA[<p>首先 <code>pip install Pillow</code> 安装 Pillow 模块。（这名字挺萌的）</p>
+<p>直接上代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> urllib</div><div class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont</div><div class="line"></div><div class="line">PIC_URL = <span class="string">"http://pic1.zhimg.com/3676e9bd6_l.jpg"</span></div><div class="line">DRAW_WORD = <span class="string">u"①"</span></div><div class="line">TRANSPARENT = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>)</div><div class="line">SOFT_RED = (<span class="number">243</span>, <span class="number">90</span>, <span class="number">74</span>, <span class="number">255</span>)</div><div class="line"></div><div class="line">rsp = urllib.urlopen(PIC_URL)</div><div class="line">data = rsp.read()</div><div class="line"></div><div class="line">fp = BytesIO()</div><div class="line">fp.write(data)</div><div class="line">fp.seek(<span class="number">0</span>, <span class="number">0</span>)</div><div class="line">base_image = Image.open(fp).convert(<span class="string">'RGBA'</span>)</div><div class="line"></div><div class="line">fnt = ImageFont.truetype(<span class="string">'CALIBRI.TTF'</span>, base_image.size[<span class="number">0</span>] / <span class="number">4</span>)  <span class="comment"># FreeTypeFont</span></div><div class="line">fnt_size = fnt.getsize(DRAW_WORD)</div><div class="line"></div><div class="line">txt_image = Image.new(<span class="string">'RGBA'</span>, base_image.size, TRANSPARENT)</div><div class="line">ImageDraw.Draw(txt_image).text((base_image.size[<span class="number">0</span>] - fnt_size[<span class="number">0</span>], <span class="number">10</span>), DRAW_WORD, fill=SOFT_RED, font=fnt)</div><div class="line"></div><div class="line">out = Image.alpha_composite(base_image, txt_image)</div><div class="line">out.show()</div></pre></td></tr></table></figure>
+
+<p>参考资料：</p>
+<ol>
+<li>图片来自 <a href="http://zhuanlan.zhihu.com/zhihu-product" target="_blank" rel="external">知乎</a></li>
+<li>颜色参考了 <a href="https://color.adobe.com/zh/explore/most-popular/?time=all" target="_blank" rel="external">Adobe Color CC</a></li>
+<li><a href="http://en.wikipedia.org/wiki/RGBA_color_space" target="_blank" rel="external">RGBA color space</a></li>
+<li><a href="https://github.com/Show-Me-the-Code/show-me-the-code" target="_blank" rel="external">Python 练习册，每天一个小程序</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[1. 图片来自 [知乎](http://zhuanlan.zhihu.com/zhihu-product) 2. 颜色参考了 [Adobe Color CC](https://color.adobe.com/zh/explore/most-popular/?time=all) 3. [RGBA color space](http://en.wikipedia.org/wiki/RGBA_color_space) 4. [Python 练习册，每天一个小程序](https://github.com/Show-Me-the-Code/show-me-the-code)]]>
+    
+    </summary>
+    
+      <category term="Pillow" scheme="http://jianyan.me/tags/Pillow/"/>
+    
+      <category term="PIL" scheme="http://jianyan.me/tags/PIL/"/>
+    
+      <category term="Python" scheme="http://jianyan.me/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[如何写一个无 bug 的 min/max 宏？]]></title>
     <link href="http://jianyan.me/2014/11/01/how-to-write-a-bug-free-min-max-macro/"/>
     <id>http://jianyan.me/2014/11/01/how-to-write-a-bug-free-min-max-macro/</id>
     <published>2014-11-01T13:30:00.000Z</published>
-    <updated>2014-12-09T07:56:40.000Z</updated>
+    <updated>2014-12-09T08:42:17.000Z</updated>
     <content type="html"><![CDATA[<p>今天看了下 GHC 的源码，在 <a href="https://github.com/ghc/ghc/blob/master/includes/Rts.h" target="_blank" rel="external">Rts.h</a> 中，有如下宏定义：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">#<span class="keyword">if</span> defined(SUPPORTS_TYPEOF)</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_min(a,b) ({typeof(a) _a = (a), _b = (b); _a &lt;= _b ? _a : _b; })</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_max(a,b) ({typeof(a) _a = (a), _b = (b); _a &lt;= _b ? _b : _a; })</span></div><div class="line"><span class="preprocessor">#<span class="keyword">else</span></span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_min(a,b) ((a) &lt;= (b) ? (a) : (b))</span></div><div class="line"><span class="preprocessor">#<span class="keyword">define</span> stg_max(a,b) ((a) &lt;= (b) ? (b) : (a))</span></div><div class="line"><span class="preprocessor">#<span class="keyword">endif</span></span></div></pre></td></tr></table></figure>
 
@@ -30,8 +61,8 @@
 </ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>今天看了下 GHC 的源码，在 <a href="https://github.com/ghc/ghc/blob/master/includes/Rts.h" target="_blank" rel="external">Rts.h</a> 中，有如下宏定义：</p>
-<f]]>
+    <![CDATA[今天看了下 GHC 的源码，在 [Rts.h](https://github.com/ghc/ghc/blob/master/includes/Rts.h) 中，有如下宏定义：]]>
+    
     </summary>
     
       <category term="C" scheme="http://jianyan.me/tags/C/"/>
@@ -745,7 +776,7 @@
     <link href="http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/"/>
     <id>http://jianyan.me/2014/09/18/django-sets-the-css-js-images-path/</id>
     <published>2014-09-18T13:30:00.000Z</published>
-    <updated>2014-12-09T07:58:24.000Z</updated>
+    <updated>2014-12-09T08:43:31.000Z</updated>
     <content type="html"><![CDATA[<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">STATIC_ROOT = os.path.join(os.path.dirname(__file__),<span class="string">'static'</span>)</div><div class="line">STATICFILES_DIRS = (</div><div class="line">    (<span class="string">'css'</span>,os.path.join(STATIC_ROOT,<span class="string">'css'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'js'</span>,os.path.join(STATIC_ROOT,<span class="string">'js'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">    (<span class="string">'images'</span>,os.path.join(STATIC_ROOT,<span class="string">'images'</span>).replace(<span class="string">'\\'</span>,<span class="string">'/'</span>) ),</div><div class="line">)</div></pre></td></tr></table></figure>
 
@@ -757,8 +788,8 @@
 
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>在 settings.py 的最后一行你可以看到 <code>STATIC_URL = &#39;/static/&#39;</code> 这句话，在其后面加上：</p>
-<figure class="highlight python"><table><tr><td cla]]>
+    <![CDATA[在 settings.py 的最后一行你可以看到 STATIC_URL = '/static/' 这句话，在其后面加上：]]>
+    
     </summary>
     
       <category term="Django" scheme="http://jianyan.me/tags/Django/"/>
@@ -770,7 +801,7 @@
     <link href="http://jianyan.me/2014/07/04/earlier-for-git-youll-live-longer/"/>
     <id>http://jianyan.me/2014/07/04/earlier-for-git-youll-live-longer/</id>
     <published>2014-07-04T13:30:00.000Z</published>
-    <updated>2014-12-09T07:47:50.000Z</updated>
+    <updated>2014-12-09T08:44:06.000Z</updated>
     <content type="html"><![CDATA[<p>这是我最近这段时间使用 Git 的感受。<br>Git 的核心功能是版本控制，基于此，我们可以：</p>
 <ol>
 <li>利用其强大的「历史」功能，我们可以把一些频繁修改的东西（不仅限于代码），都使用 Git 来管理。这样，我们可以轻松找回 n 天前删掉的代码或文字。</li>
