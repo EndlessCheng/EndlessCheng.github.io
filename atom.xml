@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2014-12-09T08:45:22.164Z</updated>
+  <updated>2014-12-09T08:51:10.387Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -19,11 +19,13 @@
     <link href="http://jianyan.me/2014/12/09/notes-of-the-pillow-moudle-adding-text-on-the-picture/"/>
     <id>http://jianyan.me/2014/12/09/notes-of-the-pillow-moudle-adding-text-on-the-picture/</id>
     <published>2014-12-09T09:00:00.000Z</published>
-    <updated>2014-12-09T08:45:08.000Z</updated>
+    <updated>2014-12-09T08:51:00.000Z</updated>
     <content type="html"><![CDATA[<p>首先 <code>pip install Pillow</code> 安装 Pillow 模块。（这名字挺萌的）</p>
 <p>直接上代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> urllib</div><div class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</div><div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image, ImageDraw, ImageFont</div><div class="line"></div><div class="line">PIC_URL = <span class="string">"http://pic1.zhimg.com/3676e9bd6_l.jpg"</span></div><div class="line">DRAW_WORD = <span class="string">u"①"</span></div><div class="line">TRANSPARENT = (<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>)</div><div class="line">SOFT_RED = (<span class="number">243</span>, <span class="number">90</span>, <span class="number">74</span>, <span class="number">255</span>)</div><div class="line"></div><div class="line">rsp = urllib.urlopen(PIC_URL)</div><div class="line">data = rsp.read()</div><div class="line"></div><div class="line">fp = BytesIO()</div><div class="line">fp.write(data)</div><div class="line">fp.seek(<span class="number">0</span>, <span class="number">0</span>)</div><div class="line">base_image = Image.open(fp).convert(<span class="string">'RGBA'</span>)</div><div class="line"></div><div class="line">fnt = ImageFont.truetype(<span class="string">'CALIBRI.TTF'</span>, base_image.size[<span class="number">0</span>] / <span class="number">4</span>)  <span class="comment"># FreeTypeFont</span></div><div class="line">fnt_size = fnt.getsize(DRAW_WORD)</div><div class="line"></div><div class="line">txt_image = Image.new(<span class="string">'RGBA'</span>, base_image.size, TRANSPARENT)</div><div class="line">ImageDraw.Draw(txt_image).text((base_image.size[<span class="number">0</span>] - fnt_size[<span class="number">0</span>], <span class="number">10</span>), DRAW_WORD, fill=SOFT_RED, font=fnt)</div><div class="line"></div><div class="line">out = Image.alpha_composite(base_image, txt_image)</div><div class="line">out.show()</div></pre></td></tr></table></figure>
 
+<p>效果图：</p>
+<p><img src="http://endless.qiniudn.com/blogpillow.bmp" alt=""></p>
 <p>参考资料：</p>
 <ol>
 <li>图片来自 <a href="http://zhuanlan.zhihu.com/zhihu-product" target="_blank" rel="external">知乎</a></li>
