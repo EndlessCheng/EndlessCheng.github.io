@@ -14,12 +14,12 @@ var _hmt = _hmt || [];
 
   <meta charset="UTF-8">
   
-    <title>Python 爬虫学习——收集「有趣」信息（8月16日更新） | 简言</title>
+    <title>访问网页的过程——常见网络传输协议汇总 | 简言</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="简言">
     
-    <meta name="description" itemprop="description" content="从获取 GitHub 等网站的我们感兴趣的信息开始，学习 Python 爬虫的使用方法。">
+    <meta name="description" itemprop="description" content="1. 解析输入的 URL，找出其中的域名。2. 将域名通过 UDP 协议发送给域名服务器（DNS），通过逐层查找获得域名对应的 IP 地址，返回给用户主机。">
     
     
     
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/06/24/learning-python-crawler-gathering-interesting-information/" title="Python 爬虫学习——收集「有趣」信息（8月16日更新）" itemprop="url">Python 爬虫学习——收集「有趣」信息（8月16日更新）</a>
+      <a href="/2015/01/13/access-pages-common-network-transport-protocol-summary/" title="访问网页的过程——常见网络传输协议汇总" itemprop="url">访问网页的过程——常见网络传输协议汇总</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://plus.google.com/103441795113657293146?rel=author" title="简言" target="_blank" itemprop="author">简言</a>
 		
   <p class="article-time">
-    <time datetime="2014-06-24T13:30:00.000Z" itemprop="datePublished"> Published Jun 24 2014</time>
+    <time datetime="2015-01-13T10:10:00.000Z" itemprop="datePublished"> Published Jan 13 2015</time>
     
   </p>
 </header>
@@ -101,18 +101,39 @@ var _hmt = _hmt || [];
 		
 		</div>
 		
-		<p>我们使用 urllib2 这个组件来抓取网页，这是 Python 的一个获取 URLs (Uniform Resource Locators)的组件，它以 urlopen 函数的形式提供了一个非常简单的接口。</p>
-<p>以获取某 <del>id 为 EndlessCheng</del> 用户的 repository 列表为例：</p>
-<p>（阅读下面代码之前建议先看看 <a href="https://github.com/EndlessCheng?tab=repositories" target="_blank" rel="external">该页面</a> 的源码）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"></div><div class="line">USERNAME = <span class="string">'EndlessCheng'</span></div><div class="line">response = urllib2.urlopen(<span class="string">'https://github.com/'</span> + USERNAME + <span class="string">'?tab=repositories'</span>)  </div><div class="line">html = response.read()  </div><div class="line"></div><div class="line">STEP = <span class="number">20</span></div><div class="line">cnt = next = <span class="number">1</span></div><div class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    end = html.find(<span class="string">'&lt;/h3&gt;'</span>, next, len(html))  <span class="comment"># 获取 repolist-name 尾位置</span></div><div class="line">    <span class="keyword">if</span> end == -<span class="number">1</span>:</div><div class="line">        <span class="keyword">break</span></div><div class="line">    next = end + STEP</div><div class="line">    end = html.rfind(<span class="string">'&lt;/a&gt;'</span>, <span class="number">0</span>, end) </div><div class="line">    begin = html.rfind(<span class="string">'&gt;'</span>, <span class="number">0</span>, end) + <span class="number">1</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"%3d  %s"</span> % (cnt, html[begin:end])</div><div class="line">    cnt += <span class="number">1</span></div></pre></td></tr></table></figure>
-
-<p>源网页：</p>
-<p><img src="http://endless.qiniudn.com/blogrepo.png" alt=""></p>
-<p>输出结果：</p>
-<p><img src="http://endless.qiniudn.com/blogoutput.png" alt=""></p>
-<p>出于项目维护的需要，写了一个获取 Commits 列表的爬虫：<br>（晕，代码中的 EscapeCharacterDict 的转义字符被直接转换了，可以去 <a href="https://github.com/EndlessCheng/Commits-Crawler/blob/master/Core.py" target="_blank" rel="external">原项目</a> 查看）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"></div><div class="line">EscapeCharacterDict = {<span class="string">'&'</span>: <span class="string">'&'</span>, <span class="string">'&lt;'</span>: <span class="string">'&lt;'</span>, <span class="string">'&gt;'</span>: <span class="string">'&gt;'</span>, <span class="string">'"'</span>: <span class="string">'"'</span>, <span class="string">''': '\''}</span></div><div class="line"></div><div class="line"></div><div class="line">def deal(response):</div><div class="line">    html = response.read()</div><div class="line"></div><div class="line">    global cnt</div><div class="line">    global fp</div><div class="line">    step = 24</div><div class="line">    end = 1000</div><div class="line"></div><div class="line">    while True:</div><div class="line">        begin = html.find('data-pjax="true" title=', end, len(html))  # 获取 commit 首位置</div><div class="line">        if begin == -1:</div><div class="line">            break</div><div class="line">        begin += step</div><div class="line">        keywords = '"&gt;' if html[begin - 1] == '"' else '\'&gt;'</div><div class="line">        end = html.find(keywords, begin, len(html))</div><div class="line">        s = html[begin:end]</div><div class="line">        for k, v in EscapeCharacterDict.iteritems():</div><div class="line">            s = s.replace(k, v)</div><div class="line">        fp.write("%3d  %s\n" % (cnt, s))</div><div class="line">        cnt += 1</div><div class="line"></div><div class="line">USERNAME = 'rogerwang' # 修改这里</div><div class="line">REPONAME = 'node-webkit' # 修改这里</div><div class="line"></div><div class="line">fp = open(USERNAME + '#' + REPONAME + '#commits.txt', 'w')</div><div class="line"></div><div class="line">cnt = 1</div><div class="line">i = 1</div><div class="line">while True:</div><div class="line">    try:</div><div class="line">        response = urllib2.urlopen('https://github.com/' + USERNAME + '/' + REPONAME + '/commits?page=' + str(i))</div><div class="line">        deal(response)</div><div class="line">        print 'Cheaked', i, 'page(s).'</div><div class="line">        i += 1</div><div class="line">    except urllib2.HTTPError, err:</div><div class="line">        if err.code == 404:</div><div class="line">            print ''</div><div class="line">            print 'Cheaked', i - 1, 'page(s),', cnt - 1, 'commit(s) found.'</div><div class="line">            break</div><div class="line">        else:</div><div class="line">            raise</div></pre></td></tr></table></figure>
-
+		<p>计网学完了，整理下。</p>
+<ol>
+<li><p>解析输入的 URL，找出其中的域名。</p>
+</li>
+<li><p>将域名通过 UDP 协议发送给域名服务器（DNS），通过逐层查找获得域名对应的 IP 地址，返回给用户主机。</p>
+</li>
+<li><p>通过三次握手协议建立起用户主机与目标主机的 TCP 连接。</p>
+</li>
+<li><p>用户的请求消息包括请求路径，文件名等信息，给消息加上 HTTP 头，递交给传输层。</p>
+</li>
+<li><p>传输层为请求消息加上 TCP 头，包括源与目标端口号，传输序列号等信息，如果请求消息过长还需要对其进行分段，将加过头部的消息交给网络层。</p>
+</li>
+<li><p>网络层给消息添加 IP 头组成分组（IP 头包括源与目标 IP 地址、分段信息、控制信息等内容），并将这些分组交给数据链路层。</p>
+</li>
+<li><p>用户主机检测 ARP 缓存表，看有没有关于目标主机的 MAC 地址信息，如有没有的话通过代理 ARP 协议获取。</p>
+</li>
+<li><p>给分组加上 LLC 头，在 MAC 子层中给帧添加 MAC 头与尾成帧，添加源于目的 MAC 地址，校验信息等内容，帧与帧之间添加分隔自断后交给物理层存储。</p>
+</li>
+<li><p>数据链路层通过某种协议（如 CSMA/CD）控制帧的传送，将这些帧在子网广播。</p>
+</li>
+<li><p>子网路由器获取这些帧后检查目标 MAC 地址，发现与自身 MAC 地址相同，将其接收，去掉帧头和尾将剥离出的分组递交至网络层，网络层通过分析 IP 头获取目标 IP 地址并在路由表中进行检索，选择一条合适的输出线路，把分组重新交给数据链路层按照新的 MAC 地址进行封装成帧，通过某种协议（如 PPP）把帧发送给下一个路由器。</p>
+</li>
+<li><p>经过一次货多次的重复路由过程，这些帧到达目标主机所在子网路由器。</p>
+</li>
+<li><p>子网路由器通过 ARP 协议获取目标主机的 MAC 地址，利用这个地址将分组重新封装成帧传至目标主机。</p>
+</li>
+<li><p>目标主机将截取的比特流按照帧分隔字段截取成帧，把去掉 MAC 头尾，LLC 头的分组向上递交给网络层，网络层剥去 IP 头将消息递交至传输层，传输层去掉 TCP 头将消息递交给应用层。 </p>
+</li>
+<li><p>应用层通过分析 HTTP 请求消息生成应答，以相同的方式把应答信息传送给用户主机的应用层，通过三次握手协议释放 TCP 连接。</p>
+</li>
+<li><p>浏览器解释应答信息进行显示。</p>
+</li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -121,7 +142,7 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/爬虫/">爬虫</a><a href="/tags/GitHub/">GitHub</a>
+  <span></span> <a href="/tags/网络传输协议/">网络传输协议</a>
   </div>
 
 </div>
@@ -129,7 +150,7 @@ var _hmt = _hmt || [];
 
 <div class="article-share" id="share">
 
-  <div data-url="http://jianyan.me/2014/06/24/learning-python-crawler-gathering-interesting-information/" data-title="Python 爬虫学习——收集「有趣」信息（8月16日更新） | 简言" data-tsina="null" class="share clearfix">
+  <div data-url="http://jianyan.me/2015/01/13/access-pages-common-network-transport-protocol-summary/" data-title="访问网页的过程——常见网络传输协议汇总 | 简言" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -138,19 +159,11 @@ var _hmt = _hmt || [];
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/07/04/earlier-for-git-youll-live-longer/" title="Git 用的越早，你就活得越久">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Git 用的越早，你就活得越久</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/06/21/notes-on-java-and-c-programming-jni-blended-learning/"  title="Java 与 C++ 混合编程——JNI 学习小记">
+<a href="/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/"  title="如何在 SAE 上正确地设置 Django 静态文件">
  <strong>下一篇：</strong><br/> 
- <span>Java 与 C++ 混合编程——JNI 学习小记
+ <span>如何在 SAE 上正确地设置 Django 静态文件
 </span>
 </a>
 </div>
