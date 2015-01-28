@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2015-01-13T10:09:44.368Z</updated>
+  <updated>2015-01-28T06:57:04.624Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -68,7 +68,7 @@
     <link href="http://jianyan.me/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/"/>
     <id>http://jianyan.me/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/</id>
     <published>2014-12-29T11:00:00.000Z</published>
-    <updated>2014-12-29T11:21:56.000Z</updated>
+    <updated>2015-01-28T06:56:21.000Z</updated>
     <content type="html"><![CDATA[<p>1.目录结构如下：（请无视 <code>.idea</code> 文件夹）</p>
 <p><img src="http://endless.qiniudn.com/blogsae-django-static.png" alt=""></p>
 <p>2.<code>config.yaml</code> 只需要两行：</p>
@@ -81,6 +81,7 @@
 <p>5.模板里面这样写：</p>
 <p><img src="http://endless.qiniudn.com/blogsae-django-static2.png" alt=""></p>
 <p>搞定。</p>
+<p>PS：<code>USE_TZ</code> 要设置成 <code>False</code> ，否则插入时间到数据库的时候会变成 UTC 时间而不是北京时间。</p>
 <p>参考资料：</p>
 <ol>
 <li><a href="https://docs.djangoproject.com/en/dev/howto/static-files/" target="_blank" rel="external">Managing static files (CSS, images)</a></li>
