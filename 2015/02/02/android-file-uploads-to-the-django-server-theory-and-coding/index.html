@@ -1,0 +1,472 @@
+
+ <!DOCTYPE HTML>
+<html >
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?efd32d79f8a09abef26865f3b17a3fc7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<head>
+
+  <meta charset="UTF-8">
+  
+    <title>Android 上传文件到服务器：理论与编码 | 简言</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="简言">
+    
+    <meta name="description" itemprop="description" content="手机端用户注册完成后，会需要你上传一个头像到服务器，本文就是来解决这一问题的。（内附 GitHub 源码地址）">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="简言" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="简言" title="简言"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="简言">简言</a></h1>
+				<h2 class="blog-motto">言简意赅，技术远没那么复杂</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:jianyan.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/02/02/android-file-uploads-to-the-django-server-theory-and-coding/" title="Android 上传文件到服务器：理论与编码" itemprop="url">Android 上传文件到服务器：理论与编码</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="https://plus.google.com/103441795113657293146?rel=author" title="简言" target="_blank" itemprop="author">简言</a>
+		
+  <p class="article-time">
+    <time datetime="2015-02-01T20:10:00.000Z" itemprop="datePublished"> Published Feb 2 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#需求"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#理论"><span class="toc-number">2.</span> <span class="toc-text">理论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编码"><span class="toc-number">3.</span> <span class="toc-text">编码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选择文件"><span class="toc-number">3.1.</span> <span class="toc-text">选择文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传文件"><span class="toc-number">3.2.</span> <span class="toc-text">上传文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django_上的处理"><span class="toc-number">4.</span> <span class="toc-text">Django 上的处理</span></a></li></ol>
+		
+		</div>
+		
+		<p>本文源码地址：<a href="https://github.com/EndlessCheng/AndroidUploadImages" target="_blank" rel="external">https://github.com/EndlessCheng/AndroidUploadImages</a></p>
+<h1 id="需求">需求</h1>
+<p>手机端用户注册完成后，会需要你上传一个本地头像到服务器，本文就是来解决这一问题的。</p>
+<p>我们的目标是完成这样一个方法：</p>
+<p><code>public int postFileToURL(File file, String mimeType, URL url, String fieldName);</code></p>
+<p>其中 <code>mimeType</code> 是文件的互联网媒体类型（见下面图片中的 <code>Content-Type: image/jpeg</code>），<code>fieldName</code> 是 <code>&lt;input&gt;</code> 标签中的 <code>name</code> 值。</p>
+<p>返回的有上传成功（0）、上传失败（-1）和文件不存在（-2）。</p>
+<h1 id="理论">理论</h1>
+<p>由于标准的 Android API 没有提供一个明显直接的向服务器上传文件的方法，所以还需手动设置一些 HTTP header 字段。我们先来学习下相关知识。</p>
+<p>首先在服务器端做个实验：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">method</span>=<span class="value">"post"</span> <span class="attribute">enctype</span>=<span class="value">"multipart/form-data"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span>选择一个文件<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"docfile"</span> <span class="attribute">type</span>=<span class="value">"file"</span>/&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"submit"</span> <span class="attribute">value</span>=<span class="value">"上传"</span>/&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">form</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>打开开发者工具，切换至「网络」，然后点击上传按钮，查看 POST 信息：</p>
+<p><img src="http://endless.qiniudn.com/blogupload-file.png" alt=""></p>
+<p>注意三个地方：</p>
+<ol>
+<li><p>由于上传文件可能会比较大，网速可能会比较慢，故采用 <code>Connection: keep-alive</code>，使客户端到服务器端的连接持续有效，避免重新建立连接。</p>
+</li>
+<li><p><code>Content-Type: multipart/form-data; boundary=--balabala</code> 是上传文件必须的属性</p>
+</li>
+<li><p>multipart/form-data 的请求体也是一个字符串，不过和 post 的请求体不同的是它的构造方式，post 是简单的 name=value 值连接，multipart/form-data 则是添加了分隔符等内容的构造体。具体格式如下：</p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--${bound}</span></div><div class="line">Content-Disposition: form-data; name=<span class="string">"field-name"</span>; filename=<span class="string">"img.jpg"</span></div><div class="line">Content-<span class="keyword">Type</span>: image/jpeg</div><div class="line"></div><div class="line"><span class="keyword">file</span> content</div><div class="line"><span class="comment">--${bound}</span></div><div class="line">Content-Disposition: form-data; name=<span class="string">"field-name2"</span>; filename=<span class="string">"img2.jpg"</span></div><div class="line">Content-<span class="keyword">Type</span>: image/jpeg</div><div class="line"></div><div class="line"><span class="keyword">file</span> content</div><div class="line"><span class="comment">--${bound}--</span></div></pre></td></tr></table></figure>
+
+<p>注意最后的两个连字符号。</p>
+<p>参考：</p>
+<ol>
+<li><a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Request_fields" target="_blank" rel="external">List of HTTP header fields</a> </li>
+<li><a href="https://www.byvoid.com/blog/http-keep-alive-header" target="_blank" rel="external">HTTP协议头部与Keep-Alive模式详解</a> &lt;- byvoid 博客的好文之一</li>
+<li><a href="http://blog.csdn.net/five3/article/details/7181521" target="_blank" rel="external">HTTP协议之multipart/form-data请求分析</a></li>
+<li><a href="http://www.w3.org/Protocols/rfc1341/7_2_Multipart.html#sec7.2.1" target="_blank" rel="external">RFC 1341 7.2.1 节</a> 中有这样一段话：「The boundary must be followed immediately either by another CRLF and the header fields for the next part, or by two CRLFs, in which case there are no header fields for the next part (and it is therefore assumed to be of Content-Type text/plain).」即再加一个换行的目的是界定请求头的末尾。</li>
+</ol>
+<h1 id="编码">编码</h1>
+<h2 id="选择文件">选择文件</h2>
+<p>首先图片不能过大，限制在 1 Mb 内最好，这个在选择图片的时候就应该处理一下。</p>
+<figure class="highlight java"><figcaption><span>onClick()</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">intent.setType(<span class="string">"image/*"</span>);</div><div class="line">intent.setAction(Intent.ACTION_GET_CONTENT); <span class="comment">// 返回文件 Uri</span></div><div class="line">startActivityForResult(intent, RESULT_CANCELED);</div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span>(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data) {</div><div class="line">	<span class="keyword">if</span> (resultCode == Activity.RESULT_OK) {</div><div class="line">		Uri uri = data.getData();</div><div class="line">		String path = convertUriToPath(uri);</div><div class="line">		<span class="keyword">if</span> (!isImageFileExtension(MimeTypeMap.getFileExtensionFromUrl(path))) {</div><div class="line">			alert(<span class="string">"不是有效的图片文件！"</span>);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		}</div><div class="line">		<span class="keyword">try</span> {</div><div class="line">			Bitmap bitmap = BitmapFactory.decodeStream(<span class="keyword">this</span></div><div class="line">					.getContentResolver().openInputStream(uri));</div><div class="line">			<span class="keyword">if</span> (bitmap.getByteCount() &gt; MAX_FILE_SIZE) { <span class="comment">// 1024 * 1024</span></div><div class="line">				alert(<span class="string">"图片文件过大！"</span>);</div><div class="line">				<span class="keyword">return</span>;</div><div class="line">			}</div><div class="line">			mImageView.setImageBitmap(bitmap);</div><div class="line">			mPicturePath = path;</div><div class="line">		} <span class="keyword">catch</span> (FileNotFoundException e) {</div><div class="line">			e.printStackTrace();</div><div class="line">		}</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><code>onActivityResult()</code> 内的几个方法见源码，此不累述。</p>
+<h2 id="上传文件">上传文件</h2>
+<figure class="highlight java"><figcaption><span>onClick()</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mPicturePath == <span class="keyword">null</span>) {</div><div class="line">	alert(<span class="string">"请选择文件！"</span>);</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">}</div><div class="line">String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(</div><div class="line">				MimeTypeMap.getFileExtensionFromUrl(mPicturePath));</div><div class="line"><span class="keyword">new</span> UploadFileTask(<span class="keyword">this</span>).execute(mPicturePath, mimeType, REQUEST_URL, FIELD_NAME);</div></pre></td></tr></table></figure>
+
+<p>我们的目标方法来了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">postFileToURL</span>(File file, String mimeType, URL url, String fieldName) {</div><div class="line">	<span class="keyword">if</span> (file == <span class="keyword">null</span>) <span class="comment">// 再判断一次，因为可能在选择图片之后，该图片在上传之前被删除</span></div><div class="line">		<span class="keyword">return</span> FILE_NOT_EXIST; <span class="comment">// -2</span></div><div class="line">	<span class="keyword">try</span> {</div><div class="line">		String boundary = UUID.randomUUID().toString();</div><div class="line">		HttpURLConnection conn = (HttpURLConnection) url.openConnection();</div><div class="line">		</div><div class="line">		setHttpURLConnection(conn, boundary);</div><div class="line">		writeData(conn, boundary, file, mimeType, fieldName);</div><div class="line"></div><div class="line">		<span class="keyword">int</span> res = conn.getResponseCode();</div><div class="line">		<span class="keyword">if</span> (res == <span class="number">200</span>)</div><div class="line">			<span class="keyword">return</span> SUCCESS; <span class="comment">// 0</span></div><div class="line">	} <span class="keyword">catch</span> (IOException e) {</div><div class="line">		e.printStackTrace();</div><div class="line">	}</div><div class="line">	<span class="keyword">return</span> FAILURE; <span class="comment">// -1</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setHttpURLConnection</span>(HttpURLConnection conn,</div><div class="line">		String boundary) {</div><div class="line">	conn.setConnectTimeout(TIME_OUT); <span class="comment">// 30 * 1000 ms</span></div><div class="line">	conn.setReadTimeout(TIME_OUT);</div><div class="line"></div><div class="line">	conn.setDoInput(<span class="keyword">true</span>); <span class="comment">// 允许输入流</span></div><div class="line">	conn.setDoOutput(<span class="keyword">true</span>); <span class="comment">// 允许输出流</span></div><div class="line"></div><div class="line">	<span class="keyword">try</span> {</div><div class="line">		conn.setRequestMethod(<span class="string">"POST"</span>);</div><div class="line">	} <span class="keyword">catch</span> (ProtocolException e) {</div><div class="line">		e.printStackTrace();</div><div class="line">	}</div><div class="line">	conn.setRequestProperty(<span class="string">"Connection"</span>, <span class="string">"keep-alive"</span>);</div><div class="line">	conn.setRequestProperty(<span class="string">"Content-Type"</span>, CONTENT_TYPE + <span class="string">"; boundary="</span></div><div class="line">			+ boundary);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeData</span>(HttpURLConnection conn, String boundary,</div><div class="line">		File file, String mimeType, String fieldName) <span class="keyword">throws</span> IOException {</div><div class="line">	DataOutputStream requestData = <span class="keyword">new</span> DataOutputStream(</div><div class="line">			conn.getOutputStream());</div><div class="line"></div><div class="line">	requestData.writeBytes(<span class="string">"--"</span> + boundary + CRLF); <span class="comment">// CRLF = "\r\n"</span></div><div class="line">	requestData.writeBytes(<span class="string">"Content-Disposition: form-data; name=\""</span></div><div class="line">			+ fieldName + <span class="string">"\"; filename=\""</span> + file.getName() + <span class="string">"\""</span> + CRLF);</div><div class="line">	requestData.writeBytes(<span class="string">"Content-Type: "</span> + mimeType + CRLF + CRLF); <span class="comment">// 两个回车换行</span></div><div class="line"></div><div class="line">	InputStream fileInput = <span class="keyword">new</span> FileInputStream(file);</div><div class="line">	<span class="keyword">int</span> bytesRead;</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">	<span class="keyword">while</span> ((bytesRead = fileInput.read(buffer)) != -<span class="number">1</span>) {</div><div class="line">		requestData.write(buffer, <span class="number">0</span>, bytesRead);</div><div class="line">	}</div><div class="line">	fileInput.close();</div><div class="line">	requestData.writeBytes(CRLF);</div><div class="line"></div><div class="line">	requestData.writeBytes(<span class="string">"--"</span> + boundary + <span class="string">"--"</span> + CRLF);</div><div class="line">	requestData.flush();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h1 id="Django_上的处理">Django 上的处理</h1>
+<p>为了方便手机端的上传，还需要在 <code>view.py</code> 的函数定义前加上 <code>@csrf_exempt</code>：</p>
+<figure class="highlight python"><figcaption><span>view.py</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.views.decorators.csrf <span class="keyword">import</span> csrf_exempt</div><div class="line">...</div><div class="line"><span class="decorator">@csrf_exempt</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload_file</span><span class="params">(request)</span>:</span></div><div class="line">	...</div></pre></td></tr></table></figure>
+
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Android/">Android</a><a href="/tags/Django/">Django</a>
+  </div>
+
+</div>
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://jianyan.me/2015/02/02/android-file-uploads-to-the-django-server-theory-and-coding/" data-title="Android 上传文件到服务器：理论与编码 | 简言" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/01/13/access-pages-common-network-transport-protocol-summary/"  title="访问网页的过程——常见网络传输协议汇总">
+ <strong>下一篇：</strong><br/> 
+ <span>访问网页的过程——常见网络传输协议汇总
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#需求"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#理论"><span class="toc-number">2.</span> <span class="toc-text">理论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编码"><span class="toc-number">3.</span> <span class="toc-text">编码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选择文件"><span class="toc-number">3.1.</span> <span class="toc-text">选择文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传文件"><span class="toc-number">3.2.</span> <span class="toc-text">上传文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Django_上的处理"><span class="toc-number">4.</span> <span class="toc-text">Django 上的处理</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">Tag Cloud</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/Android/" style="font-size: 10.00px;">Android</a><a href="/tags/C/" style="font-size: 15.00px;">C</a><a href="/tags/Django/" style="font-size: 20.00px;">Django</a><a href="/tags/GHC/" style="font-size: 10.00px;">GHC</a><a href="/tags/Git/" style="font-size: 15.00px;">Git</a><a href="/tags/GitHub/" style="font-size: 20.00px;">GitHub</a><a href="/tags/Hexo/" style="font-size: 10.00px;">Hexo</a><a href="/tags/JNI/" style="font-size: 10.00px;">JNI</a><a href="/tags/Jacman/" style="font-size: 10.00px;">Jacman</a><a href="/tags/Java/" style="font-size: 10.00px;">Java</a><a href="/tags/Markdown/" style="font-size: 10.00px;">Markdown</a><a href="/tags/PIL/" style="font-size: 10.00px;">PIL</a><a href="/tags/Pillow/" style="font-size: 10.00px;">Pillow</a><a href="/tags/Python/" style="font-size: 15.00px;">Python</a><a href="/tags/SAE/" style="font-size: 10.00px;">SAE</a><a href="/tags/macro/" style="font-size: 10.00px;">macro</a><a href="/tags/「Hello-World」/" style="font-size: 10.00px;">「Hello World」</a><a href="/tags/杂谈/" style="font-size: 10.00px;">杂谈</a><a href="/tags/混合编程/" style="font-size: 10.00px;">混合编程</a><a href="/tags/爬虫/" style="font-size: 10.00px;">爬虫</a><a href="/tags/网络传输协议/" style="font-size: 10.00px;">网络传输协议</a>
+    </div>
+  </div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            <a href="http://endless.logdown.com/" target="_blank" title="Logdown 博客">Logdown 博客</a>
+          </li>
+        
+          <li>
+            <a href="http://blog.csdn.net/synapse7?viewmode=list" target="_blank" title="CSDN 博客">CSDN 博客</a>
+          </li>
+        
+          <li>
+            <a href="https://github.com/EndlessCheng" target="_blank" title="GitHub">GitHub</a>
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/EndlessCheng" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/3208881" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/52879216" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/endlesscheng" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		<a href="https://plus.google.com/103441795113657293146?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		
+		
+		<a href="mailto:loli.con@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Pacman">Jacman</a> © 2015 
+		
+		<a href="http://jianyan.me/about" target="_blank" title="简言">简言</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'jianyan';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+  </body>
+</html>

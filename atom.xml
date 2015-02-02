@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2015-02-01T20:07:28.191Z</updated>
+  <updated>2015-02-02T04:39:11.451Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Android 上传文件到服务器]]></title>
-    <link href="http://jianyan.me/2015/02/02/android-file-uploads-to-the-django-server/"/>
-    <id>http://jianyan.me/2015/02/02/android-file-uploads-to-the-django-server/</id>
+    <title><![CDATA[Android 上传文件到服务器：理论与编码]]></title>
+    <link href="http://jianyan.me/2015/02/02/android-file-uploads-to-the-django-server-theory-and-coding/"/>
+    <id>http://jianyan.me/2015/02/02/android-file-uploads-to-the-django-server-theory-and-coding/</id>
     <published>2015-02-01T20:10:00.000Z</published>
-    <updated>2015-02-01T20:06:55.000Z</updated>
+    <updated>2015-02-02T04:29:20.000Z</updated>
     <content type="html"><![CDATA[<p>本文源码地址：<a href="https://github.com/EndlessCheng/AndroidUploadImages" target="_blank" rel="external">https://github.com/EndlessCheng/AndroidUploadImages</a></p>
 <h1 id="需求">需求</h1>
 <p>手机端用户注册完成后，会需要你上传一个本地头像到服务器，本文就是来解决这一问题的。</p>
