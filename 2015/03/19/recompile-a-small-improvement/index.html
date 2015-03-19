@@ -14,12 +14,12 @@ var _hmt = _hmt || [];
 
   <meta charset="UTF-8">
   
-    <title>如何在 SAE 上正确地设置 Django 静态文件 | 简言</title>
+    <title>re.compile() 函数的一个小改进 | 简言</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="简言">
     
-    <meta name="description" itemprop="description" content="只需要加几行字。">
+    <meta name="description" itemprop="description" content="Python 中的 `re.compile()` 函数可以「格式化」复杂的正则表达式，从而方便理解。但是像 `literal 48` 这句话，还需要我们自己转换一下 ASCII 对应的字符。不妨自己 DIY 一下源码。">
     
     
     
@@ -81,14 +81,14 @@ var _hmt = _hmt || [];
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/" title="如何在 SAE 上正确地设置 Django 静态文件" itemprop="url">如何在 SAE 上正确地设置 Django 静态文件</a>
+      <a href="/2015/03/19/recompile-a-small-improvement/" title="re.compile() 函数的一个小改进" itemprop="url">re.compile() 函数的一个小改进</a>
   </h1>
   <p class="article-author">By
        
 		<a href="https://plus.google.com/103441795113657293146?rel=author" title="简言" target="_blank" itemprop="author">简言</a>
 		
   <p class="article-time">
-    <time datetime="2014-12-29T11:00:00.000Z" itemprop="datePublished"> Published Dec 29 2014</time>
+    <time datetime="2015-03-19T13:35:00.000Z" itemprop="datePublished"> Published Mar 19 2015</time>
     
   </p>
 </header>
@@ -101,25 +101,15 @@ var _hmt = _hmt || [];
 		
 		</div>
 		
-		<p>1.目录结构如下：（请无视 <code>.idea</code> 文件夹）</p>
-<p><img src="http://endless.qiniudn.com/blogsae-django-static.png" alt=""></p>
-<p>2.<code>config.yaml</code> 只需要两行：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">libraries:</div><div class="line">- <span class="property">name</span>: <span class="string">"django"</span></div><div class="line">  <span class="property">version</span>: <span class="string">"1.5"</span></div></pre></td></tr></table></figure>
+		<p>Python 中的 <code>re.compile()</code> 函数可以「格式化」复杂的正则表达式，从而方便理解。</p>
+<p>比如执行 <code>re.compile(r&quot;0\d{2}-\d{8}|0\d{3}-\d{7}&quot;, re.DEBUG)</code> 后得到：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">literal</span> <span class="number">48</span></div><div class="line">branch</div><div class="line">  max_repeat <span class="number">2</span> <span class="number">2</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line">  <span class="keyword">literal</span> <span class="number">45</span></div><div class="line">  max_repeat <span class="number">8</span> <span class="number">8</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line"><span class="keyword">or</span></div><div class="line">  max_repeat <span class="number">3</span> <span class="number">3</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line">  <span class="keyword">literal</span> <span class="number">45</span></div><div class="line">  max_repeat <span class="number">7</span> <span class="number">7</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div></pre></td></tr></table></figure>
 
-<p>3.<code>settings.py</code> 里面这样写：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">STATIC_ROOT = <span class="string">''</span></div><div class="line"></div><div class="line">STATIC_URL = <span class="string">'/static/'</span></div><div class="line"></div><div class="line">STATICFILES_DIRS = (</div><div class="line">    os.path.join(<span class="string">'static'</span>),</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>但是像 <code>literal 48</code> 这句话，还需要我们自己转换一下 ASCII 对应的字符。不妨自己 DIY 一下源码。</p>
+<p>将 <code>Lib/sre_parse.py</code> 的 <code>SubPattern</code> 类中的 <code>dump()</code> 函数末尾的 <code>print av, ; nl = 0</code> 修改成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> av,</div><div class="line"><span class="keyword">if</span> op == <span class="string">"literal"</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"(%s)"</span> % repr(chr(av)),</div><div class="line">nl = <span class="number">0</span></div></pre></td></tr></table></figure>
 
-<p>4.<code>urls.py</code> 只需要加上你的 view 就行。</p>
-<p>5.模板里面这样写：</p>
-<p><img src="http://endless.qiniudn.com/blogsae-django-static2.png" alt=""></p>
-<p>搞定。</p>
-<p>PS：<code>USE_TZ</code> 要设置成 <code>False</code> ，否则插入时间到数据库的时候会变成 UTC 时间而不是北京时间。</p>
-<p>参考资料：</p>
-<ol>
-<li><a href="https://docs.djangoproject.com/en/dev/howto/static-files/" target="_blank" rel="external">Managing static files (CSS, images)</a></li>
-<li><a href="https://docs.djangoproject.com/en/1.5/ref/contrib/staticfiles/" target="_blank" rel="external">The staticfiles app</a></li>
-<li><a href="https://docs.djangoproject.com/en/1.5/ref/settings/" target="_blank" rel="external">Settings Documentation</a></li>
-</ol>
+<p>就可以显示 ASCII 码对应的字符。（10 会以 <code>\n</code> 打印出来）</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -128,7 +118,7 @@ var _hmt = _hmt || [];
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Django/">Django</a><a href="/tags/SAE/">SAE</a>
+  <span></span> <a href="/tags/Python/">Python</a><a href="/tags/正则表达式/">正则表达式</a>
   </div>
 
 </div>
@@ -136,7 +126,7 @@ var _hmt = _hmt || [];
 
 <div class="article-share" id="share">
 
-  <div data-url="http://jianyan.me/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/" data-title="如何在 SAE 上正确地设置 Django 静态文件 | 简言" data-tsina="null" class="share clearfix">
+  <div data-url="http://jianyan.me/2015/03/19/recompile-a-small-improvement/" data-title="re.compile() 函数的一个小改进 | 简言" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -145,19 +135,11 @@ var _hmt = _hmt || [];
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/01/13/access-pages-common-network-transport-protocol-summary/" title="访问网页的过程——常见网络传输协议汇总">
-  <strong>上一篇：</strong><br/>
-  <span>
-  访问网页的过程——常见网络传输协议汇总</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/12/09/notes-of-the-pillow-moudle-adding-text-on-the-picture/"  title="Pillow 模块小记：在图片上添加文字">
+<a href="/2015/03/09/notes-on-blog2md-development/"  title="blog2md 开发小记">
  <strong>下一篇：</strong><br/> 
- <span>Pillow 模块小记：在图片上添加文字
+ <span>blog2md 开发小记
 </span>
 </a>
 </div>

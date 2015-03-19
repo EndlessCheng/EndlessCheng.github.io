@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2015-02-02T04:39:11.451Z</updated>
+  <updated>2015-03-19T13:36:54.899Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -13,6 +13,65 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[re.compile() 函数的一个小改进]]></title>
+    <link href="http://jianyan.me/2015/03/19/recompile-a-small-improvement/"/>
+    <id>http://jianyan.me/2015/03/19/recompile-a-small-improvement/</id>
+    <published>2015-03-19T13:35:00.000Z</published>
+    <updated>2015-03-19T13:35:20.000Z</updated>
+    <content type="html"><![CDATA[<p>Python 中的 <code>re.compile()</code> 函数可以「格式化」复杂的正则表达式，从而方便理解。</p>
+<p>比如执行 <code>re.compile(r&quot;0\d{2}-\d{8}|0\d{3}-\d{7}&quot;, re.DEBUG)</code> 后得到：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">literal</span> <span class="number">48</span></div><div class="line">branch</div><div class="line">  max_repeat <span class="number">2</span> <span class="number">2</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line">  <span class="keyword">literal</span> <span class="number">45</span></div><div class="line">  max_repeat <span class="number">8</span> <span class="number">8</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line"><span class="keyword">or</span></div><div class="line">  max_repeat <span class="number">3</span> <span class="number">3</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line">  <span class="keyword">literal</span> <span class="number">45</span></div><div class="line">  max_repeat <span class="number">7</span> <span class="number">7</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div></pre></td></tr></table></figure>
+
+<p>但是像 <code>literal 48</code> 这句话，还需要我们自己转换一下 ASCII 对应的字符。不妨自己 DIY 一下源码。</p>
+<p>将 <code>Lib/sre_parse.py</code> 的 <code>SubPattern</code> 类中的 <code>dump()</code> 函数末尾的 <code>print av, ; nl = 0</code> 修改成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> av,</div><div class="line"><span class="keyword">if</span> op == <span class="string">"literal"</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"(%s)"</span> % repr(chr(av)),</div><div class="line">nl = <span class="number">0</span></div></pre></td></tr></table></figure>
+
+<p>就可以显示 ASCII 码对应的字符。（10 会以 <code>\n</code> 打印出来）</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[Python 中的 `re.compile()` 函数可以「格式化」复杂的正则表达式，从而方便理解。但是像 `literal 48` 这句话，还需要我们自己转换一下 ASCII 对应的字符。不妨自己 DIY 一下源码。]]>
+    
+    </summary>
+    
+      <category term="Python" scheme="http://jianyan.me/tags/Python/"/>
+    
+      <category term="正则表达式" scheme="http://jianyan.me/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[blog2md 开发小记]]></title>
+    <link href="http://jianyan.me/2015/03/09/notes-on-blog2md-development/"/>
+    <id>http://jianyan.me/2015/03/09/notes-on-blog2md-development/</id>
+    <published>2015-03-09T01:10:00.000Z</published>
+    <updated>2015-03-08T14:39:46.000Z</updated>
+    <content type="html"><![CDATA[<p>本文项目地址：<a href="https://github.com/EndlessCheng/blog2md" target="_blank" rel="external">https://github.com/EndlessCheng/blog2md</a></p>
+<p>首先指出 <code>html2text</code> 的一个 bug：在 <code>html2text\config.py</code> 文件中有这么一行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BODY_WIDTH = <span class="number">78</span></div></pre></td></tr></table></figure>
+
+<p>这会导致转换后的 markdown 中某段文字莫名其妙地被换行，将其修改成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BODY_WIDTH = <span class="number">0</span></div></pre></td></tr></table></figure>
+
+<p>即可。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文项目地址：<a href="https://github.com/EndlessCheng/blog2md" target="_blank" rel="external">https://github.com/EndlessCheng/blog2md</a></p>
+<]]>
+    </summary>
+    
+      <category term="Python" scheme="http://jianyan.me/tags/Python/"/>
+    
+      <category term="爬虫" scheme="http://jianyan.me/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="markdown" scheme="http://jianyan.me/tags/markdown/"/>
+    
+      <category term="Beautiful Soup" scheme="http://jianyan.me/tags/Beautiful-Soup/"/>
+    
+      <category term="html2text" scheme="http://jianyan.me/tags/html2text/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Android 上传文件到服务器：理论与编码]]></title>

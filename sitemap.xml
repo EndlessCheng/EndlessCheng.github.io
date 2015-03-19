@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jianyan.me/2015/03/19/recompile-a-small-improvement/</loc>
+    <lastmod>2015-03-19T13:35:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jianyan.me/2015/03/09/notes-on-blog2md-development/</loc>
+    <lastmod>2015-03-08T14:39:46.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://jianyan.me/2015/02/02/android-file-uploads-to-the-django-server-theory-and-coding/</loc>
     <lastmod>2015-02-02T04:29:20.000Z</lastmod>
   </url>
