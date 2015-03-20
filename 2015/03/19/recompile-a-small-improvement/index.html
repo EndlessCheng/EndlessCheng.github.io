@@ -107,7 +107,7 @@ var _hmt = _hmt || [];
 
 <p>但是像 <code>literal 48</code> 这句话，还需要我们自己转换一下 ASCII 对应的字符。不妨自己 DIY 一下源码。</p>
 <p>将 <code>Lib/sre_parse.py</code> 的 <code>SubPattern</code> 类中的 <code>dump()</code> 函数末尾的 <code>print av, ; nl = 0</code> 修改成</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> av,</div><div class="line"><span class="keyword">if</span> op == <span class="string">"literal"</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"(%s)"</span> % repr(chr(av)),</div><div class="line">nl = <span class="number">0</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> av,</div><div class="line"><span class="keyword">if</span> op == <span class="string">"literal"</span> <span class="keyword">or</span> op == <span class="string">"not_literal"</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"(%s)"</span> % repr(chr(av)),</div><div class="line">nl = <span class="number">0</span></div></pre></td></tr></table></figure>
 
 <p>就可以显示 ASCII 码对应的字符。（10 会以 <code>\n</code> 打印出来）</p>
   

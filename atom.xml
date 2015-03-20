@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2015-03-20T02:00:47.591Z</updated>
+  <updated>2015-03-20T05:23:17.548Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -19,14 +19,14 @@
     <link href="http://jianyan.me/2015/03/19/recompile-a-small-improvement/"/>
     <id>http://jianyan.me/2015/03/19/recompile-a-small-improvement/</id>
     <published>2015-03-19T13:35:00.000Z</published>
-    <updated>2015-03-20T01:23:34.000Z</updated>
+    <updated>2015-03-20T05:22:46.000Z</updated>
     <content type="html"><![CDATA[<p>Python 中的 <code>re.compile()</code> 函数可以「格式化」复杂的正则表达式，从而方便理解。</p>
 <p>比如执行 <code>re.compile(r&quot;0\d{2}-\d{8}|0\d{3}-\d{7}&quot;, re.DEBUG)</code> 后得到：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">literal</span> <span class="number">48</span></div><div class="line">branch</div><div class="line">  max_repeat <span class="number">2</span> <span class="number">2</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line">  <span class="keyword">literal</span> <span class="number">45</span></div><div class="line">  max_repeat <span class="number">8</span> <span class="number">8</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line"><span class="keyword">or</span></div><div class="line">  max_repeat <span class="number">3</span> <span class="number">3</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div><div class="line">  <span class="keyword">literal</span> <span class="number">45</span></div><div class="line">  max_repeat <span class="number">7</span> <span class="number">7</span></div><div class="line">    <span class="keyword">in</span></div><div class="line">      category category_digit</div></pre></td></tr></table></figure>
 
 <p>但是像 <code>literal 48</code> 这句话，还需要我们自己转换一下 ASCII 对应的字符。不妨自己 DIY 一下源码。</p>
 <p>将 <code>Lib/sre_parse.py</code> 的 <code>SubPattern</code> 类中的 <code>dump()</code> 函数末尾的 <code>print av, ; nl = 0</code> 修改成</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> av,</div><div class="line"><span class="keyword">if</span> op == <span class="string">"literal"</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"(%s)"</span> % repr(chr(av)),</div><div class="line">nl = <span class="number">0</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> av,</div><div class="line"><span class="keyword">if</span> op == <span class="string">"literal"</span> <span class="keyword">or</span> op == <span class="string">"not_literal"</span>:</div><div class="line">    <span class="keyword">print</span> <span class="string">"(%s)"</span> % repr(chr(av)),</div><div class="line">nl = <span class="number">0</span></div></pre></td></tr></table></figure>
 
 <p>就可以显示 ASCII 码对应的字符。（10 会以 <code>\n</code> 打印出来）</p>
 ]]></content>
