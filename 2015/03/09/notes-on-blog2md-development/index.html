@@ -19,11 +19,7 @@ var _hmt = _hmt || [];
     
     <meta name="author" content="简言">
     
-    <meta name="description" content="本文项目地址：https://github.com/EndlessCheng/blog2md
-首先指出 html2text 的一个 bug：在 html2text\config.py 文件中有这么一行
-1BODY_WIDTH = 78
-
-这会导致转换后的 markdown 中某段文字莫名其妙地被换行">
+    <meta name="description" itemprop="description" content="傲游、360 等浏览器有一个小功能：阅读模式。 How to do that?">
     
     
     
@@ -101,18 +97,35 @@ var _hmt = _hmt || [];
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编码"><span class="toc-number">2.</span> <span class="toc-text">编码</span></a></li></ol>
 		
 		</div>
 		
 		<p>本文项目地址：<a href="https://github.com/EndlessCheng/blog2md" target="_blank" rel="external">https://github.com/EndlessCheng/blog2md</a></p>
-<p>首先指出 <code>html2text</code> 的一个 bug：在 <code>html2text\config.py</code> 文件中有这么一行</p>
+<h1 id="缘起">缘起</h1>
+<p>傲游、360 等浏览器有一个小功能：阅读模式，效果如下：</p>
+<p><img src="http://endless.qiniudn.com/blogblog2md.png" alt=""></p>
+<p>转换后</p>
+<p><img src="http://endless.qiniudn.com/blogblog2md2.png" alt=""></p>
+<p>去掉了一些杂七杂八的东西。</p>
+<p>How to do that?</p>
+<p>识别出那些「垃圾标签」然后去掉就行，比如下图的 <code>&lt;div class=&quot;tag2box&quot;&gt;</code>。</p>
+<p><img src="http://endless.qiniudn.com/blogblog2md3.png" alt=""></p>
+<h1 id="编码">编码</h1>
+<p>知道原理后编码就简单了。</p>
+<ol>
+<li><code>requests.session().get(url).content</code> 获取 HTML 文本；</li>
+<li>通过 <code>BeautifulSoup</code> 中的 <code>extract()</code> 函数来「修剪」网页；</li>
+<li><code>html2text(html)</code> 将 html 转成 markdown 文本，然后写入文件，搞定。</li>
+</ol>
+<p>这里指出 <code>html2text</code> 的一个 bug：在 <code>html2text\config.py</code> 文件中有这么一行</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BODY_WIDTH = <span class="number">78</span></div></pre></td></tr></table></figure>
 
 <p>这会导致转换后的 markdown 中某段文字莫名其妙地被换行，将其修改成</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BODY_WIDTH = <span class="number">0</span></div></pre></td></tr></table></figure>
 
 <p>即可。</p>
+<p>如果要获取博客的全部文章的话，还需要爬虫爬更多页面的信息，详见 <a href="https://github.com/EndlessCheng/blog2md" target="_blank" rel="external">源码</a>。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -171,7 +184,7 @@ var _hmt = _hmt || [];
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编码"><span class="toc-number">2.</span> <span class="toc-text">编码</span></a></li></ol>
  
   </div>
 
