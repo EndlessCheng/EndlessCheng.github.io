@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jianyan.me/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/</loc>
+    <lastmod>2015-06-08T10:59:16.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://jianyan.me/2015/03/19/recompile-a-small-improvement/</loc>
-    <lastmod>2015-03-20T05:22:46.000Z</lastmod>
+    <lastmod>2015-03-25T06:18:25.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://jianyan.me/2015/03/09/notes-on-blog2md-development/</loc>
-    <lastmod>2015-03-20T01:55:19.000Z</lastmod>
+    <lastmod>2015-03-23T04:10:02.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://jianyan.me/2015/02/02/android-file-uploads-to-the-django-server-theory-and-coding/</loc>
     <lastmod>2015-02-02T04:29:20.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://jianyan.me/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/</loc>
-    <lastmod>2015-01-28T06:56:21.000Z</lastmod>
   </url>
   
   <url>
