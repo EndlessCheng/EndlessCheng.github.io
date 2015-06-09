@@ -4,7 +4,7 @@
   <subtitle><![CDATA[言简意赅，技术远没那么复杂]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jianyan.me/"/>
-  <updated>2015-06-08T11:55:26.065Z</updated>
+  <updated>2015-06-09T15:06:29.479Z</updated>
   <id>http://jianyan.me/</id>
   
   <author>
@@ -13,6 +13,39 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Django Extensions 使用小记]]></title>
+    <link href="http://jianyan.me/2015/06/09/notes-on-django-extensions/"/>
+    <id>http://jianyan.me/2015/06/09/notes-on-django-extensions/</id>
+    <published>2015-06-09T15:00:00.000Z</published>
+    <updated>2015-06-09T15:05:59.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="介绍">介绍</h2>
+<p>Django Extensions 增强了 Django 的一些功能，并包含了一些方便项目开发的工具。</p>
+<p>GitHub 页面：<a href="https://github.com/django-extensions/django-extensions" target="_blank" rel="external">django-extensions/django-extensions</a></p>
+<p>中文文档：<a href="http://django-extensions-zh.readthedocs.org/zh_CN/latest/" target="_blank" rel="external">django-extensions 文档</a></p>
+<h2 id="小试">小试</h2>
+<p><code>pip install django-extensions</code> 之后在 <code>settings.py</code> 中加上：</p>
+<figure class="highlight python"><figcaption><span>settings.py</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">INSTALLED_APPS = (</div><div class="line">    ...</div><div class="line">    <span class="string">'django_extensions'</span>,</div><div class="line">    ...</div><div class="line">)</div></pre></td></tr></table></figure>
+
+<p>先尝试了下 <a href="http://django-extensions-zh.readthedocs.org/zh_CN/latest/graph_models.html" target="_blank" rel="external"><code>graph_models</code></a> 这个功能，挺方便的。（注意要先下载 <a href="http://www.graphviz.org/Download..php" target="_blank" rel="external">Graphviz</a>）</p>
+<p><code>cd</code> 到工作目录后使用：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ pip install pygraphviz</div><div class="line">$ <span class="keyword">python</span> manage.<span class="keyword">py</span> graph_models -<span class="keyword">a</span> -<span class="keyword">o</span> myapp_models.png</div></pre></td></tr></table></figure>
+
+<p>效果如下，显示了一对多，多对多，模型继承等：</p>
+<p><img src="http://7fvgov.com1.z0.glb.clouddn.com/blogmyapp_models.png" alt=""></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="介绍">介绍</h2>
+<p>Django Extensions 增强了 Django 的一些功能，并包含了一些方便项目开发的工具。</p>
+<p>GitHub 页面：<a href="https://github.com/django-extensions/dj]]>
+    </summary>
+    
+      <category term="Django" scheme="http://jianyan.me/tags/Django/"/>
+    
+      <category term="Django Extensions" scheme="http://jianyan.me/tags/Django-Extensions/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[re.compile() 函数的一个小改进]]></title>

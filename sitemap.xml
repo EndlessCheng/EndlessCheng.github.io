@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jianyan.me/2015/06/09/notes-on-django-extensions/</loc>
+    <lastmod>2015-06-09T15:05:59.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://jianyan.me/2014/12/29/how-to-properly-configure-the-django-static-files-on-sae/</loc>
     <lastmod>2015-06-08T10:59:16.000Z</lastmod>
   </url>
