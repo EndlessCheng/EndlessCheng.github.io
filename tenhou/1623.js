@@ -7338,14 +7338,25 @@
                     console.log("ws:onerror", a)
                 },
                 open: function() {
-                    console.log("ws:open", JSON.stringify(a))
-                    this.send(JSON.stringify(a))
+                    var stringifyA = JSON.stringify(a)
+                    console.log("ws:open", stringifyA)
+
+                    var oReq = new XMLHttpRequest();
+                    oReq.open("POST", "http://localhost:12121/");
+                    oReq.send(stringifyA);
+
+                    this.send(stringifyA)
                 },
                 message: function(a) {
                     try {
                         var b = JSON.parse(a.data)
                     } catch (p) {}
-                    console.log("ws:message", b)
+                    console.log("ws:message", a.data)
+
+                    var oReq = new XMLHttpRequest();
+                    oReq.open("POST", "http://localhost:12121/");
+                    oReq.send(a.data);
+
                     2 == I.a && yb.rb(u.tw, b);
                     xb.lb(b);
                     1 == I.a && "D" == b.tag || Y.pa(b)
