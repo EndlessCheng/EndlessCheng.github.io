@@ -7341,11 +7341,11 @@
                     var stringifyA = JSON.stringify(a)
                     console.log("ws:open", stringifyA)
 
-                    var oReq = new XMLHttpRequest();
-                    oReq.open("POST", "http://localhost:12121/");
-                    oReq.send(stringifyA);
-
                     this.send(stringifyA)
+
+                    // var oReq = new XMLHttpRequest();
+                    // oReq.open("POST", "http://localhost:12121/");
+                    // oReq.send(stringifyA);
                 },
                 message: function(a) {
                     try {
@@ -7353,13 +7353,13 @@
                     } catch (p) {}
                     console.log("ws:message", a.data)
 
-                    var oReq = new XMLHttpRequest();
-                    oReq.open("POST", "http://localhost:12121/");
-                    oReq.send(a.data);
-
                     2 == I.a && yb.rb(u.tw, b);
                     xb.lb(b);
                     1 == I.a && "D" == b.tag || Y.pa(b)
+
+                    var oReq = new XMLHttpRequest();
+                    oReq.open("POST", "http://localhost:12121/");
+                    oReq.send(a.data);
                 },
                 close: function() {
                     this != b ? 4 != I.a && 3 != I.a && H.l({
