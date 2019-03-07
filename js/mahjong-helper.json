@@ -10,7 +10,7 @@
 			"group": "未分组",
 			"isFunction": false,
 			"action": "redirect",
-			"to": "http://jianyan.me/tenhou/1623.js"
+			"to": "https://jianyan.me/tenhou/1623.js"
 		},
 		{
 			"enable": true,
