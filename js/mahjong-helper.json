@@ -1,0 +1,30 @@
+{
+  "request": [
+    {
+      "enable": true,
+      "name": "majsoul",
+      "ruleType": "redirect",
+      "matchType": "regexp",
+      "pattern": "^https://majsoul\\.union-game\\.com/0/[a-z0-9\\.]+/code\\.js$",
+      "exclude": "",
+      "group": "未分组",
+      "isFunction": false,
+      "action": "redirect",
+      "to": "https://jianyan.me/majsoul/code.js"
+    },
+    {
+      "enable": true,
+      "name": "tenhou",
+      "ruleType": "redirect",
+      "matchType": "regexp",
+      "pattern": "^http://tenhou\\.net/3/[0-9]+\\.js$",
+      "exclude": "",
+      "group": "未分组",
+      "isFunction": false,
+      "action": "redirect",
+      "to": "https://jianyan.me/tenhou/code.js"
+    }
+  ],
+  "sendHeader": [],
+  "receiveHeader": []
+}
