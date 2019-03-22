@@ -5,7 +5,7 @@
       "name": "majsoul",
       "ruleType": "redirect",
       "matchType": "regexp",
-      "pattern": "^https://majsoul\\.union-game\\.com/0/[a-z0-9\\.]+/code\\.js$",
+      "pattern": "^https://majsoul\\.union-game\\.com/0/[a-zA-Z0-9\\.]+/code\\.js$",
       "exclude": "",
       "group": "未分组",
       "isFunction": false,
