@@ -17,7 +17,7 @@
       "name": "tenhou",
       "ruleType": "redirect",
       "matchType": "regexp",
-      "pattern": "^http://tenhou\\.net/3/[0-9]+\\.js$",
+      "pattern": "^http://tenhou\\.net/3/[0-9a-zA-Z]+\\.js$",
       "exclude": "",
       "group": "未分组",
       "isFunction": false,
