@@ -35,6 +35,18 @@
       "isFunction": false,
       "action": "redirect",
       "to": "https://jianyan.me/majsoul/jp/code.js"
+    },
+    {
+      "enable": true,
+      "name": "majsoul-english",
+      "ruleType": "redirect",
+      "matchType": "regexp",
+      "pattern": "^https://mahjongsoul\\.game\\.yo-star\\.com/[a-zA-Z0-9\\.]+/code\\.js$",
+      "exclude": "",
+      "group": "未分组",
+      "isFunction": false,
+      "action": "redirect",
+      "to": "https://jianyan.me/majsoul/en/code.js"
     }
   ],
   "sendHeader": [],
