@@ -23,6 +23,18 @@
       "isFunction": false,
       "action": "redirect",
       "to": "https://jianyan.me/tenhou/code.js"
+    },
+    {
+      "enable": true,
+      "name": "majsoul-japan",
+      "ruleType": "redirect",
+      "matchType": "regexp",
+      "pattern": "^https://game\\.mahjongsoul\\.com/[a-zA-Z0-9\\.]+/code\\.js$",
+      "exclude": "",
+      "group": "未分组",
+      "isFunction": false,
+      "action": "redirect",
+      "to": "https://jianyan.me/majsoul-jp/code.js"
     }
   ],
   "sendHeader": [],
