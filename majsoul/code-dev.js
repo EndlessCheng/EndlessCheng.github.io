@@ -21,16 +21,18 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
 
         app.Log.log("===========notify-with-handler-decodeMessage========="+JSON.stringify(a));
 
-        var method = a.name;
-        if(!method.startsWith(".lq.") && !method.startsWith("lq.")){
-            method = "lq."+method
-        }
-        try {
-            var n = net.ProtobufManager.lookupType(method);
-            var r = n.decode(a.data);
-            app.Log.log("===========decodeRpc-decodeMessage-"+method+"-decode=========="+JSON.stringify(r));
-        } catch (ex) {
-            console.log(ex)
+        if(a.name) {
+            var method = a.name;
+            if(!method.startsWith(".lq.") && !method.startsWith("lq.")){
+                method = "lq."+method
+            }
+            try {
+                var n = net.ProtobufManager.lookupType(method);
+                var r = n.decode(a.data);
+                app.Log.log("===========decodeRpc-decodeMessage-"+method+"-decode=========="+JSON.stringify(r));
+            } catch (ex) {
+                console.log(ex)
+            }
         }
 
 
