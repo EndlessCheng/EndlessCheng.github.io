@@ -21,24 +21,38 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
 
         app.Log.log("===========notify-with-handler-decodeMessage========="+JSON.stringify(a));
 
+        var method = a.name;
+        if(!method.startsWith(".lq.") && !method.startsWith("lq.")){
+            method = "lq."+method
+        }
+        try {
+            var n = net.ProtobufManager.lookupType(method);
+            var r = n.decode(e);
+            app.Log.log("===========decodeRpc-decodeMessage-"+method+"-decode=========="+JSON.stringify(r));
+        } catch (ex) {
+            console.log(ex)
+        }
+
+
+
         for(var s=0;s<r.length;s++)try{r[s].runWith(a)}catch(t){app.Log.Error("message "+a.$type.fullName+" handle error info:"+t),this.code_error_handler&&this.code_error_handler.runWith({method:a.$type.fullName,info:t})}return;default:return void console.error("net","unknown headerType: "+i.type)}},e.prototype._requestMessage=function(e,i,n){this.requestIndex_=(this.requestIndex_+1)%60007,app.Log.info_net("_requestMessage method:"+e+", index:"+this.requestIndex_),this._sendRpc(e,{header:{type:t.HeaderType.REQUEST,reqIndex:this.requestIndex_},packet:i}),this.requestClientHandle_.waitResponseCb(e,this.requestIndex_,n)},e.prototype._registerService=function(e){var i=this,n=t.ProtobufManager.lookupService("lq."+e);if(!n)throw new Error("ERR_SERVICE_NOT_FOUND, name="+e);var a=n.create(function(t,e,n){i._requestMessage(t.fullName,e,n)});this.services_[e]=a},e.prototype._sendMessage=function(e){if(!this.socket_)throw new Error("ERR_SOCKET_NOT_CONNECT");var i=t.MessageWrapper.encodeHeaderData(e.header),n=t.MessageWrapper.encodeMessage(e.packet),a=new Laya.Byte;a.writeArrayBuffer(i),a.writeArrayBuffer(n),this.socket_.send(a.buffer),app.Log.info_net("socket _sendMessage")},e.prototype._sendRpc=function(e,i){if(!this.socket_)throw new Error("ERR_SOCKET_NOT_CONNECT");var n=t.MessageWrapper.encodeHeaderData(i.header),a=t.MessageWrapper.encodeRpc(e,i.packet),r=new Laya.Byte;r.writeArrayBuffer(n),r.writeArrayBuffer(a),this.socket_.send(r.buffer),app.Log.info_net("socket _sendRpc")},e.prototype.sendMessage=function(e,i){app.Log.info_net("socket sendMessage msg_type:"+e);var n=t.ProtobufManager.lookupType(e);n?this._sendMessage({header:{type:t.HeaderType.NOTIFY},packet:n.create(i)}):app.Log.Error("sendMessage msg_type:"+e+"未找到")},e.prototype.sendRequest=function(t,e,i,n){app.Log.info_net("socket sendRequest service_name:"+t+", rpc_name:"+e);var a=this.services_[t];if(!a)throw new Error("ERR_SERVICE_NOT_FOUND, name=FastTest");a[e](i,n)},e.prototype.addMsgListener=function(t,e){this.handler_[t]||(this.handler_[t]=[]),this.handler_[t].push(e)},e.prototype.removeMsgListener=function(t,e){if(this.handler_[t]){for(var i=this.handler_[t],n=[],a=0;a<i.length;a++)i[a]!==e&&n.push(e);this.handler_[t]=n}},e.prototype.addSocketLister=function(t){this.when_socket_event=t},e.prototype.close=function(){app.Log.info_net("socket close"),this.socket_&&this.socket_.close()},e.prototype.getNetworkDelay=function(){return this.network_delay},e}();t.Socket=e}(net||(net={}));var net;!function(t){var e=function(){return function(){}}();t.WaitingEvent=e;var i=function(){function t(t,e){this._delay=0,this.waitingData={},this.checkArray=[],this.delayLst=[],this._responseErrorHandler=t,this._networkDelayHandler=e,Laya.timer.loop(500,this,this.loop)}return t.prototype.emitResponse=function(t,e){
             var i=this.waitingData[t];if(i){
 
                 var method = i.method;
-                if(!method.startsWith("lq.")){
-                    method = "lq."+method
-                }
+                // if(!method.startsWith("lq.")){
+                //     method = "lq."+method
+                // }
 
                 app.Log.log("===========decodeRpc-emitResponse========="+method);
-                try {
-                    var n = net.ProtobufManager.lookupType(method);
-                    var r = n.decode(e);
-
-                    app.Log.log("===========decodeRpc-emitResponse-"+method+"-decode=========="+JSON.stringify(r));
-
-                } catch (ex) {
-                    console.log(ex)
-                }
+                // try {
+                //     var n = net.ProtobufManager.lookupType(method);
+                //     var r = n.decode(e);
+                //
+                //     app.Log.log("===========decodeRpc-emitResponse-"+method+"-decode=========="+JSON.stringify(r));
+                //
+                // } catch (ex) {
+                //     console.log(ex)
+                // }
 
 
 
