@@ -6,7 +6,7 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
     case t.HeaderType.RESPONSE:
         var n=t.MessageWrapper.decodeRpc(e);
 
-        app.Log.log("=========resp-decodeRpc==========="+JSON.stringify(n));
+        app.Log.log("=========resp-decodeRpc==========="+JSON.stringify({index:i.reqIndex, content:n.data}));
         // app.Log.log("=========resp-decodeRpc-data-decodeMessage==========="+JSON.stringify(net.MessageWrapper.decodeMessage(n.data)));
 
 
