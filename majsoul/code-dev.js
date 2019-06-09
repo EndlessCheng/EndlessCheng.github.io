@@ -27,7 +27,7 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
         }
         try {
             var n = net.ProtobufManager.lookupType(method);
-            var r = n.decode(e);
+            var r = n.decode(a.data);
             app.Log.log("===========decodeRpc-decodeMessage-"+method+"-decode=========="+JSON.stringify(r));
         } catch (ex) {
             console.log(ex)
