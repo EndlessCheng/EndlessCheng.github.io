@@ -21,7 +21,7 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
 
         app.Log.log("===========notify-with-handler-decodeMessage========="+JSON.stringify(a));
 
-        if(a.name) {
+        if(a.name !== undefined) {
             var method = a.name;
             if(!method.startsWith(".lq.") && !method.startsWith("lq.")){
                 method = "lq."+method
