@@ -25,7 +25,7 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
             var i=this.waitingData[t];if(i){
 
                 var method = i.method;
-                if !method.startsWith("lq.") {
+                if(!method.startsWith("lq.")){
                     method = "lq."+method
                 }
 
