@@ -5,8 +5,8 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
     this.seat=t,uiscript.UI_DesktopInfo.Inst.refreshSeat(!0);for(var e=0;e<4;e++)this.players[e].onInitRoom(this.localPosition2Seat(e)),this.players[e].trans_ind.active=!1,this.players[e].RefreshDir();this.Reset(),this.mode==n.paipu&&uiscript.UI_Replay.Inst.onChangeMainBody(),this.mode==n.live_broadcast&&uiscript.UI_Live_Broadcast.Inst.onChangeMainbody()}},r.prototype.trySyncGame=function(){var t=this;this.Reset(),this.duringReconnect=!0,this.hangupCount=0,app.NetAgent.sendReq2MJ("FastTest","syncGame",{round_id:this.round_id,step:0},function(e,i){e||i.error?(uiscript.UIMgr.Inst.showNetReqError("syncGame",e,i),game.Scene_MJ.Inst.ForceOut()):(app.Log.log("[syncGame2] "+JSON.stringify(i)),i.isEnd?(uiscript.UIMgr.Inst.ShowErrorInfo(game.Tools.strOfLocalization(2229)),game.Scene_MJ.Inst.GameEnd()):(t.fetchLinks(),t.Reset(),t.duringReconnect=!0,t.syncGameByStep(i.game_restore)))})},r.prototype.syncGameByStep=function(e){var i=this,n=!1;if(this.timestoped=!1,this.handles_after_timerun=[],this.action_running=!1,uiscript.UI_GameStop.Inst.close(),this.hangupCount=0,uiscript.UI_Hangup_Warn.Inst.enable=!1,e&&5===e.game_state&&(this.timestoped=!0),GameMgr.Inst.EnterMJ(),e&&e.actions&&e.actions.length>0){
 
     var actions=[];
-    for (var i = 0; i < e.actions.length; i++) {
-        var rawAction = e.actions[i];
+    for (var idx = 0; idx < e.actions.length; idx++) {
+        var rawAction = e.actions[idx];
         var action = net.ProtobufManager.lookupType("lq."+rawAction.name).decode(rawAction.data);
         actions.push(c);
     }
