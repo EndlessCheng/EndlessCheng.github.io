@@ -8,7 +8,7 @@ function __cons(t,a){return eval("new t("+a.map(function(t,e){return"a["+e+"]"})
     for (var idx = 0; idx < e.actions.length; idx++) {
         var rawAction = e.actions[idx];
         var action = net.ProtobufManager.lookupType("lq."+rawAction.name).decode(rawAction.data);
-        actions.push({name:rawAction.name, data:action);
+        actions.push({name:rawAction.name, data:action});
     }
     (req=new XMLHttpRequest(),req.open("POST","https://localhost:12121/"),req.send(JSON.stringify({sync_game_actions:actions})));
 
