@@ -1,16 +1,16 @@
 window.loopcnt = 0; //计数
 
-!(function() {
+!(function () {
     //创建工具栏
     var newdiv = document.createElement("div");
-    newdiv.style.cssText =
-        "background:#66997B;width:100%;position:fixed;bottom:0;left:0;";
+    newdiv.style.cssText = "background:#66997B;width:100%;position:fixed;bottom:0;left:0;";
+
     //循环按钮
     var e = document.createElement("input");
     e.setAttribute("type", "button");
     e.setAttribute("id", "btn");
     e.setAttribute("value", "开始循环:满4人即开");
-    e.setAttribute("onclick", "loop_start()");
+    e.setAttribute("onclick", "on_click_loop_start()");
     newdiv.appendChild(e);
 
     //次数按钮
@@ -30,6 +30,7 @@ window.loopcnt = 0; //计数
     e2.setAttribute("value", "转成天凤记录");
     e2.setAttribute("onclick", "tenhou_log()");
     newdiv.appendChild(e2);
+
     var a = document.createElement("a");
     a.setAttribute("href", "http://tenhou.net/ranking_tool.html");
     a.setAttribute("target", "_blank");
@@ -40,7 +41,6 @@ window.loopcnt = 0; //计数
 })();
 
 function sleep(ms) {
-    //暂停
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -82,7 +82,7 @@ async function tenhou_log() {
     alert("读取成功，可以利用【天凤统计工具】进行更详细的统计");
 }
 
-function loop_start() {
+function on_click_loop_start() {
     var _span_ = document.getElementsByTagName("span");
     for (var i = 0; i < _span_.length; i++) {
         if (_span_[i].innerText === "对局管理") {
@@ -92,10 +92,7 @@ function loop_start() {
             _span_[i].setAttribute("id", "sp_set");
         }
     }
-    if (
-        document.getElementById("sp_set") == null ||
-        document.getElementById("sp_set") == ""
-    ) {
+    if (document.getElementById("sp_set") == null || document.getElementById("sp_set") == "") {
         return alert("请进入开比赛的页面执行此脚本");
     }
 
@@ -105,16 +102,16 @@ function loop_start() {
 
     window.loop = setInterval(check_list, 10000);
     e = document.getElementById("btn");
-    e.setAttribute("onclick", "loop_stop()");
+    e.setAttribute("onclick", "on_click_loop_stop()");
     e.value = "停止循环";
     document.getElementById("lcnt").innerText = window.loopcnt;
 }
 
-function loop_stop() {
+function on_click_loop_stop() {
     clearInterval(window.loop);
     e = document.getElementById("btn");
     e.value = "开始循环:满4人即开";
-    e.setAttribute("onclick", "loop_start()");
+    e.setAttribute("onclick", "on_click_loop_start()");
     document.getElementById("lcnt").innerText = window.loopcnt;
 }
 
