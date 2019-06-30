@@ -83,6 +83,8 @@ async function tenhou_log() {
 }
 
 function on_click_loop_start() {
+    window.loopcnt = 0;
+
     var _span_ = document.getElementsByTagName("span");
     for (var i = 0; i < _span_.length; i++) {
         if (_span_[i].innerText === "对局管理") {
@@ -96,11 +98,8 @@ function on_click_loop_start() {
         return alert("请进入开比赛的页面执行此脚本");
     }
 
-    document.getElementById("sp_set").click();
-    setTimeout("document.getElementById('sp_st').click()", 1000);
-    window.loopcnt = 0;
-
-    window.loop = setInterval(check_list, 10000);
+    check_list()
+    window.loop = setInterval(check_list, 7000);
     e = document.getElementById("btn");
     e.setAttribute("onclick", "on_click_loop_stop()");
     e.value = "停止循环";
@@ -117,33 +116,31 @@ function on_click_loop_stop() {
 
 function stck() {
     window.loopcnt++;
-    var pcnt = 0;
+    var readyPlayerCount = 0;
     var _span_ = document.getElementsByTagName("span");
     for (var i = 0; i < _span_.length; i++) {
         if (_span_[i].innerText === "准备开始") {
-            pcnt++;
-            _span_[i].parentNode.setAttribute("id", "sbt_" + pcnt);
-        }
-        if (_span_[i].innerText === "对局开始") {
+            readyPlayerCount++;
+            _span_[i].parentNode.setAttribute("id", "sbt_" + readyPlayerCount);
+        } else if (_span_[i].innerText === "随机坐席（后台）") {
+            _span_[i].parentNode.setAttribute("id", "btn_rand");
+        } else if (_span_[i].innerText === "对局开始") {
             _span_[i].parentNode.setAttribute("id", "btn_st");
         }
-        if (_span_[i].innerText === "随机坐席（后台）") {
-            _span_[i].parentNode.setAttribute("id", "btn_rand");
-        }
     }
-    if (pcnt >= 4) {
+    if (readyPlayerCount >= 4) { // 暂时只支持四麻
         document.getElementById("sbt_1").click();
-        setTimeout("document.getElementById('sbt_2').click()", 1000);
-        setTimeout("document.getElementById('sbt_3').click()", 2000);
-        setTimeout("document.getElementById('sbt_4').click()", 3000);
-        setTimeout("document.getElementById('btn_rand').click()", 4000);
-        setTimeout("document.getElementById('btn_st').click()", 5000);
+        setTimeout("document.getElementById('sbt_2').click()", 300);
+        setTimeout("document.getElementById('sbt_3').click()", 600);
+        setTimeout("document.getElementById('sbt_4').click()", 900);
+        setTimeout("document.getElementById('btn_rand').click()", 1200);
+        setTimeout("document.getElementById('btn_st').click()", 1500);
     }
     document.getElementById("lcnt").innerText = window.loopcnt;
 }
 
 function check_list() {
     document.getElementById("sp_set").click();
-    setTimeout("document.getElementById('sp_st').click()", 1000);
-    setTimeout("stck()", 2000);
+    setTimeout("document.getElementById('sp_st').click()", 500);
+    setTimeout("stck()", 1300);
 }
