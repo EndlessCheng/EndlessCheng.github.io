@@ -1,3 +1,6 @@
+// 添加此书签
+// javascript:void((function(){var e=document.createElement('script');e.setAttribute('src','https://jianyan.me/majsoul/auto-match.js');document.body.appendChild(e);})());
+
 window.loopcnt = 0; //计数
 
 !(function () {
