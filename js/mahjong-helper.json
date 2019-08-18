@@ -30,7 +30,7 @@
       "name": "majsoul.com",
       "ruleType": "redirect",
       "matchType": "regexp",
-      "pattern": "^https://majsoul\\.com/[0-9]+/[a-zA-Z0-9\\.]+/code\\.js$",
+      "pattern": "^https://www\\.majsoul\\.com/[0-9]+/[a-zA-Z0-9\\.]+/code\\.js$",
       "exclude": "",
       "group": "未分组",
       "isFunction": false,
