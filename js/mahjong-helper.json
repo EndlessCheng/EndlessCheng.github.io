@@ -12,6 +12,7 @@
       "action": "redirect",
       "to": "https://jianyan.me/majsoul/code-v0.1.4.js"
     },
+
     {
       "enable": true,
       "name": "tenhou",
@@ -23,6 +24,18 @@
       "isFunction": false,
       "action": "redirect",
       "to": "https://jianyan.me/tenhou/code.js"
+    },
+    {
+      "enable": true,
+      "name": "majsoul.com",
+      "ruleType": "redirect",
+      "matchType": "regexp",
+      "pattern": "^https://majsoul\\.com/[0-9]+/[a-zA-Z0-9\\.]+/code\\.js$",
+      "exclude": "",
+      "group": "未分组",
+      "isFunction": false,
+      "action": "redirect",
+      "to": "https://jianyan.me/majsoul/code-v0.1.4.js"
     },
     {
       "enable": true,
