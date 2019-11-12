@@ -340,4 +340,4 @@
             3,function(){location.reload()}))}}))}function f(){if(d.length)if(d[0][6])qb("RUNNING",d[0]);else{var a=d[0];d[0][6]=1;H[a.tag](a)&&W.Ea()}}var d=[],b;setInterval(function(){b&&1==b.readyState&&(b.send("<Z/>"),W.Na&&b.send('<PXR v="'+W.Na+'" />'))},1E4);return{Na:0,qa:function(a){d.push(a);1==d.length&&f()},L:function(d){b?(0==b.readyState&&console.log("ws.readyState="+b.readyState,d),b.send(d.tag?JSON.stringify(d):d)):"HELO"==d.tag&&setTimeout(function(){a(d)},1)},Y:function(){b&&(b.close(),b=null)},
         nc:function(){b&&xa(b,"close",function(){setTimeout(function(){C.l({tag:"AUTOLOGIN"})},1E4)});W.Y()},pb:function(){for(b&&1==b.readyState&&b.send("<BYE/>");d.length;d.shift())delete d[0][6]},Ea:function(){d.length&&(delete d[0][6],d.shift(),f())}}}();r.handleOpenURL=function(a){a=a.split("?")[1];location.href=a?"?"+a:"index.html"};r.top!==r&&(location.href="https://tenhou.net/0/"+location.search);var Qc=I.lastreload,Rc=Date.now();Qc?36E5<Rc-Qc?(I.lastreload=Rc,location.reload()):Nb():(I.lastreload=Rc,Nb());
 })();
-//
+//1668
