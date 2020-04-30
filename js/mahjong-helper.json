@@ -2,20 +2,7 @@
   "request": [
     {
       "enable": true,
-      "name": "majsoul",
-      "ruleType": "redirect",
-      "matchType": "regexp",
-      "pattern": "^https://majsoul\\.union-game\\.com/[0-9]+/[a-zA-Z0-9\\.]+/code\\.js$",
-      "exclude": "",
-      "group": "未分组",
-      "isFunction": false,
-      "action": "redirect",
-      "to": "https://jianyan.me/majsoul/code-v0.1.4.js"
-    },
-
-    {
-      "enable": true,
-      "name": "tenhou",
+      "name": "天凤",
       "ruleType": "redirect",
       "matchType": "regexp",
       "pattern": "^https?://tenhou\\.net/3/[0-9a-zA-Z]+\\.js$",
@@ -23,11 +10,11 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://jianyan.me/tenhou/code.js"
+      "to": "https://endlesscheng.gitee.io/public/js/tenhou/code.js"
     },
     {
       "enable": true,
-      "name": "majsoul.com",
+      "name": "雀魂-国服",
       "ruleType": "redirect",
       "matchType": "regexp",
       "pattern": "^https://www\\.majsoul\\.com/[0-9]+/[a-zA-Z0-9\\.]+/code\\.js$",
@@ -35,11 +22,11 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://jianyan.me/majsoul/code-v0.1.4.js"
+      "to": "https://endlesscheng.gitee.io/public/js/majsoul/code-zh.js"
     },
     {
       "enable": true,
-      "name": "majsoul-japan",
+      "name": "雀魂-日服",
       "ruleType": "redirect",
       "matchType": "regexp",
       "pattern": "^https://game\\.mahjongsoul\\.com/[a-zA-Z0-9\\.]+/code\\.js$",
@@ -47,11 +34,11 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://jianyan.me/majsoul/jp/code.js"
+      "to": "https://endlesscheng.gitee.io/public/js/majsoul/code-jp.js"
     },
     {
       "enable": true,
-      "name": "majsoul-english",
+      "name": "雀魂-国际服",
       "ruleType": "redirect",
       "matchType": "regexp",
       "pattern": "^https://mahjongsoul\\.game\\.yo-star\\.com/[a-zA-Z0-9\\.]+/code\\.js$",
@@ -59,7 +46,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://jianyan.me/majsoul/en/code.js"
+      "to": "https://endlesscheng.gitee.io/public/js/majsoul/code-en.js"
     }
   ],
   "sendHeader": [],
