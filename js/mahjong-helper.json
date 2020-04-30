@@ -10,7 +10,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://cdn.jsdelivr.net/gh/EndlessCheng/EndlessCheng.github.io/majsoul/code-v0.1.4.js"
+      "to": "https://jianyan.me/majsoul/code-v0.1.4.js"
     },
 
     {
@@ -23,7 +23,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://cdn.jsdelivr.net/gh/EndlessCheng/EndlessCheng.github.io/tenhou/code.js"
+      "to": "https://jianyan.me/tenhou/code.js"
     },
     {
       "enable": true,
@@ -35,7 +35,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://cdn.jsdelivr.net/gh/EndlessCheng/EndlessCheng.github.io/majsoul/code-v0.1.4.js"
+      "to": "https://jianyan.me/majsoul/code-v0.1.4.js"
     },
     {
       "enable": true,
@@ -47,7 +47,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://cdn.jsdelivr.net/gh/EndlessCheng/EndlessCheng.github.io/majsoul/jp/code.js"
+      "to": "https://jianyan.me/majsoul/jp/code.js"
     },
     {
       "enable": true,
@@ -59,7 +59,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://cdn.jsdelivr.net/gh/EndlessCheng/EndlessCheng.github.io/majsoul/en/code.js"
+      "to": "https://jianyan.me/majsoul/en/code.js"
     }
   ],
   "sendHeader": [],
