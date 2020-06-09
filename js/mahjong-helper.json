@@ -14,10 +14,10 @@
     },
     {
       "enable": true,
-      "name": "雀魂-国服",
+      "name": "雀魂-国际中文服",
       "ruleType": "redirect",
       "matchType": "regexp",
-      "pattern": "^https://www\\.majsoul\\.com/[0-9]+/[a-zA-Z0-9\\.]+/code\\.js$",
+      "pattern": "^https://game\\.maj\\-soul\\.com/[0-9]+/[a-zA-Z0-9\\.]+/code\\.js$",
       "exclude": "",
       "group": "未分组",
       "isFunction": false,
