@@ -14,6 +14,18 @@
     },
     {
       "enable": true,
+      "name": "天凤-4K",
+      "ruleType": "redirect",
+      "matchType": "regexp",
+      "pattern": "^https?://tenhou\\.net/4/[0-9a-zA-Z]+\\.js$",
+      "exclude": "",
+      "group": "未分组",
+      "isFunction": false,
+      "action": "redirect",
+      "to": "https://endlesscheng.gitee.io/public/js/tenhou4k/code-4k.js"
+    },
+    {
+      "enable": true,
       "name": "雀魂-国际中文服",
       "ruleType": "redirect",
       "matchType": "regexp",
