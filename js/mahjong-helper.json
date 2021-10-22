@@ -10,7 +10,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://endlesscheng.gitee.io/public/js/tenhou/code.js"
+      "to": "https://endlesscheng.github.io/js/tenhou/code.js"
     },
     {
       "enable": true,
@@ -22,7 +22,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://endlesscheng.gitee.io/public/js/tenhou4k/code-4k.js"
+      "to": "https://endlesscheng.github.io/js/tenhou4k/code-4k.js"
     },
     {
       "enable": true,
@@ -34,7 +34,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://endlesscheng.gitee.io/public/js/majsoul/code-zh.js"
+      "to": "https://endlesscheng.github.io/js/majsoul/code-zh.js"
     },
     {
       "enable": true,
@@ -46,7 +46,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://endlesscheng.gitee.io/public/js/majsoul/code-jp.js"
+      "to": "https://endlesscheng.github.io/js/majsoul/code-jp.js"
     },
     {
       "enable": true,
@@ -58,7 +58,7 @@
       "group": "未分组",
       "isFunction": false,
       "action": "redirect",
-      "to": "https://endlesscheng.gitee.io/public/js/majsoul/code-en.js"
+      "to": "https://endlesscheng.github.io/js/majsoul/code-en.js"
     }
   ],
   "sendHeader": [],
